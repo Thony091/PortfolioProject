@@ -1,13 +1,13 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:portafolio_project/firebase_options.dart';
+import 'package:portafolio_project/config/services/firebase/firebase_service.dart';
+import 'package:portafolio_project/presentation/pages/home_page.dart';
 
 void main() async {
   
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  
+  /// Initialize Firebase
+  await FirebaseService.init();
 
   runApp(const MainApp());
 }
@@ -18,11 +18,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
     );
   }
 }
