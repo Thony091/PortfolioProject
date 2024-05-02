@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portafolio_project/presentation/shared/widgets/side_menu.dart';
 
-import '../../config/theme.dart';
+import '../../config/theme/theme.dart';
 
 
 class HomePage extends StatelessWidget {

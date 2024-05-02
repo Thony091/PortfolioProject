@@ -1,4 +1,4 @@
-import 'package:portafolio_project/infrastructure/models/userdb_response.dart';
+import 'package:portafolio_project/infrastructure/models/user/userdb_response.dart';
 
 import '../../domain/domain.dart';
 
