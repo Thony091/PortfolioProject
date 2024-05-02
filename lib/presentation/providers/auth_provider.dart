@@ -1,8 +1,6 @@
 import 'package:riverpod/riverpod.dart';
-import '../../../shared/shared_widgets.dart';
 import '../../domain/domain.dart';
 import '../../infrastructure/errors/auth_errors.dart';
-import '../../infrastructure/infrastructure.dart';
 import '../shared/shared_widgets.dart';
 
 /// Proveedor de estado para la gestión de la autenticación.
@@ -70,7 +68,7 @@ class AuthNotifier extends StateNotifier<AuthState>{
 
   }
 
-  /// Método privado para establecer el usuario autenticado.
+  /// Método privado para establecer el usuario autenticado. 
   void _setLoggedUser (User user) async{
  
     await keyValueStorageService.setKeyValue( 'token', user.token);

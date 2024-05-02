@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../shared/widgets/side_menu.dart';
 
-class ReservationsPage extends StatelessWidget {
-  const ReservationsPage({super.key});
+class PagoPage extends StatelessWidget {
+  const PagoPage({super.key});
 
   @override
   Widget build(BuildContext context) {

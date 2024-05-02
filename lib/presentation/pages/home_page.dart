@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:portafolio_project/presentation/shared/widgets/side_menu.dart';
 
-import '../widgets.dart';
+import '../../config/theme.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -8,14 +10,16 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final color       = AppTheme().getTheme().colorScheme;
     final scaffoldKey = GlobalKey<ScaffoldState>();
+    
     return  Scaffold(
       appBar: AppBar(
-        title: const Text("Home Page"),),
+        title: const Text("Home Page"), backgroundColor: color.primary,),
       body: const Center(
         child: Text('Home Page'),
       ),
-      drawer:  CustomAppbar(scaffoldKey: scaffoldKey,),
+      drawer:  SideMenu(scaffoldKey: scaffoldKey),
     );
   }
 }

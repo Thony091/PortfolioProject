@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../providers/providers.dart';
+import '../shared/shared_widgets.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -12,6 +15,7 @@ class LoginPage extends StatelessWidget {
     final scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
 
     return Container(
+      
       height: size.height - 260, // 80 los dos sizebox y 100 el ícono
       width: double.infinity,
       decoration: BoxDecoration(

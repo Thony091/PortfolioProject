@@ -1,6 +1,6 @@
 
 import 'package:shared_preferences/shared_preferences.dart';
-import '../shared_widgets.dart';
+import 'key_value_storage_service.dart';
 
 /// Implementación de [KeyValueStorageService] que utiliza SharedPreferences para almacenar pares clave-valor.
 class KeyValueStorageServiceImpl extends KeyValueStorageService{

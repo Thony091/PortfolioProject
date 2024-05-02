@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 
+import '../shared/widgets/side_menu.dart';
+
 class ProductsPage extends StatelessWidget {
   const ProductsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Products Page"),),
+      body: const Center(
+        child: Text('Products Page'),
+      ),
+      drawer: SideMenu(scaffoldKey: scaffoldKey),
+    );
   }
 }

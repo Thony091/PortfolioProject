@@ -21,7 +21,7 @@ class CustomTextFormField extends StatelessWidget {
   final Function(String)? onChanged;
 
   /// Controlador del campo de texto.
-  final TextEditingController controller;
+  // final TextEditingController controller;
 
   /// Validador del campo de texto.
   final String? Function(String?)? validator;
@@ -29,7 +29,7 @@ class CustomTextFormField extends StatelessWidget {
   /// Construye un [CustomTextFormField] con los parámetros proporcionados.
   const CustomTextFormField({
     super.key, 
-    required this.controller,
+    // required this.controller,
     this.label, 
     this.hint, 
     this.errorMessage, 
@@ -65,7 +65,7 @@ class CustomTextFormField extends StatelessWidget {
       ),
       child: TextFormField(
         onChanged: onChanged,
-        controller: controller,
+        // controller: controller,
         validator: validator,
         obscureText: obscureText,
         keyboardType: keyboardType,
