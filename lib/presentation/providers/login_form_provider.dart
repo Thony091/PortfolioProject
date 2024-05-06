@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:formz/formz.dart';
 
-import '../shared/shared_widgets.dart';
+import '../shared/shared.dart';
 import 'auth_provider.dart';
 
 

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../shared/widgets/side_menu.dart';
 
 class ServicesPage extends StatelessWidget {
+
+  static const name = 'ServicesPage';
+  
   const ServicesPage({super.key});
 
   @override

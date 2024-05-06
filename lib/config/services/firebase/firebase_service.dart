@@ -15,7 +15,7 @@ class FirebaseService{
     FirebaseAuthService.init();
     
     //* Notificaciones push
-    await PushNotificationsService.initNotifications(); 
+    // await PushNotificationsService.initNotifications();
 
   }
 

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../shared/widgets/side_menu.dart';
 
 class ProductsPage extends StatelessWidget {
+
+  static const name = 'ProductsPage';
+  
   const ProductsPage({super.key});
 
   @override

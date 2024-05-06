@@ -3,9 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../providers/providers.dart';
-import '../shared/shared_widgets.dart';
+import '../shared/shared.dart';
 
 class LoginPage extends StatelessWidget {
+
+  static const name = 'LoginPage';
+  
   const LoginPage({super.key});
 
   @override

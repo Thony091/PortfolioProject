@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../shared/widgets/side_menu.dart';
 
 class ReservationsPage extends StatelessWidget {
+
+  static const name = 'ReservationsPage';
+  
   const ReservationsPage({super.key});
 
   @override

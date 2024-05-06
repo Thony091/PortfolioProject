@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../shared/widgets/side_menu.dart';
 
 class PagoPage extends StatelessWidget {
+
+  static const name = 'pagoPage';
+  
   const PagoPage({super.key});
 
   @override

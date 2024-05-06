@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../shared/widgets/side_menu.dart';
 
 class RegisterPage extends StatelessWidget {
+
+  static const name = 'RegisterPage';
+  
   const RegisterPage({super.key});
 
   @override

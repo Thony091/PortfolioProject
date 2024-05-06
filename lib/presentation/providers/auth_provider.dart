@@ -1,16 +1,16 @@
 import 'package:riverpod/riverpod.dart';
 import '../../domain/domain.dart';
 import '../../infrastructure/errors/auth_errors.dart';
-import '../shared/shared_widgets.dart';
+import '../shared/shared.dart';
 
 /// Proveedor de estado para la gestión de la autenticación.
 final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
   
-  final authRepository = AuthRepositoryImpl(); 
+  // final authRepository = AuthRepositoryImpl(); 
   final keyValueStorageService = KeyValueStorageServiceImpl();
   
   return AuthNotifier(
-    authRepository: authRepository,
+    // authRepository: authRepository,
     keyValueStorageService: keyValueStorageService
   ); 
 });
@@ -18,11 +18,11 @@ final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
 /// Clase notificadora de estado para la gestión de la autenticación.
 class AuthNotifier extends StateNotifier<AuthState>{
   
-  final AuthRepository authRepository;
+  // final AuthRepository authRepository;
   final KeyValueStorageService keyValueStorageService;
 
   AuthNotifier({
-    required this.authRepository,
+    // required this.authRepository,
     required this.keyValueStorageService,
   }): super(AuthState()){
     checkAuthStatus();
@@ -33,8 +33,8 @@ class AuthNotifier extends StateNotifier<AuthState>{
 
     try {
       
-      final user = await authRepository.login(email, password);
-      _setLoggedUser(user);
+      // final user = await authRepository.login(email, password);
+      // _setLoggedUser(user);
       
     } on CustomError {
       logOut( 'Credenciales no son correctas' );
@@ -58,9 +58,9 @@ class AuthNotifier extends StateNotifier<AuthState>{
 
     try {
 
-      final user = await authRepository.checkAuthStatus(token);
+      // final user = await authRepository.checkAuthStatus(token);
       
-      _setLoggedUser(user);
+      // _setLoggedUser(user);
 
     } catch (e) {
       logOut();
@@ -71,7 +71,7 @@ class AuthNotifier extends StateNotifier<AuthState>{
   /// Método privado para establecer el usuario autenticado. 
   void _setLoggedUser (User user) async{
  
-    await keyValueStorageService.setKeyValue( 'token', user.token);
+    // await keyValueStorageService.setKeyValue( 'token', user.token);
 
     state = state.copyWith(
       user: user,

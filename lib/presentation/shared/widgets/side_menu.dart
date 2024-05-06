@@ -24,10 +24,14 @@ class _SideMenuState extends State<SideMenu> {
   
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        
-        padding: EdgeInsets.zero,
+    return NavigationDrawer(
+      selectedIndex: navDrawerIndex,
+      onDestinationSelected: (value) {
+        setState(() {
+          navDrawerIndex = value;
+        });
+      },
+      
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
@@ -36,8 +40,12 @@ class _SideMenuState extends State<SideMenu> {
             child: const Text(
               'AR Detailing', 
               style: TextStyle(
-                color: Colors.white
+                color: Colors.white,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                
               )
+              
             ),
           ),
 
@@ -260,7 +268,7 @@ class _SideMenuState extends State<SideMenu> {
             ]
           ),
         ],
-      ),
+      
     );
   }
 }

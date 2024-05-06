@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:portafolio_project/presentation/shared/widgets/side_menu.dart';
 
 import '../../config/theme/theme.dart';
+import '../shared/widgets/widgets.dart';
 
 
 class HomePage extends StatelessWidget {
+
+  static const name = 'HomePage';
+
   const HomePage({super.key});
 
   @override
