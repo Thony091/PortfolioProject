@@ -31,6 +31,7 @@ class FirebaseAuthService {
         email: email,
         password: password,
       );
+      // userCredential
       return userCredential.user;
     } catch (e) {
       print('Error en el registro: $e');

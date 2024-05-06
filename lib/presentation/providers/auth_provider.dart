@@ -1,3 +1,4 @@
+import 'package:portafolio_project/config/config.dart';
 import 'package:riverpod/riverpod.dart';
 import '../../domain/domain.dart';
 import '../../infrastructure/errors/auth_errors.dart';
@@ -29,10 +30,19 @@ class AuthNotifier extends StateNotifier<AuthState>{
   }
 
   /// Método para iniciar sesión de un usuario.
-  Future<void> loginUser( String email, String password ) async{
+  Future<void> loginUserFireBase( String email, String password ) async{
 
     try {
       
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      final user = await FirebaseAuthService.auth.signInWithEmailAndPassword(
+        email: email, 
+        password: password
+      );
+
+      final tokenId = await user.user!.getIdToken();
+      print('Token: $tokenId');
       // final user = await authRepository.login(email, password);
       // _setLoggedUser(user);
       
@@ -45,7 +55,9 @@ class AuthNotifier extends StateNotifier<AuthState>{
   }
 
   /// Método para registrar un nuevo usuario.
-  void registerUSer( String email, String password )async{
+  void registerUSer( String email, String password ) async {
+
+    final user = await FirebaseAuthService.signUpWithEmailAndPassword(email, password);
     // Implementar la lógica de registro de usuario.
   }
 
@@ -69,7 +81,7 @@ class AuthNotifier extends StateNotifier<AuthState>{
   }
 
   /// Método privado para establecer el usuario autenticado. 
-  void _setLoggedUser (User user) async{
+  void _setLoggedUser (User user) async {
  
     // await keyValueStorageService.setKeyValue( 'token', user.token);
 
@@ -82,6 +94,8 @@ class AuthNotifier extends StateNotifier<AuthState>{
 
   /// Método para cerrar sesión del usuario.
   Future<void> logOut([ String? errorMessage ]) async {
+
+    await FirebaseAuthService.logOut();
     
     await keyValueStorageService.removeKey('token');
 
