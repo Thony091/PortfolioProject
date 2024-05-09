@@ -98,7 +98,10 @@ class _LoginForm extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('¿No tienes cuenta?'),
+              const Text(
+                '¿No tienes cuenta?',
+                style: TextStyle(fontSize: 13),
+              ),
               TextButton(
                 onPressed: () => context.push('/register'), 
                 child: const Text('Crea una aquí')

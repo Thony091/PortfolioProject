@@ -10,7 +10,6 @@ final loginFormProvider = StateNotifierProvider.autoDispose<LoginFormNotifier,Lo
 
   final loginUserCallback = ref.watch(authProvider.notifier).loginUserFireBase;
 
-
   return LoginFormNotifier(
     loginUserCallback:loginUserCallback
   );

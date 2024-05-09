@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:portafolio_project/config/theme/app_theme.dart';
 
 class SideMenu extends StatefulWidget {
@@ -71,7 +72,7 @@ class _SideMenuState extends State<SideMenu> {
                 ),
               ),
               onTap: () {
-                // Navigator.pushNamed(context, CafeteriasScreen.name);
+                context.push('/login');
               },
             ),
             const Divider(

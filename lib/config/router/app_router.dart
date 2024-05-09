@@ -1,70 +1,95 @@
 
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../presentation/presentation.dart';
+import 'router.dart';
 
-final appRouter = GoRouter(
-  initialLocation: '/',
-  routes: 
-    [
-      //* Home
-      GoRoute(
-        path: '/',
-        name: HomePage.name,
-        builder: (context, state) => const HomePage(),
-      ),
 
-      //* Login
-      GoRoute(
-        path: '/login',
-        name: LoginPage.name,
-        builder: (context, state) => const LoginPage(),
-      ),
+final goRouterProvider = Provider( (ref) {
 
-      //* Register
-      GoRoute(
-        path: '/register',
-        name: RegisterPage.name,
-        builder: (context, state) => const RegisterPage(),
-      ),
+  final goRouterNotifier = ref.read( goRouterNotifierProvider);
 
-      //* Pago
-      GoRoute(
-        path: '/pago',
-        name: PagoPage.name,
-        builder: (context, state) => const PagoPage(),
-      ),
+  return GoRouter(
+    initialLocation: '/login',
+    refreshListenable: goRouterNotifier,
+    routes: 
+      [
+        //* Home
+        GoRoute(
+          path: '/',
+          name: HomePage.name,
+          builder: (context, state) => const HomePage(),
+        ),
 
-      //* Products
-      GoRoute(
-        path: '/products',
-        name: ProductsPage.name,
-        builder: (context, state) => const ProductsPage(),
-        // routes: 
-        //   [
-        //     //* Product Detail
-        //     GoRoute(
-        //       path: '/:id',
-        //       name: ProductDetailPage.name,
-        //       builder: (context, state) => ProductDetailPage(id: state.params['id']!),
-        //     ),
-        //   ],
-      ),
+        //* Login
+        GoRoute(
+          path: '/login',
+          name: LoginPage.name,
+          builder: (context, state) => const LoginPage(),
+        ),
 
-      //* Reservations
-      GoRoute(
-        path: '/reservations',
-        name: ReservationsPage.name,
-        builder: (context, state) => const ReservationsPage(),
-      ),
+        //* Register
+        GoRoute(
+          path: '/register',
+          name: RegisterPage.name,
+          builder: (context, state) => const RegisterPage(),
+        ),
 
-      //* Services
-      GoRoute(
-        path: '/services',
-        name: ServicesPage.name,
-        builder: (context, state) => const ServicesPage(),
-      ),
+        //* Pago
+        GoRoute(
+          path: '/pago',
+          name: PagoPage.name,
+          builder: (context, state) => const PagoPage(),
+        ),
 
-    ] 
-);
+        //* Products
+        GoRoute(
+          path: '/products',
+          name: ProductsPage.name,
+          builder: (context, state) => const ProductsPage(),
+          // routes: 
+          //   [
+          //     //* Product Detail
+          //     GoRoute(
+          //       path: '/:id',
+          //       name: ProductDetailPage.name,
+          //       builder: (context, state) => ProductDetailPage(id: state.params['id']!),
+          //     ),
+          //   ],
+        ),
+
+        //* Reservations
+        GoRoute(
+          path: '/reservations',
+          name: ReservationsPage.name,
+          builder: (context, state) => const ReservationsPage(),
+        ),
+
+        //* Services
+        GoRoute(
+          path: '/services',
+          name: ServicesPage.name,
+          builder: (context, state) => const ServicesPage(),
+        ),
+
+      ],
+
+      redirect: (context, state) {
+
+        final isGoingTo = state.matchedLocation;
+        final authStatus = goRouterNotifier.authStatus;
+
+      if ( authStatus == AuthStatus.authenticated ) {
+        if ( isGoingTo == '/login' || isGoingTo == '/register' || isGoingTo == '/splash' ){
+           return '/';
+        }
+      }
+
+
+        return null;
+
+      },
+  );
+});

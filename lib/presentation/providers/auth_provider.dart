@@ -1,6 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:portafolio_project/config/config.dart';
-import 'package:riverpod/riverpod.dart';
-import '../../domain/domain.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import '../../domain/domain.dart';
 import '../../infrastructure/errors/auth_errors.dart';
 import '../shared/shared.dart';
 
@@ -40,9 +41,11 @@ class AuthNotifier extends StateNotifier<AuthState>{
         email: email, 
         password: password
       );
-
+      _setLoggedUser(user);
+      
       final tokenId = await user.user!.getIdToken();
       print('Token: $tokenId');
+      print('Token distinto: ${user.credential!.token}');
       // final user = await authRepository.login(email, password);
       // _setLoggedUser(user);
       
@@ -55,7 +58,7 @@ class AuthNotifier extends StateNotifier<AuthState>{
   }
 
   /// Método para registrar un nuevo usuario.
-  void registerUSer( String email, String password ) async {
+  void registerUser( String email, String password ) async {
 
     final user = await FirebaseAuthService.signUpWithEmailAndPassword(email, password);
     // Implementar la lógica de registro de usuario.
@@ -81,9 +84,9 @@ class AuthNotifier extends StateNotifier<AuthState>{
   }
 
   /// Método privado para establecer el usuario autenticado. 
-  void _setLoggedUser (User user) async {
+  void _setLoggedUser (UserCredential user) async {
  
-    // await keyValueStorageService.setKeyValue( 'token', user.token);
+    await keyValueStorageService.setKeyValue( 'token', user.credential?.token);
 
     state = state.copyWith(
       user: user,
@@ -114,24 +117,29 @@ enum AuthStatus{ checking, authenticated, notAuthenticated}
 class AuthState {
    
   final AuthStatus authStatus;
-  final User? user;
+  final UserCredential? user;
   final String errorMessage;
+  final Map<String,dynamic>? userData;
+
 
   AuthState({
     this.authStatus = AuthStatus.checking, 
     this.user, 
-    this.errorMessage = ''
+    this.errorMessage = '',
+    this.userData,
   });
 
   /// Método para crear una copia del estado con cambios específicos.
   AuthState copyWith({
     AuthStatus? authStatus,
-    User? user,
-    String? errorMessage
+    UserCredential? user,
+    String? errorMessage,
+    Map<String,dynamic>? userData,
   }) => AuthState(
       authStatus: authStatus ?? this.authStatus,
       user: user ?? this.user,
-      errorMessage: errorMessage ?? this.errorMessage
+      errorMessage: errorMessage ?? this.errorMessage,
+      userData: userData ?? this.userData
   );
 
 }
