@@ -1,10 +1,12 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:portafolio_project/config/theme/app_theme.dart';
 
-class SideMenu extends StatefulWidget {
+import '../../../config/config.dart';
+import '../../presentation.dart';
+
+class SideMenu extends ConsumerStatefulWidget {
   
   final GlobalKey<ScaffoldState> scaffoldKey;
   
@@ -14,10 +16,11 @@ class SideMenu extends StatefulWidget {
     });
 
   @override
-  State<SideMenu> createState() => _SideMenuState();
+  SideMenuState createState() => SideMenuState();
 }
 
-class _SideMenuState extends State<SideMenu> {
+class SideMenuState extends ConsumerState<SideMenu> {
+
 
   int navDrawerIndex = 0;
   final color = AppTheme().getTheme().colorScheme;
@@ -25,6 +28,9 @@ class _SideMenuState extends State<SideMenu> {
   
   @override
   Widget build(BuildContext context) {
+    
+    final authStatus = ref.read( authProvider ).authStatus;
+    
     return NavigationDrawer(
       selectedIndex: navDrawerIndex,
       onDestinationSelected: (value) {
@@ -32,7 +38,7 @@ class _SideMenuState extends State<SideMenu> {
           navDrawerIndex = value;
         });
       },
-      
+        
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
@@ -50,10 +56,13 @@ class _SideMenuState extends State<SideMenu> {
             ),
           ),
 
+
+
           //* Iniciar Sesion
-          if  ( !inicioSesion ) 
+          if  ( authStatus != AuthStatus.authenticated ) 
             ListTile(
               leading: const Icon(
+                // ignore: deprecated_member_use
                 FontAwesomeIcons.signIn,
                 color: Color(0xff4981be),
               ),
@@ -75,8 +84,30 @@ class _SideMenuState extends State<SideMenu> {
                 context.push('/login');
               },
             ),
-            const Divider(
-              color: Colors.black12,
+
+          //* Home
+            ListTile(
+              leading: const Icon(
+                FontAwesomeIcons.houseChimney,
+                color: Color(0xff4981be),
+              ),
+              trailing: const Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 15,
+                color: Colors.black54,
+              ),
+              title: const Text(
+                'Home',
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 18
+                ),
+              ),
+              onTap: () {
+                context.push('/');
+              },
             ),
             
 
@@ -101,7 +132,7 @@ class _SideMenuState extends State<SideMenu> {
               ),
             ),
             onTap: () {
-              // Navigator.pushNamed(context, CafeteriasScreen.name);
+              context.push('/services');
             },
           ),
 
@@ -126,11 +157,8 @@ class _SideMenuState extends State<SideMenu> {
               ),
             ),
             onTap: () {
-              // Navigator.pushNamed(context, CafeteriasScreen.name);
+              context.push('/reservations');
             },
-          ),
-          const Divider(
-            color: Colors.black12,
           ),
 
           //* Nuestros Trabajos
@@ -157,11 +185,8 @@ class _SideMenuState extends State<SideMenu> {
               // Navigator.pushNamed(context, CafeteriasScreen.name);
             },
           ),
-          const Divider(
-            color: Colors.black12,
-          ),
 
-          //* SOBRE Cafeteria Virtual
+          //* SOBRE AR DETAILING
           ListTile(
             leading: const Icon(
               Icons.help,
@@ -185,15 +210,12 @@ class _SideMenuState extends State<SideMenu> {
               // Navigator.pushNamed(context, AboutScreen.name);
             },
           ),
-          const Divider(
-            color: Colors.black54,
-            height: 0,
-          ),
 
           //* Cerrar Sesión
-          if  ( !inicioSesion ) 
-            ListTile(
+          if  ( authStatus == AuthStatus.authenticated )
+             ListTile(
               leading: const Icon(
+                // ignore: deprecated_member_use
                 FontAwesomeIcons.signOut,
                 color: Color(0xff4981be),
               ),
@@ -212,12 +234,17 @@ class _SideMenuState extends State<SideMenu> {
                 ),
               ),
               onTap: () {
-                // Navigator.pushNamed(context, CafeteriasScreen.name);
+                ref.read( authProvider.notifier ).logOut();
+                // context.push('/');
               },
             ),
-            const Divider(
-              color: Colors.black12,
-            ),
+          
+
+            // const Divider(
+            //   color: Colors.black12,
+            // ),
+
+          const SizedBox(height: 110,),
 
           Row( 
 
@@ -225,6 +252,7 @@ class _SideMenuState extends State<SideMenu> {
             children:[
 
 
+            if  ( authStatus == AuthStatus.authenticated )  
               //* Configuración
               TextButton.icon(
                 style: ButtonStyle(
@@ -234,18 +262,40 @@ class _SideMenuState extends State<SideMenu> {
                 icon: const Icon(
                   Icons.settings,
                   size: 29, 
-                  color: Color.fromARGB(255, 0, 255, 42)
+                  color: Color(0xff4981be),
                 ),
                 label: const Text(
                   'Configuración',
                   style: TextStyle(color: Colors.red, fontSize: 15),
                 ),
                 onPressed: () async {
-                  // await _auth.signOut();
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
                 },
               ),
 
+              //* Carro de Compra
+              TextButton.icon(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(const Color(0xfff2f2f2)),
+                  padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
+                ),
+                icon: const Icon(
+                  Icons.shopping_cart_checkout_rounded,
+                  size: 29, 
+                  color: Color(0xff4981be),
+                ),
+                label: const Text(
+                  'Carro de Compra',
+                  style: TextStyle(color: Colors.red, fontSize: 15),
+                ),
+                onPressed: () async {
+
+                  // Navigator.pop(context);
+                },
+              ),
+
+
+              if ( authStatus != AuthStatus.authenticated )
               //* REGISTRAR
               TextButton.icon(
                 style: ButtonStyle(
@@ -255,15 +305,14 @@ class _SideMenuState extends State<SideMenu> {
                 icon: const Icon(
                   Icons.person_add,
                   size: 29, 
-                  color: Color.fromARGB(255, 0, 255, 42)
+                  color: Color(0xff4981be),
                 ),
                 label: const Text(
                   'Registrar',
                   style: TextStyle(color: Colors.red, fontSize: 15),
                 ),
                 onPressed: () async {
-                  // await _auth.signOut();
-                  Navigator.pop(context);
+                  context.push('/register');
                 },
               ),
             ]

@@ -15,9 +15,9 @@ class PagoPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Products Page"),),
+        title: const Text("Pago Page"),),
       body: const Center(
-        child: Text('Products Page'),
+        child: Text('Pago Page'),
       ),
       drawer: SideMenu(scaffoldKey: scaffoldKey),
     );

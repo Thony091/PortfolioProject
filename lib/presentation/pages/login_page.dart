@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../config/config.dart';
 import '../providers/providers.dart';
 import '../shared/shared.dart';
 
@@ -14,18 +15,16 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final size = MediaQuery.of(context).size;
-    final scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
-
-    return Container(
+    final color   = AppTheme().getTheme().colorScheme;
+    // final size    = MediaQuery.of(context).size;
+    
+    return  Scaffold(
       
-      height: size.height - 260, // 80 los dos sizebox y 100 el ícono
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: scaffoldBackgroundColor,
-        borderRadius: const BorderRadius.only(topLeft: Radius.circular(100)),
+      appBar: AppBar(
+        title: const Text('Login'),
+        backgroundColor: color.primary,
       ),
-      child: const _LoginForm(),
+      body: const _LoginForm(),
     );
   }
 }
@@ -50,15 +49,22 @@ class _LoginForm extends ConsumerWidget {
       showSnackBar( context, next.errorMessage );
     });
 
-    final textStyles = Theme.of(context).textTheme;
+    // final textStyles = Theme.of(context).textTheme;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50),
       child: Column(
         children: [
           const SizedBox( height: 50 ),
-          Text('Login', style: textStyles.titleLarge ),
-          const SizedBox( height: 90 ),
+
+          Image.asset(
+            'assets/images/AR_2.png',
+            width: 230, 
+            height: 230, 
+            fit: BoxFit.contain,
+          ),
+
+          const SizedBox( height: 40 ),
 
           CustomTextFormField(
             label: 'Correo',
@@ -86,10 +92,12 @@ class _LoginForm extends ConsumerWidget {
             height: 60,
             child: CustomFilledButton(
               text: 'Ingresar',
-              buttonColor: Colors.black,
-              onPressed: (){
-                ref.read(loginFormProvider.notifier).onFormSubmit();
-              },
+              buttonColor: Colors.blueAccent.shade400,
+              onPressed: loginForm.isPosting
+                ? null
+                : ref.read(loginFormProvider.notifier).onFormSubmit
+                // if ( loginForm.isPosting ) context.push('/')
+              
             )
           ),
 

@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:portafolio_project/config/config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import '../../domain/domain.dart';
-import '../../infrastructure/errors/auth_errors.dart';
+import '../../infrastructure/infrastructure.dart';
 import '../shared/shared.dart';
 
 /// Proveedor de estado para la gestión de la autenticación.
@@ -43,24 +42,19 @@ class AuthNotifier extends StateNotifier<AuthState>{
       );
       _setLoggedUser(user);
       
-      final tokenId = await user.user!.getIdToken();
-      print('Token: $tokenId');
-      print('Token distinto: ${user.credential!.token}');
-      // final user = await authRepository.login(email, password);
-      // _setLoggedUser(user);
-      
     } on CustomError {
       logOut( 'Credenciales no son correctas' );
     } catch(e){
       logOut('Error no controlado');
     }
-
+    print('Status desde logIn(): ${state.authStatus}');
   }
 
   /// Método para registrar un nuevo usuario.
-  void registerUser( String email, String password ) async {
+  void registerUserFireBase( String email, String password ) async {
 
-    final user = await FirebaseAuthService.signUpWithEmailAndPassword(email, password);
+    await FirebaseAuthService.signUpWithEmailAndPassword(email, password);
+    // final user = await FirebaseAuthService.signUpWithEmailAndPassword(email, password);
     // Implementar la lógica de registro de usuario.
   }
 
@@ -85,8 +79,22 @@ class AuthNotifier extends StateNotifier<AuthState>{
 
   /// Método privado para establecer el usuario autenticado. 
   void _setLoggedUser (UserCredential user) async {
+
+    final tokenId = await user.user!.getIdToken();
+
+    Future.delayed(const Duration(milliseconds: 500));
  
-    await keyValueStorageService.setKeyValue( 'token', user.credential?.token);
+    // Verifica si tokenId es null antes de intentar almacenarlo.
+    if (tokenId!= null) {
+
+      await keyValueStorageService.setKeyValue('token', tokenId);
+
+    } else {
+      print('Token ID is null');
+    }
+    
+    final token = await keyValueStorageService.getValue<String>('token');
+    print('Token guardado?: $token');
 
     state = state.copyWith(
       user: user,
@@ -101,12 +109,14 @@ class AuthNotifier extends StateNotifier<AuthState>{
     await FirebaseAuthService.logOut();
     
     await keyValueStorageService.removeKey('token');
+    print('Token eliminado correctamente');
 
     state = state.copyWith(
       authStatus: AuthStatus.notAuthenticated,
       user: null,
       errorMessage: errorMessage
     );
+    print('Status desde logOut(): ${state.authStatus}');
   }
 }
 

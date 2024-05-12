@@ -15,9 +15,9 @@ class ServicesPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Products Page"),),
+        title: const Text("Services Page"),),
       body: const Center(
-        child: Text('Products Page'),
+        child: Text('Services Page'),
       ),
       drawer: SideMenu(scaffoldKey: scaffoldKey),
     );

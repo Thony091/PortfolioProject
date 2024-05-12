@@ -8,7 +8,7 @@ import 'auth_provider.dart';
 //! 3 - StateNotifierProvider - consume afuera
 final loginFormProvider = StateNotifierProvider.autoDispose<LoginFormNotifier,LoginFormState>((ref) {
 
-  final loginUserCallback = ref.watch(authProvider.notifier).loginUserFireBase;
+  final loginUserCallback = ref.watch( authProvider.notifier ).loginUserFireBase;
 
   return LoginFormNotifier(
     loginUserCallback:loginUserCallback

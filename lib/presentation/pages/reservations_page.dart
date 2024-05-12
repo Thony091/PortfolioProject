@@ -15,9 +15,9 @@ class ReservationsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Products Page"),),
+        title: const Text("Reservations Page"),),
       body: const Center(
-        child: Text('Products Page'),
+        child: Text('Reservations Page'),
       ),
       drawer: SideMenu(scaffoldKey: scaffoldKey),
     );
