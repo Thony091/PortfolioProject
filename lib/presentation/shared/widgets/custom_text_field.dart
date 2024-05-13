@@ -8,6 +8,8 @@ class CustomTextFormField extends StatelessWidget {
   /// Sugerencia del campo de texto.
   final String? hint;
 
+  final Widget? suffixIcon;
+
   /// Mensaje de error del campo de texto.
   final String? errorMessage;
 
@@ -30,6 +32,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key, 
     // required this.controller,
+    this.suffixIcon,
     this.label, 
     this.hint, 
     this.errorMessage, 
@@ -37,6 +40,7 @@ class CustomTextFormField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.onChanged, 
     this.validator, 
+
   });
 
   @override
@@ -82,6 +86,7 @@ class CustomTextFormField extends StatelessWidget {
             hintText: hint,
             errorText: errorMessage,
             focusColor: colors.primary,
+            suffixIcon: suffixIcon,
           ),
         ),
       ),

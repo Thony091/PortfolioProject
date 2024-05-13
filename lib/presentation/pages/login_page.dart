@@ -53,72 +53,76 @@ class _LoginForm extends ConsumerWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50),
-      child: Column(
-        children: [
-          const SizedBox( height: 50 ),
-
-          Image.asset(
-            'assets/images/AR_2.png',
-            width: 230, 
-            height: 230, 
-            fit: BoxFit.contain,
-          ),
-
-          const SizedBox( height: 40 ),
-
-          CustomTextFormField(
-            label: 'Correo',
-            keyboardType: TextInputType.emailAddress,
-            onChanged: ref.read(loginFormProvider.notifier).onEmailChange,
-            errorMessage: loginForm.isFormPosted 
-            ? loginForm.email.errorMessage
-            : null,
-          ),
-          const SizedBox( height: 30 ),
-
-          CustomTextFormField(
-            label: 'Contraseña',
-            obscureText: true,
-            onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
-            errorMessage: loginForm.isFormPosted
-            ? loginForm.password.errorMessage
-            : null,
-          ),
-    
-          const SizedBox( height: 30 ),
-
-          SizedBox(
-            width: double.infinity,
-            height: 60,
-            child: CustomFilledButton(
-              text: 'Ingresar',
-              buttonColor: Colors.blueAccent.shade400,
-              onPressed: loginForm.isPosting
-                ? null
-                : ref.read(loginFormProvider.notifier).onFormSubmit
-                // if ( loginForm.isPosting ) context.push('/')
-              
-            )
-          ),
-
-          const Spacer( flex: 2 ),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+      child: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
             children: [
-              const Text(
-                '¿No tienes cuenta?',
-                style: TextStyle(fontSize: 13),
+              const SizedBox( height: 50 ),
+          
+              Image.asset(
+                'assets/images/AR_2.png',
+                width: 230, 
+                height: 230, 
+                fit: BoxFit.contain,
               ),
-              TextButton(
-                onPressed: () => context.push('/register'), 
-                child: const Text('Crea una aquí')
-              )
+          
+              const SizedBox( height: 40 ),
+          
+              CustomTextFormField(
+                label: 'Correo',
+                keyboardType: TextInputType.emailAddress,
+                onChanged: ref.read(loginFormProvider.notifier).onEmailChange,
+                errorMessage: loginForm.isFormPosted 
+                ? loginForm.email.errorMessage
+                : null,
+              ),
+              const SizedBox( height: 30 ),
+          
+              CustomTextFormField(
+                label: 'Contraseña',
+                obscureText: true,
+                onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
+                errorMessage: loginForm.isFormPosted
+                ? loginForm.password.errorMessage
+                : null,
+              ),
+              
+              const SizedBox( height: 30 ),
+          
+              SizedBox(
+                width: double.infinity,
+                height: 60,
+                child: CustomFilledButton(
+                  text: 'Ingresar',
+                  buttonColor: Colors.blueAccent.shade400,
+                  onPressed: loginForm.isPosting
+                    ? null
+                    : ref.read(loginFormProvider.notifier).onFormSubmit
+                    // if ( loginForm.isPosting ) context.push('/')
+                  
+                )
+              ),
+          
+              // const Spacer(  ),
+              const SizedBox( height: 20),
+          
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    '¿No tienes cuenta?',
+                    style: TextStyle(fontSize: 13),
+                  ),
+                  TextButton(
+                    onPressed: () => context.push('/register'), 
+                    child: const Text('Crea una aquí')
+                  )
+                ],
+              ),
             ],
           ),
-
-          const Spacer( flex: 1),
-        ],
+        ),
       ),
     );
   }
