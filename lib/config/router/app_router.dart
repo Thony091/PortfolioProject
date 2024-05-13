@@ -74,6 +74,20 @@ final goRouterProvider = Provider( (ref) {
           builder: (context, state) => const ServicesPage(),
         ),
 
+        //* Config
+        GoRoute(
+          path: '/config',
+          name: ConfigPage.name,
+          builder: (context, state) => const ConfigPage(),
+        ),
+
+        //* Shoping Cart
+        GoRoute(
+          path: '/shoping-cart',
+          name: ShopingCartPage.name,
+          builder: (context, state) => const ShopingCartPage(),
+        ),
+
       ],
 
     redirect: (context, state) {
@@ -83,7 +97,7 @@ final goRouterProvider = Provider( (ref) {
 
       if ( authStatus == AuthStatus.authenticated ) {
         if ( isGoingTo == '/login' || isGoingTo == '/register' || isGoingTo == '/splash' ){
-           return '/';
+           return '/config';
         }
       }
 

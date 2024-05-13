@@ -270,7 +270,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
                   style: TextStyle(color: Colors.red, fontSize: 15),
                 ),
                 onPressed: () async {
-                  // Navigator.pop(context);
+                  context.push('/config');
                 },
               ),
 
@@ -290,8 +290,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
                   style: TextStyle(color: Colors.red, fontSize: 15),
                 ),
                 onPressed: () async {
-
-                  // Navigator.pop(context);
+                  context.push('/shoping-cart');
                 },
               ),
 
