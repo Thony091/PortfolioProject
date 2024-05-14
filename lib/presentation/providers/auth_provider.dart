@@ -51,16 +51,22 @@ class AuthNotifier extends StateNotifier<AuthState>{
   }
 
   /// Método para registrar un nuevo usuario.
-  void registerUserFireBase( String email, String password ) async {
+  void registerUserFireBase( String email, String password, String name, String rut, String birthday, String phone ) async {
 
-    user = await FirebaseAuthService.signUpWithEmailAndPassword(email, password);
+    User? _userCredential = await FirebaseAuthService.signUpWithEmailAndPassword(email, password);
 
     final data = {
       'email': email,
       'password': password,
-      'uid': _userCredential?.user!.uid,
+      'uid': _userCredential?.uid,
       'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
+      'name': name,
+      'rut': rut,
+      'birthday': birthday,
+      'phone': phone
     };
+
+    
     // final user = await FirebaseAuthService.signUpWithEmailAndPassword(email, password);
     // Implementar la lógica de registro de usuario.
   }

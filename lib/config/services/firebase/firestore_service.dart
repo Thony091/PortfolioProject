@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../domain/domain.dart';
