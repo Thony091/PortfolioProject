@@ -9,7 +9,7 @@ enum RutError { empty, format, length}
 class Rut extends FormzInput<String, RutError> {
 
   static final RegExp RutRegExp = RegExp(
-    r'^\d{9,10}-[\dK]$',
+    r'^\d{7,8}-[\dK]$',
   );
 
   // Call super.pure to represent an unmodified form input.
@@ -23,7 +23,7 @@ class Rut extends FormzInput<String, RutError> {
 
     if ( displayError == RutError.empty ) return 'El campo es requerido';
     // if ( displayError == RutError.format ) return 'Error en el formato';
-    if ( displayError == RutError.format ) return 'El RUT debe tener 9 o 10 dígitos y un guión y un dígito verificador';
+    if ( displayError == RutError.format ) return 'El RUT debe tener 7 o 8 dígitos y un guión y un dígito verificador';
 
     return null;
   }

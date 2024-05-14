@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lorem_ipsum/lorem_ipsum.dart';
 
@@ -47,17 +48,18 @@ class _HomeBodyPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     final String textTest = loremIpsum(words: 150, paragraphs: 3);
+    final size = MediaQuery.of(context).size;
 
     return  SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
+          
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             
-            const SizedBox(height: 20,
-            ),
+            const SizedBox(height: 20,),
             
             const Text('Expertos en brillo', 
               style: TextStyle(
@@ -65,71 +67,80 @@ class _HomeBodyPage extends ConsumerWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(height: 20,),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
               children: [
-                Column(
-                  children: [
-                    Image.asset(
-                      'assets/images/AR_2.png',
-                      height: 150,
-                      width: 300,
-                    ),
-                    const SizedBox(height: 3,),
-                    Image.asset(
-                      'assets/images/AR_2.png',
-                      height: 150,
-                      width: 300,
-                    ),
-                    const SizedBox(height: 3,),
-                    Image.asset(
-                      'assets/images/AR_2.png',
-                      height: 150,
-                      width: 300,
-                    ),
-                    const SizedBox(height: 3,),
-                    // Text( textTest, 
-                    //   maxLines: 10,
-                    //   style: const TextStyle(
-                    //     fontSize: 13, 
-                    //     fontWeight: FontWeight.w400,
-                        
-                    //   ),
-                    // ),
-                  ],
+                SizedBox(
+                  width: size.width * 0.4,
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        'assets/images/AR_2.png',
+                        height: 150,
+                        width: 300,
+                      ),
+                      const SizedBox(height: 3,),
+                      Image.asset(
+                        'assets/images/AR_2.png',
+                        height: 150,
+                        width: 300,
+                      ),
+                      const SizedBox(height: 3,),
+                      Image.asset(
+                        'assets/images/AR_2.png',
+                        height: 150,
+                        width: 300,
+                      ),
+                      const SizedBox(height: 3,),
+                      Text( textTest, 
+                        maxLines: 10,
+                        style: const TextStyle(
+                          fontSize: 13, 
+                          fontWeight: FontWeight.w400,                          
+                        ),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ],
+                  ),
                 ),
-                Column(
-                  children: [
-                    Image.asset(
-                      'assets/images/AR_2.png',
-                      height: 150,
-                      width: 300,
-                    ),
-                    const SizedBox(height: 3,),
-                    Image.asset(
-                      'assets/images/AR_2.png',
-                      height: 150,
-                      width: 300,
-                    ),
-                    const SizedBox(height: 3,),
-                    Image.asset(
-                      'assets/images/AR_2.png',
-                      height: 150,
-                      width: 300,
-                    ),
-                    const SizedBox(height: 3,),
-                    // Text( textTest, 
-                    //   maxLines: 10,
-                    //   style: const TextStyle(
-                    //     fontSize: 13, 
-                    //     fontWeight: FontWeight.w400,
-                        
-                    //   ),
-                    // ),
-                  ],
+                SizedBox(
+                  width: size.width * 0.4,
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        'assets/images/AR_2.png',
+                        height: 150,
+                        width: 300,
+                      ),
+                      const SizedBox(height: 3,),
+                      Image.asset(
+                        'assets/images/AR_2.png',
+                        height: 150,
+                        width: 300,
+                      ),
+                      const SizedBox(height: 3,),
+                      Image.asset(
+                        'assets/images/AR_2.png',
+                        height: 150,
+                        width: 300,
+                      ),
+                      const SizedBox(height: 3,),
+                      Text( textTest, 
+                        maxLines: 10,
+                        style: const TextStyle(
+                          fontSize: 13, 
+                          fontWeight: FontWeight.w400,                          
+                        ),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ],
+                  ),
                 ),
               ],
-            )
+            ),
+            const SizedBox( height: 20,),
 
           ],
         ),

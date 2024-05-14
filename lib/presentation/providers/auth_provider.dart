@@ -73,7 +73,7 @@ class AuthNotifier extends StateNotifier<AuthState>{
 
     String uid = userCredential.user!.uid;
 
-    isSuccess = await FirestoreService().addDataToFirestore(data, 'users', uid);
+    isSuccess = await addUserToDatabase(data, 'users', uid);
     
     if (isSuccess) {
 
@@ -86,7 +86,7 @@ class AuthNotifier extends StateNotifier<AuthState>{
 
   Future<bool> addUserToDatabase ( Map<String, dynamic> data, String collectionName, String docName ) async {
     
-    var value = false;
+    bool value = false;
 
     try {
       await FirestoreService().addDataToFirestore(data, collectionName, docName);
