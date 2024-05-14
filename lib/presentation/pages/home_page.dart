@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lorem_ipsum/lorem_ipsum.dart';
 
 import '../../config/theme/theme.dart';
 import '../presentation.dart';
@@ -31,20 +32,106 @@ class HomePageState extends ConsumerState<HomePage>{
         ), 
         backgroundColor: color.primary,
       ),
-      body: const Center(
-        child: _HomeBodyPage(),
-      ),
+      body: const _HomeBodyPage(),
+      
     );
   }
 }
 
 class _HomeBodyPage extends ConsumerWidget {
-  const _HomeBodyPage({
-    super.key,
-  });
+  const _HomeBodyPage();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Text('Home Page');
+
+    final String textTest = loremIpsum(words: 150, paragraphs: 3);
+
+    return  SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            
+            const SizedBox(height: 20,
+            ),
+            
+            const Text('Expertos en brillo', 
+              style: TextStyle(
+                fontSize: 20, 
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    Image.asset(
+                      'assets/images/AR_2.png',
+                      height: 150,
+                      width: 300,
+                    ),
+                    const SizedBox(height: 3,),
+                    Image.asset(
+                      'assets/images/AR_2.png',
+                      height: 150,
+                      width: 300,
+                    ),
+                    const SizedBox(height: 3,),
+                    Image.asset(
+                      'assets/images/AR_2.png',
+                      height: 150,
+                      width: 300,
+                    ),
+                    const SizedBox(height: 3,),
+                    // Text( textTest, 
+                    //   maxLines: 10,
+                    //   style: const TextStyle(
+                    //     fontSize: 13, 
+                    //     fontWeight: FontWeight.w400,
+                        
+                    //   ),
+                    // ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Image.asset(
+                      'assets/images/AR_2.png',
+                      height: 150,
+                      width: 300,
+                    ),
+                    const SizedBox(height: 3,),
+                    Image.asset(
+                      'assets/images/AR_2.png',
+                      height: 150,
+                      width: 300,
+                    ),
+                    const SizedBox(height: 3,),
+                    Image.asset(
+                      'assets/images/AR_2.png',
+                      height: 150,
+                      width: 300,
+                    ),
+                    const SizedBox(height: 3,),
+                    // Text( textTest, 
+                    //   maxLines: 10,
+                    //   style: const TextStyle(
+                    //     fontSize: 13, 
+                    //     fontWeight: FontWeight.w400,
+                        
+                    //   ),
+                    // ),
+                  ],
+                ),
+              ],
+            )
+
+          ],
+        ),
+      )
+    );
   }
 }

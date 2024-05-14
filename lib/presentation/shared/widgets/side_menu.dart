@@ -245,7 +245,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
             //   color: Colors.black12,
             // ),
 
-          const SizedBox(height: 110,),
+          const SizedBox(height: 50,),
 
           Row( 
 
