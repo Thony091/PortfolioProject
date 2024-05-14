@@ -51,24 +51,53 @@ class AuthNotifier extends StateNotifier<AuthState>{
   }
 
   /// Método para registrar un nuevo usuario.
-  void registerUserFireBase( String email, String password, String name, String rut, String birthday, String phone ) async {
+  Future<UserCredential?> registerUserFireBase( 
+    String email, String password, String name, String rut, String birthday, String phone ) async {
 
-    User? _userCredential = await FirebaseAuthService.signUpWithEmailAndPassword(email, password);
+    var isSuccess = false;
+
+    UserCredential? userCredential = await FirebaseAuthService.signUpWithEmailAndPassword(email, password);
 
     final data = {
       'email': email,
       'password': password,
-      'uid': _userCredential?.uid,
+      'uid': userCredential!.user!.uid,
       'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
       'name': name,
       'rut': rut,
       'birthday': birthday,
-      'phone': phone
+      'phone': phone,
+      'bio': '',
+      'ProfileImage': '',
     };
 
+    String uid = userCredential.user!.uid;
+
+    isSuccess = await FirestoreService().addDataToFirestore(data, 'users', uid);
     
-    // final user = await FirebaseAuthService.signUpWithEmailAndPassword(email, password);
-    // Implementar la lógica de registro de usuario.
+    if (isSuccess) {
+
+      return userCredential;
+      
+    } else {
+      logOut('Error al registrar usuario');
+    }
+  }
+
+  Future<bool> addUserToDatabase ( Map<String, dynamic> data, String collectionName, String docName ) async {
+    
+    var value = false;
+
+    try {
+      await FirestoreService().addDataToFirestore(data, collectionName, docName);
+      value = true;
+    } catch (e) {
+      print(e);
+      value = false;
+    }
+
+    return value;
+
   }
 
   /// Método para verificar el estado de autenticación.

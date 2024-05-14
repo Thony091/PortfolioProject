@@ -12,27 +12,27 @@ class FirebaseAuthService {
     await auth.signOut();
   }
 
-  static Future<User?> signInWithEmailAndPassword(String email, String password) async {
+  static Future<UserCredential?> signInWithEmailAndPassword(String email, String password) async {
     try {
       final UserCredential userCredential = await auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return userCredential.user;
+      return userCredential;
     } catch (e) {
       print('Error de autentificación: $e');
       return null;
     }
   } 
 
-  static Future<User?> signUpWithEmailAndPassword(String email, String password) async {
+  static Future<UserCredential?> signUpWithEmailAndPassword(String email, String password) async {
     try {
       final UserCredential userCredential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
       // userCredential
-      return userCredential.user;
+      return userCredential;
     } catch (e) {
       print('Error en el registro: $e');
       return null;

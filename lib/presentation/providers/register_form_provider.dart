@@ -16,7 +16,7 @@ final registerFormProvider = StateNotifierProvider.autoDispose<RegisterFormNotif
 
 class RegisterFormNotifier extends StateNotifier<RegisterFormState> {
 
-  final Function(String, String) registerUserCallback;
+  final Function(String, String, String, String, String, String) registerUserCallback;
 
   RegisterFormNotifier({
     required this.registerUserCallback,
@@ -77,7 +77,7 @@ class RegisterFormNotifier extends StateNotifier<RegisterFormState> {
 
     state = state.copyWith(isPosting: true);
 
-    await registerUserCallback( state.email.value, state.password.value );
+    await registerUserCallback( state.email.value, state.password.value, state.name.value, state.rut.value, state.birthday.value, state.phone.value);
 
     state = state.copyWith(isPosting: false);
   }
