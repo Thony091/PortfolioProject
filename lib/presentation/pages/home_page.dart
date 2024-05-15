@@ -58,7 +58,7 @@ class _HomeBodyPage extends ConsumerWidget {
 
     return  SingleChildScrollView(
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-      reverse: true,
+      // reverse: true,
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
