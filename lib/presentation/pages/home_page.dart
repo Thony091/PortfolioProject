@@ -52,8 +52,12 @@ class _HomeBodyPage extends ConsumerWidget {
 
     final String textTest = loremIpsum(words: 150, paragraphs: 3);
     final size = MediaQuery.of(context).size;
+    const String textColumn1 = '¡Transforma tu Renault Duster en una obra maestra sobre ruedas con nuestro servicio de Detailing exclusivo! En Nuestro taller especializado, ofrecemos una experiencia única de embellecimiento y protección de tu vehículo, centrandonos en cada detalle de tu amada Renault Duster.';
+    const String textColumn2 = '¡Experimenta  la potencia y el estilo sin igual de tu MINI john Cooper Works llevados al máximo nivel con nuestra transformación exclusiva! En nuestro talle especializado, nos enorgullese ofrecer un servicio personalizado  que resalta la esencia deportiva y elegancia intrinseca de tu MINI JCW.';
+    const String detailingDescription = 'El detailing, en el servicio automotriz, es el conjunto de tecnicas centeradas en la limpieza perfecta del vehiculo sin causar deterioro de los materiales que lo componen. Es más, se encarga de solucionar defectos estéticos y proteger el auto ante la mayoria de las agresiones externas.';
 
     return  SingleChildScrollView(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       reverse: true,
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -77,122 +81,169 @@ class _HomeBodyPage extends ConsumerWidget {
 
               children: [
                 SizedBox(
-                  width: size.width * 0.4,
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        'assets/images/AR_2.png',
-                        height: 150,
-                        width: 300,
+                  width: size.width * 0.42,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(2),
+                        topRight: Radius.circular(2),
+                        bottomRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
                       ),
-                      const SizedBox(height: 3,),
-                      Image.asset(
-                        'assets/images/AR_2.png',
-                        height: 150,
-                        width: 300,
-                      ),
-                      const SizedBox(height: 3,),
-                      Image.asset(
-                        'assets/images/AR_2.png',
-                        height: 150,
-                        width: 300,
-                      ),
-                      const SizedBox(height: 3,),
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(2),
-                            topRight: Radius.circular(2),
-                            bottomRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 5,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 5,
+                          offset: Offset(0, 2),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Text( textTest,
-                            maxLines: 10,
-                            style: const TextStyle(
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/images/brillos/RD1.jpeg',
+                          height: 150,
+                          width: 300,
+                        ),
+                        // const SizedBox(height: 3,),
+                        Image.asset(
+                          'assets/images/brillos/RD5.jpeg',
+                          height: 150,
+                          width: 300,
+                        ),
+                        // const SizedBox(height: 3,),
+                        Image.asset(
+                          'assets/images/brillos/RD4.jpeg',
+                          height: 150,
+                          width: 300,
+                        ),
+                        // const SizedBox(height: 3,),
+                        const Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: Text( textColumn1,
+                            maxLines: 15,
+                            style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
                             ),
                             textAlign: TextAlign.justify,
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
-                  width: size.width * 0.4,
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        'assets/images/AR_2.png',
-                        height: 150,
-                        width: 300,
+                  width: size.width * 0.42,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(2),
+                        topRight: Radius.circular(2),
+                        bottomRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
                       ),
-                      const SizedBox(height: 3,),
-                      Image.asset(
-                        'assets/images/AR_2.png',
-                        height: 150,
-                        width: 300,
-                      ),
-                      const SizedBox(height: 3,),
-                      Image.asset(
-                        'assets/images/AR_2.png',
-                        height: 150,
-                        width: 300,
-                      ),
-                      const SizedBox(height: 3,),
-                       Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(2),
-                            topRight: Radius.circular(2),
-                            bottomRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 5,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 5,
+                          offset: Offset(0, 2),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Text( textTest,
-                            maxLines: 10,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/images/brillos/JWC2.jpeg',
+                          height: 150,
+                          width: 300,
+                        ),
+                        // const SizedBox(height: 1,),
+                        Image.asset(
+                          'assets/images/brillos/JWC3.jpeg',
+                          height: 150,
+                          width: 300,
+                        ),
+                        // const SizedBox(height: 1,),
+                        Image.asset(
+                          'assets/images/brillos/JWC4.jpeg',
+                          height: 150,
+                          width: 300,
+                        ),
+                        // const SizedBox(height: 1,),
+                        const Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SingleChildScrollView(
+                            child: Text( textColumn2,
+                              maxLines: 13,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              textAlign: TextAlign.justify,
                             ),
-                            textAlign: TextAlign.justify,
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
             const SizedBox( height: 20,),
 
-            // const SizedBox(
-            //   height: 350,
-            //   width: double.infinity,
-            // ),
             Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(5),
+                  topRight: Radius.circular(5),
+                  bottomRight: Radius.circular(5),
+                  bottomLeft: Radius.circular(5),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 5,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(12),
+                child: Column(
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('¿Que es Detailing?',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox( height: 10,),
+                    Text( detailingDescription,
+                      maxLines: 10,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      textAlign: TextAlign.justify,
+                    ),
+                  ],
+                )
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+
+            SizedBox(
               height: 350,
               width: double.infinity,
               child: _Map()
@@ -219,45 +270,58 @@ class _HomeBodyPage extends ConsumerWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Form(child: Column(
-                  children: [
-                    const Text( 'Contacto',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                child: Form(
+                  child: Column(
+                    children: [
+                      const Text( 'Contacto',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'Nombre',
-                        hintText: 'Nombre',
+                      const CustomTextFormField(
+                        label: 'Nombre',
+                        // obscureText: true,
+                        // onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
+                        // errorMessage: loginForm.isFormPosted
+                        // ? loginForm.password.errorMessage
+                        // : null,
                       ),
-                    ),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'Correo',
-                        hintText: 'Correo',
+                      const SizedBox( height: 10,),
+                      const CustomTextFormField(
+                        label: 'Correo Electrónico',
+                        // obscureText: true,
+                        // onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
+                        // errorMessage: loginForm.isFormPosted
+                        // ? loginForm.password.errorMessage
+                        // : null,
                       ),
-                    ),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'Telefono',
-                        hintText: 'Telefono',
+                      const SizedBox( height: 10,),
+                      const CustomTextFormField(
+                        label: 'Mensaje',
+                        hint: 'Escribe tu Mensaje',
+                        keyboardType: TextInputType.multiline,  
+                        // obscureText: true,
+                        // onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
+                        // errorMessage: loginForm.isFormPosted
+                        // ? loginForm.password.errorMessage
+                        // : null,
                       ),
-                    ),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'Mensaje',
-                        hintText: 'Mensaje',
+                      const SizedBox( height: 15,),
+                      // TextFormField(
+                      //   decoration: const InputDecoration(
+                      //     labelText: 'Mensaje',
+                      //     hintText: 'Mensaje',
+                      //   ),
+                      // ),
+                      // const SizedBox( height: 20,),
+                      ElevatedButton(
+                        onPressed: (){},
+                        child: const Text('Enviar'),
                       ),
-                    ),
-                    ElevatedButton(
-                      onPressed: (){},
-                      child: const Text('Enviar'),
-                    ),
-                  ],
-                )
-                            ),
+                    ],
+                  )
+                ),
               )
             ),
           ],
@@ -274,15 +338,15 @@ class _Map extends StatelessWidget {
       Completer<GoogleMapController>();
 
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+    target: LatLng(-33.538221, -70.661555),
+    zoom: 12,
   );
 
-  static const CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414
+  static const CameraPosition _ARDetailin = CameraPosition(
+      // bearing: 192.8334901395799,
+      target: LatLng(-33.530395, -70.649066),
+      // tilt: 59.440717697143555,
+      zoom: 14
   );
 
   @override
@@ -297,17 +361,32 @@ class _Map extends StatelessWidget {
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
+        markers: {
+          const Marker(
+            markerId: MarkerId('ARDetailin'),
+            position: LatLng(-33.530395, -70.649066),
+            infoWindow: InfoWindow(
+              title: 'ARDetailin',
+              snippet: 'Taller de Detallado Automotriz',
+            ),
+          ),
+        }
       ),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: _goToTheLake,
-      //   label: const Text('To the lake!'),
-      //   icon: const Icon(Icons.directions_boat),
-      // ),
+      floatingActionButton: SizedBox(
+        width: 135,
+        height: 40,
+        child: FloatingActionButton.extended(
+          onPressed: _goToARDetailin,
+          label: const Text('To WorkShop!'),
+          icon: const Icon(Icons.car_repair_outlined),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 
-  Future<void> _goToTheLake() async {
+  Future<void> _goToARDetailin() async {
     final GoogleMapController controller = await _controller.future;
-    await controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+    await controller.animateCamera(CameraUpdate.newCameraPosition(_ARDetailin));
   }
 }
