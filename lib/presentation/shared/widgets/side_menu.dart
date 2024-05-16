@@ -132,7 +132,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
               ),
             ),
             onTap: () {
-              context.push('/products');
+              context.push('/services');
               // context.push('/services');
             },
           ),

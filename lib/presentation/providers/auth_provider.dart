@@ -69,6 +69,12 @@ class AuthNotifier extends StateNotifier<AuthState>{
       'phone': phone,
       'bio': '',
       'ProfileImage': '',
+      'creditCard': [{
+        'number': '',
+        'expirationDate': '',
+        'cvv': '',
+        'name': '',
+      }]
     };
 
     String uid = userCredential.user!.uid;

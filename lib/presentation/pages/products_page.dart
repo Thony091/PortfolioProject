@@ -63,7 +63,7 @@ class _ProductsBodyPageState extends ConsumerState {
           return GestureDetector(
             // onTap: () =>  context.push('/product/${ product.id }'),
             child: CustomProductCard(
-              image: 'assets/images/AR_2.png',
+              image: 'assets/icons/AR_2.png',
               title: 'Product $index',
               price: 100,
               press: (){},
