@@ -48,7 +48,15 @@ class _ProductsBodyPage extends ConsumerStatefulWidget {
 
 class _ProductsBodyPageState extends ConsumerState {
 
+  final ScrollController scrollController = ScrollController();
   // final productsState = ref.watch( productsProvider );
+
+  @override
+  void initState() {
+    super.initState();
+
+    ref.read( productsProvider.notifier ).loadNextPage();
+  }
 
   @override
   Widget build(BuildContext context) {
