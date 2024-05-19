@@ -35,12 +35,24 @@ class RegisterPage extends StatelessWidget {
 class _RegisterForm extends ConsumerWidget {
   const _RegisterForm();
 
+  void showSnackBar( BuildContext context, String message ){
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message))
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
     final registerForm = ref.watch(( registerFormProvider ));
     final textStyles = Theme.of(context).textTheme;
     // final size = MediaQuery.of(context).size;
+
+    ref.listen(authProvider, (previous, next) { 
+      if ( next.errorMessage.isEmpty )  return;
+      showSnackBar( context, next.errorMessage );
+    });
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50),
@@ -129,8 +141,9 @@ class _RegisterForm extends ConsumerWidget {
                 buttonColor: Colors.blueAccent.shade400,
                 onPressed: (){ registerForm.isPosting
                   ? null
-                  : ref.read( registerFormProvider.notifier ).onFormSubmit().then((_) => context.push('/login'));
-                  // context.go('/');
+                  : ref.read( registerFormProvider.notifier ).onFormSubmit().then((_) {
+                      if( registerForm.isValid) context.push('/login');
+                  });
                 }, 
               )
             ),

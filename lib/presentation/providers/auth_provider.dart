@@ -41,7 +41,7 @@ class AuthNotifier extends StateNotifier<AuthState>{
         password: password
       );
       _setLoggedUser(user);
-      
+      // print( 'Valor de UserData ${state.userData.toString()}');
     } on CustomError {
       logOut( 'Credenciales no son correctas' );
     } catch(e){
@@ -54,40 +54,46 @@ class AuthNotifier extends StateNotifier<AuthState>{
   Future<UserCredential?> registerUserFireBase( 
     String email, String password, String name, String rut, String birthday, String phone ) async {
 
-    var isSuccess = false;
+    try {
+      var isSuccess = false;
 
-    UserCredential? userCredential = await FirebaseAuthService.signUpWithEmailAndPassword(email, password);
+      UserCredential? userCredential = await FirebaseAuthService.signUpWithEmailAndPassword(email, password);
 
-    final data = {
-      'email': email,
-      'password': password,
-      'uid': userCredential!.user!.uid,
-      'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
-      'name': name,
-      'rut': rut,
-      'birthday': birthday,
-      'phone': phone,
-      'bio': '',
-      'ProfileImage': '',
-      'creditCard': [{
-        'number': '',
-        'expirationDate': '',
-        'cvv': '',
-        'name': '',
-      }]
-    };
+      final data = {
+        'email': email,
+        'password': password,
+        'uid': userCredential!.user!.uid,
+        'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
+        'name': name,
+        'rut': rut,
+        'birthday': birthday,
+        'phone': phone,
+        'bio': '',
+        'ProfileImage': '',
+        'isAdmin': false,
+        'creditCard': [{
+          'number': '',
+          'expirationDate': '',
+          'cvv': '',
+          'name': '',
+        }]
+      };
 
-    String uid = userCredential.user!.uid;
+      String uid = userCredential.user!.uid;
 
-    isSuccess = await addUserToDatabase(data, 'users', uid);
-    
-    if (isSuccess) {
-
-      return userCredential;
+      isSuccess = await addUserToDatabase(data, 'users', uid);
       
-    } else {
-      logOut('Error al registrar usuario');
+      if (isSuccess) {
+
+        return userCredential;
+        
+      } else {
+        logOut('Error al registrar usuario');
+      }
+    } catch (e) {
+      logOut(e.toString());
     }
+    
   }
 
   Future<bool> addUserToDatabase ( Map<String, dynamic> data, String collectionName, String docName ) async {
@@ -98,12 +104,11 @@ class AuthNotifier extends StateNotifier<AuthState>{
       await FirestoreService().addDataToFirestore(data, collectionName, docName);
       value = true;
     } catch (e) {
+      logOut(e.toString());
       print(e);
       value = false;
     }
-
     return value;
-
   }
 
   /// Método para verificar el estado de autenticación.
@@ -130,7 +135,8 @@ class AuthNotifier extends StateNotifier<AuthState>{
 
     final tokenId = await user.user!.getIdToken();
 
-    Future.delayed(const Duration(milliseconds: 500));
+    final uid = user.user!.uid;
+    final userData = await FirestoreService().getUserDataFromFirestore('users', uid);
  
     // Verifica si tokenId es null antes de intentar almacenarlo.
     if (tokenId!= null) {
@@ -148,6 +154,7 @@ class AuthNotifier extends StateNotifier<AuthState>{
       user: user,
       authStatus: AuthStatus.authenticated,
       errorMessage: '',
+      userData: userData
     );
   }
 
@@ -199,5 +206,16 @@ class AuthState {
       errorMessage: errorMessage ?? this.errorMessage,
       userData: userData ?? this.userData
   );
+
+  @override
+  String toString() {
+    return '''
+      AuthState:
+      authStatus: $authStatus, 
+      user: $user, 
+      errorMessage: $errorMessage, 
+      userData: $userData
+    ''';
+  }
 
 }
