@@ -22,8 +22,11 @@ class ReservationsPage extends StatelessWidget {
         title: const Text("Reservations Page"),
         backgroundColor: color.primary,
       ),
-      body: const Center(
-        child: _ReservationFormBody(),
+      body: const BackgroundImageWidget(
+        opacity: 0.1,
+        child: Center(
+          child: _ReservationFormBody(),
+        ),
       ),
       // drawer: SideMenu(scaffoldKey: scaffoldKey),
     );
@@ -111,7 +114,7 @@ class _ReservationFormBody extends ConsumerWidget {
               width: double.infinity,
               height: 80.0 ,
               child: DropdownButton<String>(
-                hint: Text("Seleccione una opción"), // Opcional: texto de sugerencia
+                hint: const Text("Seleccione una opción"), // Opcional: texto de sugerencia
                 items: opciones.map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,

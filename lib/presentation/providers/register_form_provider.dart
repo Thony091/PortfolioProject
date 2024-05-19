@@ -70,7 +70,7 @@ class RegisterFormNotifier extends StateNotifier<RegisterFormState> {
     );
   }
 
-  onFormSubmit() async {
+  Future<void> onFormSubmit() async {
     _touchEveryField();
 
     if ( !state.isValid ) return;

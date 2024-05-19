@@ -8,3 +8,4 @@ export 'services_page.dart';
 export 'pago_page.dart';
 export 'config_page.dart';
 export 'shoping_cart_page.dart';
+export 'our_works_page.dart';

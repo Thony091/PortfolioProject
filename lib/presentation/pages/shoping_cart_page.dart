@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portafolio_project/presentation/presentation.dart';
 
 import '../../config/config.dart';
 
@@ -18,7 +19,9 @@ class ShopingCartPage extends StatelessWidget {
         backgroundColor: color.primary,
         title: const Text('Shoping Cart Page'),
       ),
-      body: const _ShopingCartBodyPage(),
+      body: const BackgroundImageWidget(
+        opacity: 0.1,
+        child: _ShopingCartBodyPage()),
     );
   }
 }

@@ -3,7 +3,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lorem_ipsum/lorem_ipsum.dart';
@@ -38,7 +37,10 @@ class HomePageState extends ConsumerState<HomePage>{
         ),
         backgroundColor: color.primary,
       ),
-      body: const _HomeBodyPage(),
+      body: const BackgroundImageWidget(
+        opacity: 0.1,
+        child: _HomeBodyPage()
+      ),
 
     );
   }

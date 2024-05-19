@@ -23,7 +23,10 @@ class RegisterPage extends StatelessWidget {
           title: const Text('Crear cuenta'),
           backgroundColor: color.primary,
         ),
-        body:  const _RegisterForm(),
+        body:  const BackgroundImageWidget(
+          opacity: 0.1,
+          child: _RegisterForm()
+        ),
       ),
     );
   }
@@ -37,7 +40,7 @@ class _RegisterForm extends ConsumerWidget {
 
     final registerForm = ref.watch(( registerFormProvider ));
     final textStyles = Theme.of(context).textTheme;
-    final size = MediaQuery.of(context).size;
+    // final size = MediaQuery.of(context).size;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50),
@@ -126,9 +129,9 @@ class _RegisterForm extends ConsumerWidget {
                 buttonColor: Colors.blueAccent.shade400,
                 onPressed: (){ registerForm.isPosting
                   ? null
-                  : ref.read( registerFormProvider.notifier ).onFormSubmit();
+                  : ref.read( registerFormProvider.notifier ).onFormSubmit().then((_) => context.push('/login'));
                   // context.go('/');
-                },
+                }, 
               )
             ),
         

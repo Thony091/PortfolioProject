@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../shared/widgets/side_menu.dart';
+import '../presentation.dart';
+
 
 class PagoPage extends StatelessWidget {
 
@@ -16,10 +17,24 @@ class PagoPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Pago Page"),),
-      body: const Center(
-        child: Text('Pago Page'),
+      body: const BackgroundImageWidget(
+        opacity: 0.1,
+        child: Center(
+          child: _PagoBodyPage(),
+        ),
       ),
       drawer: SideMenu(scaffoldKey: scaffoldKey),
     );
+  }
+}
+
+class _PagoBodyPage extends StatelessWidget {
+  const _PagoBodyPage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text('Pago Page');
   }
 }

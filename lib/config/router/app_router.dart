@@ -88,6 +88,13 @@ final goRouterProvider = Provider( (ref) {
           builder: (context, state) => const ShopingCartPage(),
         ),
 
+        //* Our Works
+        GoRoute(
+          path: '/our-works',
+          name: OurWorksPage.name,
+          builder: (context, state) => const OurWorksPage(),
+        ),
+
       ],
 
     redirect: (context, state) {
@@ -102,7 +109,7 @@ final goRouterProvider = Provider( (ref) {
       }
 
       if ( authStatus == AuthStatus.notAuthenticated ) {
-        if ( isGoingTo == '/pago' ){
+        if ( isGoingTo == '/pago' || isGoingTo == '/config' ){
            return '/login';
         }
       }

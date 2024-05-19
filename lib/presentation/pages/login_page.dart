@@ -24,7 +24,10 @@ class LoginPage extends StatelessWidget {
         title: const Text('Login'),
         backgroundColor: color.primary,
       ),
-      body: const _LoginForm(),
+      body: const BackgroundImageWidget(
+        opacity: 0.1,
+        child: _LoginForm()
+      ),
     );
   }
 }
@@ -54,6 +57,7 @@ class _LoginForm extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50),
       child: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Container(
           height: MediaQuery.of(context).size.height,
           child: Column(
@@ -61,7 +65,7 @@ class _LoginForm extends ConsumerWidget {
               const SizedBox( height: 50 ),
           
               Image.asset(
-                'assets/images/AR_2.png',
+                'assets/icons/AR_2.png',
                 width: 230, 
                 height: 230, 
                 fit: BoxFit.contain,

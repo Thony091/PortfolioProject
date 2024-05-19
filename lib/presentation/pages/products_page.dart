@@ -31,7 +31,10 @@ class ProductsPage extends StatelessWidget {
         ],
         backgroundColor: color.primary,
       ),
-        body: const _ProductsBodyPage(),
+        body: const BackgroundImageWidget(
+          opacity: 0.1, 
+          child: _ProductsBodyPage()
+        ),
     );
   }
 }

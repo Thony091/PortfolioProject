@@ -23,21 +23,33 @@ class ConfigPage extends StatelessWidget {
         backgroundColor: color.primary,
         title: const Text('Config Page'),
       ),
-      body:  Center(
+      body:  const BackgroundImageWidget(
+        opacity: 0.1,
+        child: _ConfigPage()
+      ),
+    );
+  }
+}
+
+class _ConfigPage extends StatelessWidget {
+  const _ConfigPage();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      
+      child: Column(
+        children: [
+          const SizedBox(height: 25,),
+          const Text('Config Page'),
+          ElevatedButton(
+            onPressed: () {
+              context.push('/');
+            },
+            child: const Text('Go Home!'),
+          ),
+        ],
         
-        child: Column(
-          children: [
-            const SizedBox(height: 25,),
-            const Text('Config Page'),
-            ElevatedButton(
-              onPressed: () {
-                context.push('/');
-              },
-              child: const Text('Go Home!'),
-            ),
-          ],
-          
-        ),
       ),
     );
   }

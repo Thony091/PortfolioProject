@@ -62,8 +62,8 @@ class SideMenuState extends ConsumerState<SideMenu> {
           if  ( authStatus != AuthStatus.authenticated ) 
             ListTile(
               leading: const Icon(
-                // ignore: deprecated_member_use
-                FontAwesomeIcons.signIn,
+                size: 33,
+                Icons.person,
                 color: Color(0xff4981be),
               ),
               trailing: const Icon(
@@ -88,7 +88,8 @@ class SideMenuState extends ConsumerState<SideMenu> {
           //* Home
             ListTile(
               leading: const Icon(
-                FontAwesomeIcons.houseChimney,
+                size: 33,
+                Icons.home_outlined,
                 color: Color(0xff4981be),
               ),
               trailing: const Icon(
@@ -111,10 +112,11 @@ class SideMenuState extends ConsumerState<SideMenu> {
             ),
             
 
-          //* Cafeterias
+          //* Servicios
           ListTile(
             leading: const Icon(
-              FontAwesomeIcons.servicestack,
+              size: 33,
+              Icons.car_repair,
               color: Color(0xff4981be),
             ),
             trailing: const Icon(
@@ -140,7 +142,9 @@ class SideMenuState extends ConsumerState<SideMenu> {
           //* Agenda tu hora
           ListTile(
             leading: const Icon(
-              FontAwesomeIcons.clock,
+              size: 33,
+              Icons.calendar_month_outlined,
+              // FontAwesomeIcons.calendarAlt,
               color: Color(0xff4981be),
             ),
             trailing: const Icon(
@@ -165,7 +169,8 @@ class SideMenuState extends ConsumerState<SideMenu> {
           //* Nuestros Trabajos
           ListTile(
             leading: const Icon(
-              FontAwesomeIcons.images,
+              size: 33,
+              Icons.diamond_outlined,
               color: Color(0xff4981be),
             ),
             trailing: const Icon(
@@ -183,13 +188,14 @@ class SideMenuState extends ConsumerState<SideMenu> {
               ),
             ),
             onTap: () {
-              // Navigator.pushNamed(context, CafeteriasScreen.name);
+              context.push('/our-works');
             },
           ),
 
           //* SOBRE AR DETAILING
           ListTile(
             leading: const Icon(
+              size: 33,
               Icons.help,
               color: Color(0xff4981be),
             ),
@@ -235,7 +241,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
                 ),
               ),
               onTap: () {
-                ref.read( authProvider.notifier ).logOut();
+                ref.read( authProvider.notifier ).logOut().then((_) => context.push('/'));
                 // context.push('/');
               },
             ),

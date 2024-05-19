@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../config/config.dart';
+import '../presentation.dart';
 
 
 class ServicesPage extends StatelessWidget {
@@ -21,7 +22,10 @@ class ServicesPage extends StatelessWidget {
         title: const Text("Services Page"),
         backgroundColor: color.primary,
       ),
-      body: const _ServicesPageBody(),
+      body: const BackgroundImageWidget(
+        opacity: 0.1,
+        child: _ServicesPageBody()
+        ),
       // drawer: SideMenu(scaffoldKey: scaffoldKey),
     );
   }
