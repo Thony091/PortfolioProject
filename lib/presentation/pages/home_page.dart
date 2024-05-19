@@ -24,7 +24,7 @@ class HomePageState extends ConsumerState<HomePage>{
   @override
   Widget build(BuildContext context ) {
 
-    final authStatusProvider  = ref.read( authProvider );
+    final authStatusProvider  = ref.watch( authProvider );
     final color               = AppTheme().getTheme().colorScheme;
     final scaffoldKey         = GlobalKey<ScaffoldState>();
 
@@ -32,7 +32,7 @@ class HomePageState extends ConsumerState<HomePage>{
       drawer:  SideMenu(scaffoldKey: scaffoldKey),
       appBar: AppBar(
         title: Text((authStatusProvider.authStatus == AuthStatus.authenticated)
-          ? 'Hola ${authStatusProvider.user!.user!.email}'
+          ? 'Hola ${authStatusProvider.userData!.nombre}'
           : 'Hola Invitado'
         ),
         backgroundColor: color.primary,

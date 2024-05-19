@@ -70,23 +70,33 @@ class RegisterFormNotifier extends StateNotifier<RegisterFormState> {
     );
   }
 
-  Future<void> onFormSubmit() async {
-    _touchEveryField();
+  Future<bool> onFormSubmit() async {
 
-    if ( !state.isValid ) return;
+    try {
+      
+      _touchEveryField();
 
-    state = state.copyWith(isPosting: true);
+      if ( !state.isValid ) return false;
 
-    await registerUserCallback( 
-      state.email.value, 
-      state.password.value, 
-      state.name.value, 
-      state.rut.value, 
-      state.birthday.value, 
-      state.phone.value
-    );
+      state = state.copyWith(isPosting: true);
 
-    state = state.copyWith(isPosting: false);
+      await registerUserCallback( 
+        state.email.value, 
+        state.password.value, 
+        state.name.value, 
+        state.rut.value, 
+        state.birthday.value, 
+        state.phone.value
+      );
+
+      state = state.copyWith(isPosting: false);
+
+      return true;
+
+    } catch (e) {
+      e.toString();
+      return false;
+    }
   }
 
   _touchEveryField() {

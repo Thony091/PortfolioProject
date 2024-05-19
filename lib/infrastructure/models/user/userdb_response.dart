@@ -1,6 +1,6 @@
 
-class UserDbResponse {
-    final int idUser;
+class UserFirestoreResponse {
+    final String uid;
     final String nombre;
     final String rut;
     final String fechaNacimiento;
@@ -8,9 +8,13 @@ class UserDbResponse {
     final String telefono;
     final String direccion;
     final String contrasenia;
+    final String imagenPerfil;
+    final String bio;
+    final bool isAdmin;
 
-    UserDbResponse({
-        required this.idUser,
+
+    UserFirestoreResponse({
+        required this.uid,
         required this.nombre,
         required this.rut,
         required this.fechaNacimiento,
@@ -18,27 +22,36 @@ class UserDbResponse {
         required this.telefono,
         required this.direccion,
         required this.contrasenia,
+        required this.imagenPerfil,
+        required this.bio,
+        required this.isAdmin,
     });
 
-    factory UserDbResponse.fromJson(Map<String, dynamic> json) => UserDbResponse(
-        idUser: json["idUser"],
-        nombre: json["nombre"],
+    factory UserFirestoreResponse.fromJson(Map<String, dynamic> json) => UserFirestoreResponse(
+        uid: json["uid"],
+        nombre: json["name"],
         rut: json["rut"] ?? '',
-        fechaNacimiento: json["fechaNacimiento"] ?? '',
+        fechaNacimiento: json["birthday"] ?? '',
         email: json["email"] ?? '',
-        telefono: json["telefono"] ?? '',
+        telefono: json["phone"] ?? '',
         direccion: json["direccion"] ?? '',
-        contrasenia: json["contraseña"],
+        contrasenia: json["password"],
+        imagenPerfil: json["ProfileImage"] ?? '',
+        bio: json["bio"] ?? '',
+        isAdmin: json["isAdmin"],
     );
 
     Map<String, dynamic> toJson() => {
-        "idUser": idUser,
-        "nombre": nombre,
+        "uid": uid,
+        "name": nombre,
         "rut": rut,
-        "fechaNacimiento": fechaNacimiento,
+        "birthay": fechaNacimiento,
         "email": email,
         "telefono": telefono,
         "direccion": direccion,
-        "contraseña": contrasenia,
+        "password": contrasenia,
+        "ProfileImage": imagenPerfil,
+        "bio": bio,
+        "isAdmin": isAdmin,
     };
 }

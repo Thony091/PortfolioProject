@@ -77,8 +77,8 @@ final goRouterProvider = Provider( (ref) {
         //* Config
         GoRoute(
           path: '/config',
-          name: ConfigPage.name,
-          builder: (context, state) => const ConfigPage(),
+          name: ConfigUserPage.name,
+          builder: (context, state) => const ConfigUserPage(),
         ),
 
         //* Shoping Cart
@@ -95,6 +95,42 @@ final goRouterProvider = Provider( (ref) {
           builder: (context, state) => const OurWorksPage(),
         ),
 
+        //* AdminZone
+        //* HomeAdminPage
+        GoRoute(
+          path: '/admin-home',
+          name: HomeAdminPage.name,
+          builder: (context, state) => const HomeAdminPage(),
+        ),
+
+        //* ConfigProductsPage
+        GoRoute(
+          path: '/admin-config-products',
+          name: ConfigProductsPage.name,
+          builder: (context, state) => const ConfigProductsPage(),
+        ),
+
+        //* ConfigServicesPage
+        GoRoute(
+          path: '/admin-config-services',
+          name: ConfigServicesPage.name,
+          builder: (context, state) => const ConfigServicesPage(),
+        ),
+        
+        //* ConfigWorksPage
+        GoRoute(
+          path: '/admin-config-works',
+          name: ConfigWorksPage.name,
+          builder: (context, state) => const ConfigWorksPage(),
+        ),
+
+        //* ContactTicketsPage
+        GoRoute(
+          path: '/admin-contact-tickets',
+          name: ContactTicketsPage.name,
+          builder: (context, state) => const ContactTicketsPage(),
+        ),
+        
       ],
 
     redirect: (context, state) {
@@ -104,7 +140,7 @@ final goRouterProvider = Provider( (ref) {
 
       if ( authStatus == AuthStatus.authenticated ) {
         if ( isGoingTo == '/login' || isGoingTo == '/register' || isGoingTo == '/splash' ){
-           return '/config';
+           return '/';
         }
       }
 

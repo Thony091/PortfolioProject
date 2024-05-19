@@ -47,6 +47,11 @@ class FirestoreService extends FirestoreServiceRepository {
   Future<Map<String,dynamic>> getUserDataFromFirestore(String collectionName, String docName) async {
     try {
       final userData = await _firestore.collection(collectionName).doc(docName).get();
+
+      if (userData.data() == null) {
+        throw Exception('No data found');
+      }
+
       return userData.data() as Map<String, dynamic>;
     } catch (e) {
       print(e);

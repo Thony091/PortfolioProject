@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ConfigWorksPage extends StatelessWidget {
 
-  static const name = 'ConfigWorks';
+  static const name = 'ConfigAdminWorks';
   
   const ConfigWorksPage({super.key});
 

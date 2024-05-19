@@ -1,5 +1,7 @@
 
 
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+
 import '../../domain/domain.dart';
 import '../infrastructure.dart';
 
@@ -7,9 +9,9 @@ class UserRepositoryImpl implements UserRepository {
 
   final UserDatasource datasource;
 
-  UserRepositoryImpl( 
+  UserRepositoryImpl( {
     UserDatasource? datasource
-  ) : datasource = datasource ?? UserDatasourceImpl();
+  }) : datasource = datasource ?? UserDatasourceImpl();
   
 
   @override
@@ -23,18 +25,18 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<User> getUser() async {
-    return await datasource.getUser();
+  Future<User> getUser(String collectionName, String uid) async {
+    return await datasource.getUser( collectionName, uid);
   }
 
   @override
-  Future<User> login(String email, String password) async {
+  Future<firebase_auth.UserCredential> login(String email, String password) async {
     return await datasource.login(email, password);
   }
 
   @override
-  Future<User> register(User user) async {
-    return await datasource.register(user);
+  Future<bool> register(String email, String password, String name, String rut, String birthday, String phone, String uid) async {
+    return await datasource.register(email, password, name, rut, birthday, phone, uid);
   }
 
   @override

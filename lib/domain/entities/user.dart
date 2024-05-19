@@ -1,6 +1,6 @@
 class User{
 
-  final int id;
+  final String uid;
   final String nombre;
   final String rut;
   final String fechaNacimiento;
@@ -8,21 +8,25 @@ class User{
   final String telefono;
   final String direccion;
   final String password;
-  final List<String> roles;
+  final String imagenPerfil;
+  final String bio;
+  final bool   isAdmin;
 
   User({
-    required this.roles,
-    required this.id,
+    required this.uid,
     required this.nombre, 
     required this.rut, 
     required this.fechaNacimiento, 
     required this.email, 
     required this.telefono, 
     required this.direccion, 
-    required this.password
+    required this.password,
+    required this.imagenPerfil,
+    required this.bio,
+    required this.isAdmin,
   });
 
-  bool get isAdmin { 
-    return roles.contains('admin');
-  }
+  // bool get isAdmin { 
+  //   return isAdmin;
+  // }
 }

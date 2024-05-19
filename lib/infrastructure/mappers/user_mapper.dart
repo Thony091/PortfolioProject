@@ -1,18 +1,20 @@
-import 'package:portafolio_project/infrastructure/models/user/userdb_response.dart';
 
 import '../../domain/domain.dart';
+import '../infrastructure.dart';
 
-class USerMapper {
+class UserMapper {
 
-  static User userDbToEntity( UserDbResponse userDb) => User(
-    id: userDb.idUser,
-    nombre: userDb.nombre,
-    rut: userDb.rut,
-    fechaNacimiento: userDb.fechaNacimiento,
-    email: userDb.email,
-    telefono: userDb.telefono,
-    direccion: userDb.direccion,
-    password: userDb.contrasenia, 
-    roles: [],
+  static User userDbToEntity( UserFirestoreResponse userFs) => User(
+    uid: userFs.uid,
+    nombre: userFs.nombre,
+    rut: userFs.rut,
+    fechaNacimiento: userFs.fechaNacimiento,
+    email: userFs.email,
+    telefono: userFs.telefono,
+    direccion: userFs.direccion,
+    password: userFs.contrasenia, 
+    imagenPerfil: userFs.imagenPerfil,
+    bio: userFs.bio,
+    isAdmin: userFs.isAdmin,
   );
 }

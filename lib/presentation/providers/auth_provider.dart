@@ -1,47 +1,52 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:portafolio_project/config/config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../domain/domain.dart';
 import '../../infrastructure/infrastructure.dart';
 import '../shared/shared.dart';
 
 /// Proveedor de estado para la gestión de la autenticación.
 final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
   
-  // final authRepository = AuthRepositoryImpl(); 
+  final authRepository = UserRepositoryImpl(); 
   final keyValueStorageService = KeyValueStorageServiceImpl();
   
   return AuthNotifier(
-    // authRepository: authRepository,
+    authRepository: authRepository,
     keyValueStorageService: keyValueStorageService
-  ); 
+  );
 });
 
 /// Clase notificadora de estado para la gestión de la autenticación.
 class AuthNotifier extends StateNotifier<AuthState>{
   
-  // final AuthRepository authRepository;
+  final UserRepository authRepository;
   final KeyValueStorageService keyValueStorageService;
 
   AuthNotifier({
-    // required this.authRepository,
+    required this.authRepository,
     required this.keyValueStorageService,
   }): super(AuthState()){
-    checkAuthStatus();
+    
+    // checkAuthStatus();
   }
 
   /// Método para iniciar sesión de un usuario.
   Future<void> loginUserFireBase( String email, String password ) async{
 
+    await Future.delayed(const Duration(milliseconds: 500));
+
     try {
-      
-      await Future.delayed(const Duration(milliseconds: 500));
 
       final user = await FirebaseAuthService.auth.signInWithEmailAndPassword(
         email: email, 
         password: password
       );
-      _setLoggedUser(user);
-      // print( 'Valor de UserData ${state.userData.toString()}');
+
+      final userData = await authRepository.getUser('users', user.user!.uid);
+
+      _setLoggedUser(user, userData);
+
     } on CustomError {
       logOut( 'Credenciales no son correctas' );
     } catch(e){
@@ -51,47 +56,24 @@ class AuthNotifier extends StateNotifier<AuthState>{
   }
 
   /// Método para registrar un nuevo usuario.
-  Future<UserCredential?> registerUserFireBase( 
-    String email, String password, String name, String rut, String birthday, String phone ) async {
+  Future<bool> registerUserFireBase( 
+    String email, 
+    String password, 
+    String name, 
+    String rut, 
+    String birthday, 
+    String phone 
+  ) async {
 
     try {
-      var isSuccess = false;
-
-      UserCredential? userCredential = await FirebaseAuthService.signUpWithEmailAndPassword(email, password);
-
-      final data = {
-        'email': email,
-        'password': password,
-        'uid': userCredential!.user!.uid,
-        'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
-        'name': name,
-        'rut': rut,
-        'birthday': birthday,
-        'phone': phone,
-        'bio': '',
-        'ProfileImage': '',
-        'isAdmin': false,
-        'creditCard': [{
-          'number': '',
-          'expirationDate': '',
-          'cvv': '',
-          'name': '',
-        }]
-      };
-
-      String uid = userCredential.user!.uid;
-
-      isSuccess = await addUserToDatabase(data, 'users', uid);
       
-      if (isSuccess) {
+      await authRepository.register(email, password, name, rut, birthday, phone, '');
+      print('Usuario registrado correctamente');
+      return true;
 
-        return userCredential;
-        
-      } else {
-        logOut('Error al registrar usuario');
-      }
     } catch (e) {
       logOut(e.toString());
+      return false;
     }
     
   }
@@ -111,32 +93,29 @@ class AuthNotifier extends StateNotifier<AuthState>{
     return value;
   }
 
-  /// Método para verificar el estado de autenticación.
-  void checkAuthStatus() async {
-
-    final token = await keyValueStorageService.getValue<String>('token');
-
-    if( token == null ) return logOut();
-
-    try {
-
-      // final user = await authRepository.checkAuthStatus(token);
-      
-      // _setLoggedUser(user);
-
-    } catch (e) {
-      logOut();
-    }
-
-  }
+  // /// Método para verificar el estado de autenticación.
+  // void checkAuthStatus() async {
+  //   final token = await keyValueStorageService.getValue<String>('token');
+  //   if( token == null ) return logOut();
+  //   try {
+  //     // final user = await authRepository.checkAuthStatus(token);
+  //     // _setLoggedUser(user);
+  //   } catch (e) {
+  //     logOut();
+  //   }
+  // }
 
   /// Método privado para establecer el usuario autenticado. 
-  void _setLoggedUser (UserCredential user) async {
+  void _setLoggedUser (firebase_auth.UserCredential user, User userData) async {
 
     final tokenId = await user.user!.getIdToken();
 
-    final uid = user.user!.uid;
-    final userData = await FirestoreService().getUserDataFromFirestore('users', uid);
+    // final uid = user.user!.uid;
+    // final data = await FirestoreService().getUserDataFromFirestore('users', uid);
+
+    // final userDataFirestore = UserFirestoreResponse.fromJson(data);
+
+    // final userData = UserMapper.userDbToEntity(userDataFirestore);
  
     // Verifica si tokenId es null antes de intentar almacenarlo.
     if (tokenId!= null) {
@@ -154,7 +133,7 @@ class AuthNotifier extends StateNotifier<AuthState>{
       user: user,
       authStatus: AuthStatus.authenticated,
       errorMessage: '',
-      userData: userData
+      userData: userData,
     );
   }
 
@@ -182,9 +161,9 @@ enum AuthStatus{ checking, authenticated, notAuthenticated}
 class AuthState {
    
   final AuthStatus authStatus;
-  final UserCredential? user;
+  final firebase_auth.UserCredential? user;
   final String errorMessage;
-  final Map<String,dynamic>? userData;
+  final User? userData;
 
 
   AuthState({
@@ -197,9 +176,9 @@ class AuthState {
   /// Método para crear una copia del estado con cambios específicos.
   AuthState copyWith({
     AuthStatus? authStatus,
-    UserCredential? user,
+    firebase_auth.UserCredential? user,
     String? errorMessage,
-    Map<String,dynamic>? userData,
+    User? userData,
   }) => AuthState(
       authStatus: authStatus ?? this.authStatus,
       user: user ?? this.user,

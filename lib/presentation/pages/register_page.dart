@@ -141,8 +141,8 @@ class _RegisterForm extends ConsumerWidget {
                 buttonColor: Colors.blueAccent.shade400,
                 onPressed: (){ registerForm.isPosting
                   ? null
-                  : ref.read( registerFormProvider.notifier ).onFormSubmit().then((_) {
-                      if( registerForm.isValid) context.push('/login');
+                  : ref.read( registerFormProvider.notifier ).onFormSubmit().then((value) {
+                      if( registerForm.isValid && value == true ) context.push('/login');
                   });
                 }, 
               )
