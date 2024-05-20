@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../config/config.dart';
+import '../presentation.dart';
+
 class ProductDetailPage extends ConsumerWidget {
 
   final String productId;
@@ -8,25 +11,26 @@ class ProductDetailPage extends ConsumerWidget {
 
   const ProductDetailPage({super.key, required this.productId});
 
-  // final Product product;
-
-  // ProductDetailPage({this.product});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    // final productState = ref.watch( productProvider(productId) );
+    final productState = ref.watch( productProvider(productId) );
+    final color = AppTheme().getTheme().colorScheme;
 
     return Scaffold(
       appBar: AppBar(
-        // title: Text(product.name),
+        title: Text( 'Product Detail'),
+        backgroundColor: color.primary,
       ),
-      body: const Center(
+      body:  Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // Text(product.name),
-            // Text(product.price.toString()),
+          children: [
+            Text( productState.id ),
+            Text( productState.product!.name.toString() ),
+            Text( productState.product!.description.toString() ),
+            Text( productState.product!.price.toString() ),
           ],
         ),
       ),

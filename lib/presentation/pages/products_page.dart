@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../config/config.dart';
 import '../presentation.dart';
@@ -53,8 +54,13 @@ class _ProductsBodyPageState extends ConsumerState {
   @override
   void initState() {
     super.initState();
+    scrollController.addListener((){
 
-    ref.read( productsProvider.notifier ).loadNextPage();
+      if ( ( scrollController.position.pixels + 400 ) >= scrollController.position.maxScrollExtent ) {
+        ref.read( productsProvider.notifier ).loadNextPage();
+      }
+
+    });
   }
 
   @override
@@ -72,7 +78,7 @@ class _ProductsBodyPageState extends ConsumerState {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: MasonryGridView.count(
-        // controller: scrollController,
+        controller: scrollController,
         physics: const BouncingScrollPhysics(),
         crossAxisCount: 2, 
         mainAxisSpacing: 30,
@@ -80,17 +86,21 @@ class _ProductsBodyPageState extends ConsumerState {
         itemCount: productsState.products.length,
         itemBuilder: (context, index) {
           final product = productsState.products[index];
-          return Text( product.name );
           return GestureDetector(
-            // onTap: () =>  context.push('/product/${ product.id }'),
-            child: CustomProductCard(
-              image: 'assets/icons/AR_2.png',
-              title: 'Product $index',
-              price: 100,
-              press: (){},
-              bgColor: const Color(0xFFFBFBFD),  
-            )
+            onTap: () =>  context.push('/product/${ product.id }'),
+            child: ProductCard(product: product)
+          
           );
+          // return GestureDetector(
+          //   // onTap: () =>  context.push('/product/${ product.id }'),
+          //   child: CustomProductCard(
+          //     image: 'assets/icons/AR_2.png',
+          //     title: 'Product $index',
+          //     price: 100,
+          //     press: (){},
+          //     bgColor: const Color(0xFFFBFBFD),  
+          //   )
+          // );
         },
       ),
     );

@@ -49,16 +49,18 @@ final goRouterProvider = Provider( (ref) {
           path: '/products',
           name: ProductsPage.name,
           builder: (context, state) => const ProductsPage(),
+        ),
           // routes: 
           //   [
-          //     //* Product Detail
-          //     GoRoute(
-          //       path: '/:id',
-          //       name: ProductDetailPage.name,
-          //       builder: (context, state) => ProductDetailPage(id: state.params['id']!),
-          //     ),
-          //   ],
+              //* Product Detail
+        GoRoute(
+          path: '/product/:id',
+          name: ProductDetailPage.name,
+          builder: (context, state) => ProductDetailPage(
+            productId: state.params['id'] ?? 'no-id'
+          ),
         ),
+          //   ],
 
         //* Reservations
         GoRoute(

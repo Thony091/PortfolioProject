@@ -53,6 +53,7 @@ flutter:
     - assets/icons/AR_2.png
     - assets/icons/topBar/
     - assets/images/
+    - assets/loaders/
     - assets/images/brillos/
     # - assets/images/
     # - assets/fonts/
