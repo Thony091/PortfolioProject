@@ -13,7 +13,7 @@ class ProductsDatasourceImpl extends ProductsDatasource {
     required this.accessToken
   }) : dio = Dio(
     BaseOptions(
-      baseUrl: Enviroment.baseUrl,
+      baseUrl: '${Enviroment.baseUrl}/product-rest',
       headers: {
         'Authorization': 'Bearer $accessToken'
       }
@@ -41,19 +41,26 @@ class ProductsDatasourceImpl extends ProductsDatasource {
 
   @override
   Future<List<Product>> getProductsByPage({int limit = 10, int offset = 0}) async {
-    
-    final response = await dio.get('/products', queryParameters: {
-      'limit': limit,
-      'offset': offset
-    });
+    try {
+      
+      final response = await dio.get<List>('/listar-productos');
+      final List<Product> products = [];
 
-    final List<Product> products = [];
+      if ( response.statusCode == 200 ){
+        
+        for ( final product in response.data ?? [] ) {
+          products.add( ProductMapper.jsonToEntity(product) );
+        }
+        
+      }
+      return products;
+      
+    } catch (e) {
 
-    for ( final product in response.data ?? [] ) {
-      products.add( ProductMapper.jsonToEntity(product) );
+      print('Error: $e');
+      return [];
+
     }
-    
-    return products;
   }
 
   @override

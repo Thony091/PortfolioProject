@@ -5,21 +5,20 @@ import '../../domain/domain.dart';
 class ProductMapper {
 
   static jsonToEntity( Map<String, dynamic> json) => Product(
-    id: json['id'],
+    id: json['id'].toString(),
     name: json['name'],
     description: json['description'],
     price: double.parse( json['price'].toString()),
     stock: json['stock'],
-    // categoryId: json['category_id'],
-    images: List<String>.from( 
-      json['images'].map(
-        (image) => image.startsWith('http') 
-        ? image 
-        : '${Enviroment.baseUrl}/$image',
-      )
-    ),
-    isActive: json['is_active'], 
-    categoryId: json['category_id'],
+    images: json['images'] != null 
+      ? List<String>.from(json['images'].map(
+        (image) => image.startsWith('http')
+          ? image 
+          : '${Enviroment.baseUrl}/prduct-rest/$image'
+        ))
+      : [],
+    isActive: json['active'], 
+    categoryId: json['categoryId'],
   );
 
 }

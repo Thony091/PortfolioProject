@@ -6,7 +6,7 @@ class Product {
   final bool   isActive;
   final List<String> images;
   final int stock;
-  final String categoryId;
+  final int categoryId;
 
   Product({
     required this.id,

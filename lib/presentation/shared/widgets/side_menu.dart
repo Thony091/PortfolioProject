@@ -200,7 +200,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
               color: Color(0xff4981be),
             ),
             title: const Text(
-              'Ayuda',
+              'Productos',
               style: TextStyle(
                 color: Colors.black54,
                 fontFamily: 'Montserrat',
@@ -214,7 +214,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
               color: Colors.black54,
             ),
             onTap: (){
-              // Navigator.pushNamed(context, AboutScreen.name);
+              context.push('/products');
             },
           ),
 

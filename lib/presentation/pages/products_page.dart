@@ -49,7 +49,6 @@ class _ProductsBodyPage extends ConsumerStatefulWidget {
 class _ProductsBodyPageState extends ConsumerState {
 
   final ScrollController scrollController = ScrollController();
-  // final productsState = ref.watch( productsProvider );
 
   @override
   void initState() {
@@ -59,7 +58,17 @@ class _ProductsBodyPageState extends ConsumerState {
   }
 
   @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+
+  }
+
+  @override
   Widget build(BuildContext context) {
+
+    final productsState = ref.watch( productsProvider );
+    
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: MasonryGridView.count(
@@ -68,9 +77,10 @@ class _ProductsBodyPageState extends ConsumerState {
         crossAxisCount: 2, 
         mainAxisSpacing: 30,
         crossAxisSpacing: 35,
-        itemCount: 10,
+        itemCount: productsState.products.length,
         itemBuilder: (context, index) {
-          // final product = productsState.products[index];
+          final product = productsState.products[index];
+          return Text( product.name );
           return GestureDetector(
             // onTap: () =>  context.push('/product/${ product.id }'),
             child: CustomProductCard(
