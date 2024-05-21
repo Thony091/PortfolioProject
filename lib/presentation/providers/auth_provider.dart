@@ -118,7 +118,7 @@ class AuthNotifier extends StateNotifier<AuthState>{
     // final userData = UserMapper.userDbToEntity(userDataFirestore);
  
     // Verifica si tokenId es null antes de intentar almacenarlo.
-    if (tokenId!= null) {
+    if ( tokenId!= null ) {
 
       await keyValueStorageService.setKeyValue('token', tokenId);
 
@@ -140,17 +140,23 @@ class AuthNotifier extends StateNotifier<AuthState>{
   /// Método para cerrar sesión del usuario.
   Future<void> logOut([ String? errorMessage ]) async {
 
-    await FirebaseAuthService.logOut();
-    
-    await keyValueStorageService.removeKey('token');
-    print('Token eliminado correctamente');
+    try {
+      
+      await FirebaseAuthService.logOut();
+      
+      await keyValueStorageService.removeKey('token');
+      print('Token eliminado correctamente');
 
-    state = state.copyWith(
-      authStatus: AuthStatus.notAuthenticated,
-      user: null,
-      errorMessage: errorMessage
-    );
-    print('Status desde logOut(): ${state.authStatus}');
+      state = state.copyWith(
+        authStatus: AuthStatus.notAuthenticated,
+        user: null,
+        errorMessage: errorMessage
+      );
+      print('Status desde logOut(): ${state.authStatus}');
+      
+    } catch (e) {
+      print(e); 
+    }
   }
 }
 

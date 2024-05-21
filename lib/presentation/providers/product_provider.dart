@@ -29,7 +29,9 @@ class ProductNotifier extends StateNotifier<ProductState> {
   }
 
   Future<void> loadProduct() async {
+   
     try {
+
       final product = await productsRepository.getProductById(state.id);
 
       state = state.copyWith(
@@ -38,7 +40,7 @@ class ProductNotifier extends StateNotifier<ProductState> {
       );
       
     } catch (e) {
-      print(e);
+      print('Error en LoadProduct desde Provider: $e');
     }
     state = state.copyWith(isLoading: true);
     final product = await productsRepository.getProductById(state.id);
@@ -59,7 +61,7 @@ class ProductState{
   ProductState({
     required this.id,
     this.product,
-    this.isLoading = false,
+    this.isLoading = true,
     this.isSaving = false,
   });
   ProductState copyWith({

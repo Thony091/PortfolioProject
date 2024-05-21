@@ -6,17 +6,18 @@ import 'package:go_router/go_router.dart';
 import '../../config/config.dart';
 import '../presentation.dart';
 
-class ProductsPage extends StatelessWidget {
+class ProductsPage extends ConsumerWidget {
 
   static const name = 'ProductsPage';
   
   const ProductsPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
 
     final scaffoldKey = GlobalKey<ScaffoldState>();
     final color       = AppTheme().getTheme().colorScheme;
+    final authState   = ref.watch( authProvider );
 
 
     return Scaffold(
@@ -32,10 +33,23 @@ class ProductsPage extends StatelessWidget {
         ],
         backgroundColor: color.primary,
       ),
-        body: const BackgroundImageWidget(
-          opacity: 0.1, 
-          child: _ProductsBodyPage()
-        ),
+      body: const BackgroundImageWidget(
+        opacity: 0.1,
+        child: _ProductsBodyPage()
+      ),
+      floatingActionButton: ( authState.authStatus != AuthStatus.authenticated)
+        ? null 
+        : ( authState.userData!.isAdmin ) 
+          ? 
+            FloatingActionButton.extended(
+              label: const Text('Nuevo producto'),
+              icon: const Icon( Icons.add ),
+              onPressed: () {
+                // context.push('/product/new');
+              },
+            )
+          : null,
+      
     );
   }
 }
@@ -56,7 +70,7 @@ class _ProductsBodyPageState extends ConsumerState {
     super.initState();
     scrollController.addListener((){
 
-      if ( ( scrollController.position.pixels + 400 ) >= scrollController.position.maxScrollExtent ) {
+      if ( ( scrollController.position.pixels + 200 ) >= scrollController.position.maxScrollExtent ) {
         ref.read( productsProvider.notifier ).loadNextPage();
       }
 
@@ -81,7 +95,7 @@ class _ProductsBodyPageState extends ConsumerState {
         controller: scrollController,
         physics: const BouncingScrollPhysics(),
         crossAxisCount: 2, 
-        mainAxisSpacing: 30,
+        mainAxisSpacing: 20,
         crossAxisSpacing: 35,
         itemCount: productsState.products.length,
         itemBuilder: (context, index) {
@@ -89,13 +103,12 @@ class _ProductsBodyPageState extends ConsumerState {
           return GestureDetector(
             onTap: () =>  context.push('/product/${ product.id }'),
             child: ProductCard(product: product)
-          
           );
           // return GestureDetector(
           //   // onTap: () =>  context.push('/product/${ product.id }'),
           //   child: CustomProductCard(
           //     image: 'assets/icons/AR_2.png',
-          //     title: 'Product $index',
+          //     name: 'Product $index',
           //     price: 100,
           //     press: (){},
           //     bgColor: const Color(0xFFFBFBFD),  

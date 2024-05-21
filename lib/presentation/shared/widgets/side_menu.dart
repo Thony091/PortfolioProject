@@ -241,7 +241,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
                 ),
               ),
               onTap: () {
-                ref.read( authProvider.notifier ).logOut().then((_) => context.push('/'));
+                ref.read( authProvider.notifier ).logOut().then( (_) => context.push('/'));
                 // context.push('/');
               },
             ),
