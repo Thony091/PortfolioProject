@@ -6,4 +6,5 @@ abstract class ProductsRepository {
   Future<List<Product>> searchProductByTerm( String term );
   Future<List<Product>> getProductsByCategory( String categoryId );
   Future<Product> createUpdateProduct( Map<String, dynamic> productSimilar );
+  Future<void> deleteProduct( String id );
 }

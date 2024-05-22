@@ -83,5 +83,11 @@ class ProductsDatasourceImpl extends ProductsDatasource {
     // TODO: implement searchProductByTerm
     throw UnimplementedError();
   }
+  
+  @override
+  Future<void> deleteProduct(String id) {
+    // TODO: implement deleteProduct
+    throw UnimplementedError();
+  }
 
 }

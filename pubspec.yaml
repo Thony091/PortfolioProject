@@ -43,6 +43,7 @@ flutter_icons:
 
 flutter_native_splash:
   color: "#252829"
+  image: "assets/icons/AR_2.png"
 
 flutter:
   uses-material-design: true
