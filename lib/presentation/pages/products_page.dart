@@ -49,7 +49,6 @@ class ProductsPage extends ConsumerWidget {
               },
             )
           : null,
-      
     );
   }
 }

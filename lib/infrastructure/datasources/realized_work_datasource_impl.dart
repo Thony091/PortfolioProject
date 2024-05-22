@@ -1,5 +1,6 @@
 
 import 'package:dio/dio.dart';
+import 'package:portafolio_project/infrastructure/infrastructure.dart';
 
 import '../../config/config.dart';
 import '../../domain/domain.dart';
@@ -39,9 +40,28 @@ class RealizedWorkDatasourceImpl extends RealizedWorkDatasource {
   }
 
   @override
-  Future<List<Works>> getRealizedWorks() {
-    // TODO: implement getRealizedWorks
-    throw UnimplementedError();
+  Future<List<Works>> getRealizedWorks() async {
+
+    try {
+      
+      final response = await dio.get('/listar-trabajos-realizados');
+      final List<Works> works = [];
+
+      if (response.statusCode == 200){
+
+        for ( final work in response.data ?? [] ){
+          works.add( RealizedWorksMapper.jsonToEntity(work) );
+        }
+
+      }
+      return works;
+    } catch (e) {
+      
+      print('Error: $e');
+      return [];
+      
+    }
+
   }
 
 

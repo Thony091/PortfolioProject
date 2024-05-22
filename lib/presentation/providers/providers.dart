@@ -4,3 +4,7 @@ export 'register_form_provider.dart';
 export 'products_repository_provider.dart';
 export 'products_provider.dart';
 export 'product_provider.dart';
+export 'works_repository_provider.dart';
+export 'works_provider.dart';
+export 'services_repository_provider.dart';
+export 'services_provider.dart';

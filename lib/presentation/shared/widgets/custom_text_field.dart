@@ -28,6 +28,8 @@ class CustomTextFormField extends StatelessWidget {
   /// Validador del campo de texto.
   final String? Function(String?)? validator;
 
+  final int maxLines;
+
   /// Construye un [CustomTextFormField] con los parámetros proporcionados.
   const CustomTextFormField({
     super.key, 
@@ -40,6 +42,7 @@ class CustomTextFormField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.onChanged, 
     this.validator, 
+    this.maxLines = 1,
 
   });
 
@@ -69,6 +72,7 @@ class CustomTextFormField extends StatelessWidget {
       ),
       child: Material(
         child: TextFormField(
+          maxLines: maxLines,
           onChanged: onChanged,
           // controller: controller,
           validator: validator,
