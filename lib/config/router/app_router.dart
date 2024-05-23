@@ -86,9 +86,9 @@ final goRouterProvider = Provider( (ref) {
 
         //* Config
         GoRoute(
-          path: '/config',
-          name: ConfigUserPage.name,
-          builder: (context, state) => const ConfigUserPage(),
+          path: '/profile-user',
+          name: ProfileUserPage.name,
+          builder: (context, state) => const ProfileUserPage(),
         ),
 
         //* Shoping Cart
@@ -155,7 +155,7 @@ final goRouterProvider = Provider( (ref) {
       }
 
       if ( authStatus == AuthStatus.notAuthenticated ) {
-        if ( isGoingTo == '/pago' || isGoingTo == '/config' ){
+        if ( isGoingTo == '/pago' || isGoingTo == '/profile-user' ){
            return '/login';
         }
       }

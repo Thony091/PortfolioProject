@@ -58,7 +58,7 @@ class _ServiceBodyPageState extends ConsumerState {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(servicesProvider.notifier).getServices();
     });
   }

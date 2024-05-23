@@ -6,7 +6,7 @@ export 'product_detail_page.dart';
 export 'reservations_page.dart';
 export 'services_page.dart';
 export 'pago_page.dart';
-export 'config_user_page.dart';
+export 'profile_user_page.dart';
 export 'shoping_cart_page.dart';
 export 'our_works_page.dart';
 export 'admin_pages/config_admin_page.dart';

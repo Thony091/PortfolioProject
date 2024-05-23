@@ -276,7 +276,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
                   style: TextStyle(color: Colors.red, fontSize: 15),
                 ),
                 onPressed: () async {
-                  context.push('/config');
+                  context.push('/profile-user');
                 },
               ),
 

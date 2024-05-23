@@ -253,89 +253,97 @@ class _HomeBodyPage extends ConsumerWidget {
 
             const SizedBox( height: 20,),
 
-            Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(2),
-                  topRight: Radius.circular(2),
-                  bottomRight: Radius.circular(10),
-                  bottomLeft: Radius.circular(10),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Form(
-                  child: Column(
-                    children: [
-                      const Text( 'Contacto',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const CustomTextFormField(
-                        label: 'Nombre',
-                        // obscureText: true,
-                        // onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
-                        // errorMessage: loginForm.isFormPosted
-                        // ? loginForm.password.errorMessage
-                        // : null,
-                      ),
-                      const SizedBox( height: 10,),
-                      const CustomTextFormField(
-                        label: 'Correo Electrónico',
-                        // obscureText: true,
-                        // onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
-                        // errorMessage: loginForm.isFormPosted
-                        // ? loginForm.password.errorMessage
-                        // : null,
-                      ),
-                      const SizedBox( height: 10,),
-                      const CustomTextFormField(
-                        label: 'Mensaje',
-                        hint: 'Escribe tu Mensaje',
-                        keyboardType: TextInputType.multiline,  
-                        // obscureText: true,
-                        // onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
-                        // errorMessage: loginForm.isFormPosted
-                        // ? loginForm.password.errorMessage
-                        // : null,
-                      ),
-                      const SizedBox( height: 15,),
-                      // TextFormField(
-                      //   decoration: const InputDecoration(
-                      //     labelText: 'Mensaje',
-                      //     hintText: 'Mensaje',
-                      //   ),
-                      // ),
-                      // const SizedBox( height: 20,),
-                      ElevatedButton(
-                        onPressed: (){},
-                        child: const Text('Enviar'),
-                      ),
-                    ],
-                  )
-                ),
-              )
-            ),
+            const _ContactUsForm(),
           ],
         ),
       ),
     );
   }
 }
+
+class _ContactUsForm extends StatelessWidget {
+  const _ContactUsForm();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(2),
+          topRight: Radius.circular(2),
+          bottomRight: Radius.circular(10),
+          bottomLeft: Radius.circular(10),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 5,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Form(
+          child: Column(
+            children: [
+              const Text( 'Contacto',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const CustomTextFormField(
+                label: 'Nombre',
+                // obscureText: true,
+                // onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
+                // errorMessage: loginForm.isFormPosted
+                // ? loginForm.password.errorMessage
+                // : null,
+              ),
+              const SizedBox( height: 10,),
+              const CustomTextFormField(
+                label: 'Correo Electrónico',
+                // obscureText: true,
+                // onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
+                // errorMessage: loginForm.isFormPosted
+                // ? loginForm.password.errorMessage
+                // : null,
+              ),
+              const SizedBox( height: 10,),
+              const CustomTextFormField(
+                label: 'Mensaje',
+                hint: 'Escribe tu Mensaje',
+                keyboardType: TextInputType.multiline,  
+                // obscureText: true,
+                // onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
+                // errorMessage: loginForm.isFormPosted
+                // ? loginForm.password.errorMessage
+                // : null,
+              ),
+              const SizedBox( height: 15,),
+              // TextFormField(
+              //   decoration: const InputDecoration(
+              //     labelText: 'Mensaje',
+              //     hintText: 'Mensaje',
+              //   ),
+              // ),
+              // const SizedBox( height: 20,),
+              ElevatedButton(
+                onPressed: (){},
+                child: const Text('Enviar'),
+              ),
+            ],
+          )
+        ),
+      )
+    );
+  }
+}
+
 class _Map extends StatelessWidget {
-   _Map({
-    Key? key,
-  });
+   _Map();
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
