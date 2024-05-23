@@ -21,9 +21,9 @@ class ServicesNotifier extends StateNotifier<ServicesState>{
   }) : super(ServicesState()){
     getServices();
   }
-
+  
   Future<void> getServices() async {
-
+    
     state = state.copyWith(isLoading: true);
 
     try {
@@ -31,12 +31,12 @@ class ServicesNotifier extends StateNotifier<ServicesState>{
       final services = await servicesRepository.getServices();
       
       state = state.copyWith(
-        services: services, 
+        services: services,
         isLoading: false
       );
 
     } catch (e) {
-
+      
       state = state.copyWith(
         isLoading: false,
         error: 'Error al obtener los servicios'

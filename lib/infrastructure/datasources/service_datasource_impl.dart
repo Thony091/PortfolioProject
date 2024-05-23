@@ -33,9 +33,24 @@ class ServicesDatasourceImpl extends ServicesDatasource {
   }
 
   @override
-  Future<Services> getServiceById(String id) {
-    // TODO: implement getServiceById
-    throw UnimplementedError();
+  Future<Services> getServiceById(String id) async {
+    
+    try {
+
+      final response = await dio.get('/obtener-servicio/$id');
+
+      final service = ServiceMapper.jsonToEntity(response.data);
+      return service;
+
+    } on DioException catch (e) {
+      
+      if ( e.response!.statusCode == 404) throw ServiceNotFound();
+      throw e;
+
+    } catch (e) {
+      throw e;
+    }
+
   }
 
   @override

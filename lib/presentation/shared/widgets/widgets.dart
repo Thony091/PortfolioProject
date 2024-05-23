@@ -9,3 +9,4 @@ export 'full_screen_loader.dart';
 export 'custom_product_field.dart';
 export 'work_card.dart';
 export 'service_card.dart';
+export 'custom_image_gallery.dart';

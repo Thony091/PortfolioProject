@@ -75,6 +75,14 @@ final goRouterProvider = Provider( (ref) {
           name: ServicesPage.name,
           builder: (context, state) => const ServicesPage(),
         ),
+        //* Service Detail
+        GoRoute(
+          path: '/service/:id',
+          name: ServiceDetailPage.name,
+          builder: (context, state) => ServiceDetailPage(
+            serviceId: state.params['id'] ?? 'no-id'
+          ),
+        ),
 
         //* Config
         GoRoute(

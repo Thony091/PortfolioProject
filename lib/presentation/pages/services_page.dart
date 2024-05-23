@@ -58,7 +58,9 @@ class _ServiceBodyPageState extends ConsumerState {
   @override
   void initState() {
     super.initState();
-    ref.read( servicesProvider.notifier ).getServices();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      ref.read(servicesProvider.notifier).getServices();
+    });
   }
 
   @override
@@ -75,7 +77,7 @@ class _ServiceBodyPageState extends ConsumerState {
         itemBuilder: ( context, index) {
           final service = servicesState.services[index];
           return GestureDetector(
-            // onTap: () => context.push('/service/${service.id}'),
+            onTap: () => context.push('/service/${service.id}'),
             child: ServiceCard( services: service ),
           );
         },

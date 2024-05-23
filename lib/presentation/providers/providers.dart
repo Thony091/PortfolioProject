@@ -8,3 +8,4 @@ export 'works_repository_provider.dart';
 export 'works_provider.dart';
 export 'services_repository_provider.dart';
 export 'services_provider.dart';
+export 'service_provider.dart';

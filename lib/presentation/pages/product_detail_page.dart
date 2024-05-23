@@ -66,7 +66,7 @@ class _ProductDetailBodyPage extends ConsumerWidget {
         SizedBox(
           height: 250,
           width: 600,
-          child: _ImageGallery(images: product.images ),
+          child: CustomImageGallery(images: product.images ),
         ),
 
         const SizedBox( height: 10 ),
@@ -140,31 +140,31 @@ class _ProductInformation extends ConsumerWidget {
   }
 }
 
-class _ImageGallery extends StatelessWidget {
+// class _ImageGallery extends StatelessWidget {
 
-  final List<String> images;
+//   final List<String> images;
   
-  const _ImageGallery({required this.images});
+//   const _ImageGallery({required this.images});
 
-  @override
-  Widget build(BuildContext context) {
+//   @override
+//   Widget build(BuildContext context) {
 
-    return PageView(
-      scrollDirection: Axis.horizontal,
-      controller: PageController(
-        viewportFraction: 0.7
-      ),
-      children: images.isEmpty
-        ? [ ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-            child: Image.asset('assets/images/no-image.jpg', fit: BoxFit.cover )) 
-        ]
-        : images.map((e){
-          return ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-            child: Image.network(e, fit: BoxFit.cover,),
-          );
-      }).toList(),
-    );
-  }
-}
+//     return PageView(
+//       scrollDirection: Axis.horizontal,
+//       controller: PageController(
+//         viewportFraction: 0.7
+//       ),
+//       children: images.isEmpty
+//         ? [ ClipRRect(
+//             borderRadius: const BorderRadius.all(Radius.circular(20)),
+//             child: Image.asset('assets/images/no-image.jpg', fit: BoxFit.cover )) 
+//         ]
+//         : images.map((e){
+//           return ClipRRect(
+//             borderRadius: const BorderRadius.all(Radius.circular(20)),
+//             child: Image.network(e, fit: BoxFit.cover,),
+//           );
+//       }).toList(),
+//     );
+//   }
+// }

@@ -15,3 +15,4 @@ export 'admin_pages/config_services_page.dart';
 export 'admin_pages/config_works_page.dart';
 export 'admin_pages/contact_tickets_page.dart';
 export 'admin_pages/home_admin_page.dart';
+export 'service_detail_page.dart';
