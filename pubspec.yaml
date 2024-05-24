@@ -30,6 +30,7 @@ dependencies:
   google_maps_flutter: ^2.5.3
   lorem_ipsum: ^0.0.3
   shared_preferences: ^2.2.3
+  flutter_svg: ^2.0.9 # help us to use SVG in our app
 
 dev_dependencies:
   flutter_test:
@@ -51,7 +52,9 @@ flutter:
     - .env
     - assets/
     - assets/icons/
+    - assets/avatar.png
     - assets/icons/AR_2.png
+    - assets/icons/Camera_Icon.svg
     - assets/icons/topBar/
     - assets/images/
     - assets/loaders/

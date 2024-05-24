@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:portafolio_project/presentation/shared/widgets/custom_product_field.dart';
 
 import '../../config/config.dart';
 import '../presentation.dart';
@@ -37,6 +38,33 @@ class _ReservationFormBody extends ConsumerWidget {
 
   const _ReservationFormBody();
 
+  void callDatePicker() async {
+    // var orderDate = DateTime.now();
+    // var orderTime = TimeOfDay.now();
+    // var date = await showDatePicker(
+    //   context: context,
+    //   initialDate: orderDate,
+    //   firstDate: orderDate,
+    //   lastDate: DateTime(2022),
+    // );
+    // if (date != null) {
+    //   var time = await showTimePicker(
+    //     context: context,
+    //     initialTime: orderTime,
+    //   );
+    //   if (time != null) {
+    //     orderDate = DateTime(
+    //       date.year,
+    //       date.month,
+    //       date.day,
+    //       time.hour,
+    //       time.minute,
+    //     );
+    //     print(orderDate);
+    //   }
+    // }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     
@@ -58,7 +86,9 @@ class _ReservationFormBody extends ConsumerWidget {
               )
             ),
       
-            CustomTextFormField(
+            CustomProductField(
+              isBottomField: true,
+              isTopField: true,
               label: "Name",
               hint: "Nombre Completo",
               onChanged: (value) {
@@ -67,7 +97,9 @@ class _ReservationFormBody extends ConsumerWidget {
             ),
             const SizedBox(height: 10.0),
       
-            CustomTextFormField(
+            CustomProductField(
+              isBottomField: true,
+              isTopField: true,
               label: "Rut",
               hint: "Rut",
               onChanged: (value) {
@@ -76,7 +108,9 @@ class _ReservationFormBody extends ConsumerWidget {
             ),
             const SizedBox(height: 10.0),
       
-            CustomTextFormField(
+            CustomProductField(
+              isBottomField: true,
+              isTopField: true,
               label: "Correo Electrónico",
               hint: "Correo Electrónico",
               onChanged: (value) {
@@ -85,7 +119,9 @@ class _ReservationFormBody extends ConsumerWidget {
             ),
             const SizedBox(height: 10.0),
       
-            CustomTextFormField(
+            CustomProductField(
+              isBottomField: true,
+              isTopField: true,
               label: "Fecha de Reserva",
               hint: "Fecha de Reservación",
               keyboardType: TextInputType.datetime,
@@ -100,7 +136,9 @@ class _ReservationFormBody extends ConsumerWidget {
             ),
             const SizedBox(height: 10.0),
       
-            CustomTextFormField(
+            CustomProductField(
+              isBottomField: true,
+              isTopField: true,
               label: "Hora",
               hint: "Hora de la Reservación",
               onChanged: (value) {

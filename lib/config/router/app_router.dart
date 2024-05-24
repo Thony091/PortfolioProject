@@ -84,11 +84,17 @@ final goRouterProvider = Provider( (ref) {
           ),
         ),
 
-        //* Config
+        //* Profile
         GoRoute(
           path: '/profile-user',
           name: ProfileUserPage.name,
           builder: (context, state) => const ProfileUserPage(),
+        ),
+        //* Edit Profile
+        GoRoute(
+          path: '/edit-user-profile',
+          name: EditUserProfilePage.name,
+          builder: (context, state) => const EditUserProfilePage(),
         ),
 
         //* Shoping Cart

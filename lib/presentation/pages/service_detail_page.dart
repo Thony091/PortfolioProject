@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../config/config.dart';
 import '../../domain/domain.dart';
 import '../presentation.dart';
+import '../shared/widgets/custom_product_field.dart';
 
 class ServiceDetailPage extends ConsumerWidget{
 

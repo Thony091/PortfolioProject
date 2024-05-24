@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/domain.dart';
-
+import '../../../../domain/domain.dart';
 
 class WorkCard extends StatelessWidget {
 

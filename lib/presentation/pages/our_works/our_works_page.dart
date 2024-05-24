@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../../config/config.dart';
-import '../presentation.dart';
+import '../../../config/config.dart';
+import '../../presentation.dart';
+import 'components/work_card.dart';
 
 class OurWorksPage extends ConsumerWidget {
   static const String name = 'OurWorksPage';
