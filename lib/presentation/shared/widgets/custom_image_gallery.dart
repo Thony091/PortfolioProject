@@ -28,3 +28,4 @@ class CustomImageGallery extends StatelessWidget {
     );
   }
 }
+

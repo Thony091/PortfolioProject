@@ -16,7 +16,7 @@ class WorkCard extends StatelessWidget {
     return Column(
       children: [
         _ImageViewer( 
-          images: work.images,
+          image: work.image,
           title: work.name,
           description: work.description,
         ),
@@ -29,12 +29,12 @@ class WorkCard extends StatelessWidget {
 
 class _ImageViewer extends StatelessWidget {
 
-  final List<String> images;
+  final String image;
   final String title;
   final String description;
 
   const _ImageViewer({
-    required this.images,
+    required this.image,
     this.title = '', 
     this.description = '',
   });
@@ -44,7 +44,7 @@ class _ImageViewer extends StatelessWidget {
 
     final size = MediaQuery.of(context).size;
     
-    if ( images.isEmpty ) {
+    if ( image.isEmpty ) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(5),
         child: Container(
@@ -103,7 +103,7 @@ class _ImageViewer extends StatelessWidget {
         width: size.width * 0.93,
         fadeOutDuration: const Duration(milliseconds: 100),
         fadeInDuration: const Duration(milliseconds: 200),
-        image: NetworkImage( images.first ),
+        image: NetworkImage( image ),
         placeholder: const AssetImage('assets/loaders/loader2.gif'),
       ),
     );

@@ -1,13 +1,13 @@
 import 'package:formz/formz.dart';
 
 // Define input validation errors
-enum MessageError { empty, format }
+enum MessageError { empty, format, length }
 
 // Extend FormzInput and provide the input type and error type.
 class Message extends FormzInput<String, MessageError> {
 
   static final RegExp messageRegExp = RegExp(
-    r'^.{1,250}$',
+    r'^[A-Za-z].{0,349}$',
   );
 
   // Call super.pure to represent an unmodified form input.
@@ -22,7 +22,8 @@ class Message extends FormzInput<String, MessageError> {
     if ( isValid || isPure ) return null;
 
     if ( displayError == MessageError.empty ) return 'El campo es requerido';
-    if ( displayError == MessageError.format ) return 'El mensaje no puede superar los 350 caracteres';
+    if ( displayError == MessageError.format ) return 'El mensaje no cumple con el formato requerido';
+    if ( displayError == MessageError.length ) return 'El mensaje no puede superar los 350 caracteres';
 
     return null;
   }
@@ -32,7 +33,8 @@ class Message extends FormzInput<String, MessageError> {
   MessageError? validator(String value) {
     
     if ( value.isEmpty || value.trim().isEmpty ) return MessageError.empty;
-    if ( !messageRegExp.hasMatch(value) ) return MessageError.format;
+    if ( messageRegExp.hasMatch(value)) return MessageError.format;
+    if ( value.length >= 350 ) return MessageError.length;
 
     return null;
   }

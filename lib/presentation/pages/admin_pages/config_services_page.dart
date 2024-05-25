@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../presentation.dart';
+
 class ConfigServicesPage extends StatelessWidget {
   
   static const name = 'ConfigAdminServices';
@@ -9,13 +11,12 @@ class ConfigServicesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Configuração de Serviços'),
+      appBar: AppBar(backgroundColor: Colors.transparent,
+        title: const Text('Configuración de Servicios'),
       ),
-      body: ListView(
-        children: const [
-          
-        ],
+      body: const BackgroundImageWidget(
+        opacity: 0.1,
+        child: Text('Configuración de Servicios')
       ),
     );
   }

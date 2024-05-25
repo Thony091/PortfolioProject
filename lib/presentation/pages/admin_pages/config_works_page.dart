@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../presentation.dart';
+
 class ConfigWorksPage extends StatelessWidget {
 
   static const name = 'ConfigAdminWorks';
@@ -8,6 +10,14 @@ class ConfigWorksPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.transparent,
+        title: const Text('Configuración de Trabajos'),
+      ),
+      body: const BackgroundImageWidget(
+        opacity: 0.1,
+        child: Text('Configuración de Trabajos')
+      ),
+    );
   }
 }

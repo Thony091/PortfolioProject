@@ -32,7 +32,7 @@ class AuthNotifier extends StateNotifier<AuthState>{
   }
 
   /// Método para iniciar sesión de un usuario.
-  Future<void> loginUserFireBase( String email, String password ) async{
+  Future<void> loginUserFireBase( String email, String password ) async {
 
     await Future.delayed(const Duration(milliseconds: 500));
 

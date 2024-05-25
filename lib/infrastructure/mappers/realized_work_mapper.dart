@@ -1,5 +1,5 @@
 import '../../domain/domain.dart';
-import '../../config/config.dart';
+// import '../../config/config.dart';
 
 class RealizedWorksMapper{
 
@@ -7,13 +7,17 @@ class RealizedWorksMapper{
     id: json['id'].toString(), 
     name: json['name'],
     description: json['description'],
-    images: json['images'] != null 
-      ? List<String>.from(json['images'].map(
-        (image) => image.startsWith('http')
-          ? image 
-          : '${Enviroment.baseUrl}/realized-works-rest/$image'
-        ))
-      : [], 
+    image: json['image'],
+    // .startsWith('http')
+    //   ? json['image']
+    //   : '${Enviroment.baseUrl}/realized-works-rest/${json['image']}',
+    //  != null 
+    //   ? List<String>.from(json['images'].map(
+    //     (image) => image.startsWith('http')
+    //       ? image 
+    //       : '${Enviroment.baseUrl}/realized-works-rest/$image'
+    //     ))
+    //   : [], 
   );
 
 }

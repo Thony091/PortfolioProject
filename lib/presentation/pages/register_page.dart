@@ -142,7 +142,13 @@ class _RegisterForm extends ConsumerWidget {
                 onPressed: (){ registerForm.isPosting
                   ? null
                   : ref.read( registerFormProvider.notifier ).onFormSubmit().then((value) {
-                      if( registerForm.isValid && value == true ) context.push('/login');
+                      if( registerForm.isValid && value == true ) {
+                        context.push('/login');
+                        showDialog(
+                          context: context, 
+                          builder: (context) => const PopUpMensajeFinalWidget(text: 'Se ha Registrado Exitosamente!'),
+                        );
+                      }
                   });
                 }, 
               )

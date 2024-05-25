@@ -10,6 +10,7 @@ import 'router.dart';
 final goRouterProvider = Provider( (ref) {
 
   final goRouterNotifier = ref.read( goRouterNotifierProvider);
+  // final authState = ref.watch( authProvider ).userData!;
 
   return GoRouter(
     initialLocation: '/',
@@ -112,13 +113,6 @@ final goRouterProvider = Provider( (ref) {
         ),
 
         //* AdminZone
-        //* HomeAdminPage
-        GoRoute(
-          path: '/admin-home',
-          name: HomeAdminPage.name,
-          builder: (context, state) => const HomeAdminPage(),
-        ),
-
         //* ConfigProductsPage
         GoRoute(
           path: '/admin-config-products',
@@ -154,7 +148,10 @@ final goRouterProvider = Provider( (ref) {
       final isGoingTo = state.subloc;
       final authStatus = goRouterNotifier.authStatus;
 
+
+
       if ( authStatus == AuthStatus.authenticated ) {
+
         if ( isGoingTo == '/login' || isGoingTo == '/register' || isGoingTo == '/splash' ){
            return '/';
         }

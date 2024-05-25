@@ -59,129 +59,76 @@ class _HomeBodyPage extends ConsumerWidget {
     const String textColumn1 = '¡Transforma tu Renault Duster en una obra maestra sobre ruedas con nuestro servicio de Detailing exclusivo! En Nuestro taller especializado, ofrecemos una experiencia única de embellecimiento y protección de tu vehículo, centrandonos en cada detalle de tu amada Renault Duster.';
     const String textColumn2 = '¡Experimenta  la potencia y el estilo sin igual de tu MINI john Cooper Works llevados al máximo nivel con nuestra transformación exclusiva! En nuestro talle especializado, nos enorgullese ofrecer un servicio personalizado  que resalta la esencia deportiva y elegancia intrinseca de tu MINI JCW.';
     const String detailingDescription = 'El detailing, en el servicio automotriz, es el conjunto de tecnicas centeradas en la limpieza perfecta del vehiculo sin causar deterioro de los materiales que lo componen. Es más, se encarga de solucionar defectos estéticos y proteger el auto ante la mayoria de las agresiones externas.';
+    final authStateProvider = ref.watch( authProvider ).userData;
 
-    return  SingleChildScrollView(
-      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-      // reverse: true,
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-
-            const SizedBox(height: 10,),
-
-            const Text('Expertos en brillo',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 20,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-              children: [
-                SizedBox(
-                  width: size.width * 0.42,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(2),
-                        topRight: Radius.circular(2),
-                        bottomRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 5,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'assets/images/brillos/RD1.jpeg',
-                          height: 150,
-                          width: 300,
-                        ),
-                        // const SizedBox(height: 3,),
-                        Image.asset(
-                          'assets/images/brillos/RD5.jpeg',
-                          height: 150,
-                          width: 300,
-                        ),
-                        // const SizedBox(height: 3,),
-                        Image.asset(
-                          'assets/images/brillos/RD4.jpeg',
-                          height: 150,
-                          width: 300,
-                        ),
-                        // const SizedBox(height: 3,),
-                        const Padding(
-                          padding: EdgeInsets.all(5.0),
-                          child: Text( textColumn1,
-                            maxLines: 15,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            textAlign: TextAlign.justify,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+    if ( authStateProvider == null || authStateProvider.isAdmin == false){
+      return  SingleChildScrollView( 
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        // reverse: true,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+          
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+            
+              const SizedBox(height: 10,),
+  
+              const Text('Expertos en brillo',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-                SizedBox(
-                  width: size.width * 0.42,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(2),
-                        topRight: Radius.circular(2),
-                        bottomRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
+              ),
+              const SizedBox(height: 20,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  
+                children: [
+                  SizedBox(
+                    width: size.width * 0.42,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(2),
+                          topRight: Radius.circular(2),
+                          bottomRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 5,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 5,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'assets/images/brillos/JWC2.jpeg',
-                          height: 150,
-                          width: 300,
-                        ),
-                        // const SizedBox(height: 1,),
-                        Image.asset(
-                          'assets/images/brillos/JWC3.jpeg',
-                          height: 150,
-                          width: 300,
-                        ),
-                        // const SizedBox(height: 1,),
-                        Image.asset(
-                          'assets/images/brillos/JWC4.jpeg',
-                          height: 150,
-                          width: 300,
-                        ),
-                        // const SizedBox(height: 1,),
-                        const Padding(
-                          padding: EdgeInsets.all(5.0),
-                          child: SingleChildScrollView(
-                            child: Text( textColumn2,
-                              maxLines: 13,
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            'assets/images/brillos/RD1.jpeg',
+                            height: 150,
+                            width: 300,
+                          ),
+                          // const SizedBox(height: 3,),
+                          Image.asset(
+                            'assets/images/brillos/RD5.jpeg',
+                            height: 150,
+                            width: 300,
+                          ),
+                          // const SizedBox(height: 3,),
+                          Image.asset(
+                            'assets/images/brillos/RD4.jpeg',
+                            height: 150,
+                            width: 300,
+                          ),
+                          // const SizedBox(height: 3,),
+                          const Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text( textColumn1,
+                              maxLines: 15,
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,
@@ -189,77 +136,247 @@ class _HomeBodyPage extends ConsumerWidget {
                               textAlign: TextAlign.justify,
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox( height: 20,),
-
-            Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(5),
-                  topRight: Radius.circular(5),
-                  bottomRight: Radius.circular(5),
-                  bottomLeft: Radius.circular(5),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
+                  SizedBox(
+                    width: size.width * 0.42,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(2),
+                          topRight: Radius.circular(2),
+                          bottomRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 5,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            'assets/images/brillos/JWC2.jpeg',
+                            height: 150,
+                            width: 300,
+                          ),
+                          // const SizedBox(height: 1,),
+                          Image.asset(
+                            'assets/images/brillos/JWC3.jpeg',
+                            height: 150,
+                            width: 300,
+                          ),
+                          // const SizedBox(height: 1,),
+                          Image.asset(
+                            'assets/images/brillos/JWC4.jpeg',
+                            height: 150,
+                            width: 300,
+                          ),
+                          // const SizedBox(height: 1,),
+                          const Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: SingleChildScrollView(
+                              child: Text( textColumn2,
+                                maxLines: 13,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                textAlign: TextAlign.justify,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
-              child: const Padding(
-                padding: EdgeInsets.all(12),
-                child: Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('¿Que es Detailing?',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox( height: 10,),
-                    Text( detailingDescription,
-                      maxLines: 10,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      textAlign: TextAlign.justify,
+              const SizedBox( height: 20,),
+  
+              Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5),
+                    topRight: Radius.circular(5),
+                    bottomRight: Radius.circular(5),
+                    bottomLeft: Radius.circular(5),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 5,
+                      offset: Offset(0, 2),
                     ),
                   ],
-                )
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(12),
+                  child: Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('¿Que es Detailing?',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox( height: 10,),
+                      Text( detailingDescription,
+                        maxLines: 10,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ],
+                  )
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-
-            SizedBox(
-              height: 350,
-              width: double.infinity,
-              child: _Map()
-            ),
-
-            const SizedBox( height: 20,),
-
-            const _ContactUsForm(),
-          ],
+              const SizedBox(
+                height: 20,
+              ),
+  
+              SizedBox(
+                height: 350,
+                width: double.infinity,
+                child: _Map()
+              ),
+  
+              const SizedBox( height: 20,),
+  
+              const _ContactUsForm(),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }
+    else if ( authStateProvider.isAdmin == true ) {
+      return  SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all( 20 ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+          
+                const SizedBox(height: 25,),
+                const Text('Home Admin Page'),
+                const SizedBox(height: 35,),
+              
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+
+
+                    CustomFilledButton(
+                      height: 50,
+                      width: 270,
+                      padding: const EdgeInsets.only(top: 3, bottom: 3,),
+                      fontSize: 14,
+                      radius: const Radius.circular(40),
+                      spreadRadius: 2,
+                      blurRadius: 4,
+                      text: ' Gest. de Trabajos realizados',
+                      textColor: Colors.black54,
+                      buttonColor: const Color.fromARGB(255, 20, 140, 238).withOpacity(0.9),
+                      shadowColor: Colors.black45,
+                      onPressed: () => context.push('/admin-config-works'),
+                      icon: Icons.workspace_premium_outlined,
+                    ),
+                    const SizedBox(height: 25,),
+                    CustomFilledButton(
+                      height: 50,
+                      width: 270,
+                      padding: const EdgeInsets.only(top: 3, bottom: 3,),
+                      fontSize: 14,
+                      radius: const Radius.circular(40),
+                      spreadRadius: 2,
+                      blurRadius: 4,
+                      text: ' Gest. de Servicios',
+                      textColor: Colors.black54,
+                      buttonColor: const Color.fromARGB(255, 20, 140, 238).withOpacity(0.9),
+                      shadowColor: Colors.black45,
+                      onPressed: () => context.push('/admin-config-services'),
+                      icon: Icons.car_repair_outlined,
+                    ),
+                    const SizedBox(height: 25,),
+                    CustomFilledButton(
+                      height: 50,
+                      width: 270,
+                      padding: const EdgeInsets.only(top: 3, bottom: 3,),
+                      fontSize: 14,
+                      radius: const Radius.circular(40),
+                      spreadRadius: 2,
+                      blurRadius: 4,
+                      text: ' Gest. de Mensajeria',
+                      textColor: Colors.black54,
+                      buttonColor: const Color.fromARGB(255, 20, 140, 238).withOpacity(0.9),
+                      shadowColor: Colors.black45,
+                      onPressed: () => context.push('/admin-contact-tickets'),
+                      icon: Icons.message_outlined,
+                    ),
+                    const SizedBox(height: 25,),
+                              
+                    CustomFilledButton(
+                      height: 50,
+                      width: 270,
+                      padding: const EdgeInsets.only(top: 3, bottom: 3,),
+                      fontSize: 14,
+                      radius: const Radius.circular(40),
+                      spreadRadius: 2,
+                      blurRadius: 4,
+                      text: 'Gest. de Productos(Desarrollo)',
+                      textColor: Colors.white60,
+                      buttonColor: Colors.black45,
+                      shadowColor: Colors.black45,
+                      onPressed: () {},
+                      icon: Icons.production_quantity_limits_outlined,
+                    ),
+                    const SizedBox(height: 25,),
+
+                    Text('Nombre:    ${ authStateProvider.nombre }'),
+
+                  ],
+                ),
+          
+                ElevatedButton(
+                  onPressed: () {
+                    // context.push('/editor-data-page');
+                  },
+                  child: const Text('Editar'),
+                ),
+          
+                const SizedBox(height: 40,),
+          
+              ],
+            ),
+          ),
+        ),
+
+      );
+    }
+    else {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+
   }
 }
 
