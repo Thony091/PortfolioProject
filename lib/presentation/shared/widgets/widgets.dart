@@ -7,3 +7,4 @@ export 'product_card.dart';
 export 'full_screen_loader.dart';
 export 'service_card.dart';
 export 'custom_image_gallery.dart';
+export 'pop_up_message_final_widget.dart';

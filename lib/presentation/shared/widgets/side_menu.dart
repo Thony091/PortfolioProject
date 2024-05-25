@@ -192,31 +192,31 @@ class SideMenuState extends ConsumerState<SideMenu> {
             },
           ),
 
-          //* SOBRE AR DETAILING
-          ListTile(
-            leading: const Icon(
-              size: 33,
-              Icons.help,
-              color: Color(0xff4981be),
-            ),
-            title: const Text(
-              'Productos',
-              style: TextStyle(
-                color: Colors.black54,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.w400,
-                fontSize: 17
-              ),
-            ),
-            trailing: const Icon(
-              Icons.arrow_forward_ios_rounded,
-              size: 15,
-              color: Colors.black54,
-            ),
-            onTap: (){
-              context.push('/products');
-            },
-          ),
+          // //* Products
+          // ListTile(
+          //   leading: const Icon(
+          //     size: 33,
+          //     Icons.help,
+          //     color: Color(0xff4981be),
+          //   ),
+          //   title: const Text(
+          //     'Productos',
+          //     style: TextStyle(
+          //       color: Colors.black54,
+          //       fontFamily: 'Montserrat',
+          //       fontWeight: FontWeight.w400,
+          //       fontSize: 17
+          //     ),
+          //   ),
+          //   trailing: const Icon(
+          //     Icons.arrow_forward_ios_rounded,
+          //     size: 15,
+          //     color: Colors.black54,
+          //   ),
+          //   onTap: (){
+          //     context.push('/products');
+          //   },
+          // ),
 
           //* Cerrar Sesión
           if  ( authStatus == AuthStatus.authenticated )
@@ -254,7 +254,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
           const SizedBox(height: 50,),
 
           Row( 
-
+            
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children:[
 
@@ -280,25 +280,25 @@ class SideMenuState extends ConsumerState<SideMenu> {
                 },
               ),
 
-              //* Carro de Compra
-              TextButton.icon(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(const Color(0xfff2f2f2)),
-                  padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                ),
-                icon: const Icon(
-                  Icons.shopping_cart_checkout_rounded,
-                  size: 29, 
-                  color: Color(0xff4981be),
-                ),
-                label: const Text(
-                  'Carro de Compra',
-                  style: TextStyle(color: Colors.red, fontSize: 15),
-                ),
-                onPressed: () async {
-                  context.push('/shoping-cart');
-                },
-              ),
+              // //* Carro de Compra
+              // TextButton.icon(
+              //   style: ButtonStyle(
+              //     backgroundColor: MaterialStateProperty.all(const Color(0xfff2f2f2)),
+              //     padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
+              //   ),
+              //   icon: const Icon(
+              //     Icons.shopping_cart_checkout_rounded,
+              //     size: 29, 
+              //     color: Color(0xff4981be),
+              //   ),
+              //   label: const Text(
+              //     'Carro de Compra',
+              //     style: TextStyle(color: Colors.red, fontSize: 15),
+              //   ),
+              //   onPressed: () async {
+              //     context.push('/shoping-cart');
+              //   },
+              // ),
 
 
               if ( authStatus != AuthStatus.authenticated )

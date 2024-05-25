@@ -1,14 +1,17 @@
 import '../../domain/domain.dart';
+import '../infrastructure.dart';
 
 class MessageRepositoryImpl extends MessageRepository {
   
   final MessageDatasource messageDatasource;
 
-  MessageRepositoryImpl( this.messageDatasource );
+  MessageRepositoryImpl( {
+    MessageDatasource? messageDatasource
+  } ): messageDatasource = messageDatasource ?? MessageDatasourceImpl();
   
   @override
-  Future<Message> createUpdateMessage(Map<String, dynamic> messageSimilar) {
-    return messageDatasource.createUpdateMessage( messageSimilar );
+  Future<Message> createUpdateMessage( String name, String email, String message) {
+    return messageDatasource.createUpdateMessage( name, email, message );
   }
   
   @override

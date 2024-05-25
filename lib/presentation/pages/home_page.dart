@@ -4,11 +4,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lorem_ipsum/lorem_ipsum.dart';
 
 import '../../config/theme/theme.dart';
 import '../presentation.dart';
+import '../shared/widgets/custom_product_field.dart';
 
 class HomePage extends ConsumerStatefulWidget {
 
@@ -261,17 +263,20 @@ class _HomeBodyPage extends ConsumerWidget {
   }
 }
 
-class _ContactUsForm extends StatelessWidget {
+class _ContactUsForm extends ConsumerWidget {
   const _ContactUsForm();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    final messageForm = ref.watch( messageFormProvider );
+
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: Color.fromARGB(255, 240, 236, 236),
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(2),
-          topRight: Radius.circular(2),
+          topLeft: Radius.circular(8),
+          topRight: Radius.circular(8),
           bottomRight: Radius.circular(10),
           bottomLeft: Radius.circular(10),
         ),
@@ -294,44 +299,56 @@ class _ContactUsForm extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const CustomTextFormField(
+              const SizedBox( height: 7),
+              CustomProductField(
+                isBottomField: true,
+                isTopField: true,
                 label: 'Nombre',
                 // obscureText: true,
-                // onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
-                // errorMessage: loginForm.isFormPosted
-                // ? loginForm.password.errorMessage
-                // : null,
-              ),
-              const SizedBox( height: 10,),
-              const CustomTextFormField(
-                label: 'Correo Electrónico',
-                // obscureText: true,
-                // onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
-                // errorMessage: loginForm.isFormPosted
-                // ? loginForm.password.errorMessage
-                // : null,
-              ),
-              const SizedBox( height: 10,),
-              const CustomTextFormField(
-                label: 'Mensaje',
-                hint: 'Escribe tu Mensaje',
-                keyboardType: TextInputType.multiline,  
-                // obscureText: true,
-                // onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
-                // errorMessage: loginForm.isFormPosted
-                // ? loginForm.password.errorMessage
-                // : null,
+                onChanged: ref.read( messageFormProvider.notifier ).onNameChange,
+                errorMessage: messageForm.isFormPosted
+                ? messageForm.name.errorMessage
+                : null,
               ),
               const SizedBox( height: 15,),
-              // TextFormField(
-              //   decoration: const InputDecoration(
-              //     labelText: 'Mensaje',
-              //     hintText: 'Mensaje',
-              //   ),
-              // ),
-              // const SizedBox( height: 20,),
+              CustomProductField(
+                isBottomField: true,
+                isTopField: true,
+                label: 'Correo Electrónico',
+                // obscureText: true,
+                onChanged: ref.read( messageFormProvider.notifier ).onEmailChange,
+                errorMessage: messageForm.isFormPosted
+                ? messageForm.email.errorMessage
+                : null,
+              ),
+              const SizedBox( height: 15,),
+              CustomProductField(
+                isBottomField: true,
+                isTopField: true,
+                label: 'Mensaje',
+                hint: 'Escribe tu Mensaje',
+                maxLines: 4,
+                keyboardType: TextInputType.multiline,  
+                // obscureText: true,
+                onChanged: ref.read( messageFormProvider.notifier ).onMessageChange,
+                errorMessage: messageForm.isFormPosted
+                ? messageForm.message.errorMessage
+                : null,
+              ),
+              const SizedBox( height: 15,),
               ElevatedButton(
-                onPressed: (){},
+                onPressed: (){ messageForm.isPosting
+                  ? null
+                  : ref.read( messageFormProvider.notifier ).postMessage().then((value) {
+                      if( messageForm.isValid && value == true ) {
+                        context.push('/');
+                        showDialog(
+                          context: context, 
+                          builder: (context) => const PopUpMensajeFinalWidget(text: 'Mensaje Enviado Exitosamente!'),
+                        );
+                      }
+                    });
+                },
                 child: const Text('Enviar'),
               ),
             ],

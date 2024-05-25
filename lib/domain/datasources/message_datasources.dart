@@ -4,6 +4,6 @@ abstract class MessageDatasource {
 
   Future<List<Message>> getMessagesByPage();
   Future<Message> getMessageById( String id );
-  Future<Message> createUpdateMessage( Map<String, dynamic> messageSimilar );
+  Future<Message> createUpdateMessage( String name, String email, String message );
   Future<void> deleteMessage( String id );
 }
