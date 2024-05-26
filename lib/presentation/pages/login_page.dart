@@ -52,6 +52,7 @@ class _LoginForm extends ConsumerWidget {
       showSnackBar( context, next.errorMessage );
     });
 
+    final size = MediaQuery.of(context).size;
     // final textStyles = Theme.of(context).textTheme;
 
     return Padding(
@@ -94,18 +95,24 @@ class _LoginForm extends ConsumerWidget {
               
               const SizedBox( height: 30 ),
           
-              SizedBox(
-                width: double.infinity,
+              CustomFilledButton(
                 height: 60,
-                child: CustomFilledButton(
-                  text: 'Ingresar',
-                  buttonColor: Colors.blueAccent.shade400,
-                  onPressed: loginForm.isPosting
-                    ? null
-                    : ref.read(loginFormProvider.notifier).onFormSubmit
-                    // if ( loginForm.isPosting ) context.push('/')
-                  
-                )
+                width: size.width * 0.72,
+                radius: const Radius.circular(25),
+                shadowColor: Colors.white,
+                spreadRadius: 4,
+                blurRadius: 3,
+                icon: Icons.person_2_rounded,
+                iconSeparatorWidth: 50,
+                text: 'Ingresar',
+                fontSize: 22,
+                buttonColor: Colors.blueAccent.shade400,
+                mainAxisAlignment: MainAxisAlignment.start,
+                onPressed: loginForm.isPosting
+                  ? null
+                  : ref.read(loginFormProvider.notifier).onFormSubmit
+                  // if ( loginForm.isPosting ) context.push('/')
+                
               ),
           
               // const Spacer(  ),

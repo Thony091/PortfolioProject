@@ -28,7 +28,19 @@ class AuthNotifier extends StateNotifier<AuthState>{
     required this.keyValueStorageService,
   }): super(AuthState()){
     
-    // checkAuthStatus();
+    checkAuthStatus();
+  }
+
+  /// Método para verificar el estado de autenticación.
+  void checkAuthStatus() async {
+    final token = await keyValueStorageService.getValue<String>('token');
+    if( token == null ) return logOut();
+    try {
+      final user = await authRepository.checkAuthStatus(token);
+      // _setLoggedUser(user);
+    } catch (e) {
+      logOut();
+    }
   }
 
   /// Método para iniciar sesión de un usuario.

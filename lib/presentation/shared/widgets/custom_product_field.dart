@@ -14,6 +14,7 @@ class CustomProductField extends StatelessWidget {
   final String initialValue;
   final Function(String)? onChanged;
   final Function(String)? onFieldSubmitted;
+  final Function()? onTap;
   final String? Function(String?)? validator;
   final bool readOnly;
 
@@ -31,7 +32,8 @@ class CustomProductField extends StatelessWidget {
     this.onChanged, 
     this.onFieldSubmitted, 
     this.validator,
-    this.readOnly = false
+    this.readOnly = false,
+    this.onTap,
   });
 
   @override
@@ -68,6 +70,7 @@ class CustomProductField extends StatelessWidget {
       child: TextFormField(
         readOnly: readOnly,
         onChanged: onChanged,
+        onTap: onTap,
         onFieldSubmitted: onFieldSubmitted,
         validator: validator,
         obscureText: obscureText,

@@ -6,3 +6,5 @@ export 'phone.dart';
 export 'rut.dart';
 export 'products/products.dart';
 export 'message.dart';
+export 'reservation_date.dart';
+export 'reservation_time.dart';

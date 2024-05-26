@@ -60,210 +60,12 @@ class _HomeBodyPage extends ConsumerWidget {
     const String textColumn2 = '¡Experimenta  la potencia y el estilo sin igual de tu MINI john Cooper Works llevados al máximo nivel con nuestra transformación exclusiva! En nuestro talle especializado, nos enorgullese ofrecer un servicio personalizado  que resalta la esencia deportiva y elegancia intrinseca de tu MINI JCW.';
     const String detailingDescription = 'El detailing, en el servicio automotriz, es el conjunto de tecnicas centeradas en la limpieza perfecta del vehiculo sin causar deterioro de los materiales que lo componen. Es más, se encarga de solucionar defectos estéticos y proteger el auto ante la mayoria de las agresiones externas.';
     final authStateProvider = ref.watch( authProvider ).userData;
+    final authStatusProvider  = ref.watch( authProvider );
 
     if ( authStateProvider == null || authStateProvider.isAdmin == false){
-      return  SingleChildScrollView( 
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        // reverse: true,
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-          
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-            
-              const SizedBox(height: 10,),
-  
-              const Text('Expertos en brillo',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 20,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  
-                children: [
-                  SizedBox(
-                    width: size.width * 0.42,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(2),
-                          topRight: Radius.circular(2),
-                          bottomRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 5,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/images/brillos/RD1.jpeg',
-                            height: 150,
-                            width: 300,
-                          ),
-                          // const SizedBox(height: 3,),
-                          Image.asset(
-                            'assets/images/brillos/RD5.jpeg',
-                            height: 150,
-                            width: 300,
-                          ),
-                          // const SizedBox(height: 3,),
-                          Image.asset(
-                            'assets/images/brillos/RD4.jpeg',
-                            height: 150,
-                            width: 300,
-                          ),
-                          // const SizedBox(height: 3,),
-                          const Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Text( textColumn1,
-                              maxLines: 15,
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              textAlign: TextAlign.justify,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: size.width * 0.42,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(2),
-                          topRight: Radius.circular(2),
-                          bottomRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 5,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/images/brillos/JWC2.jpeg',
-                            height: 150,
-                            width: 300,
-                          ),
-                          // const SizedBox(height: 1,),
-                          Image.asset(
-                            'assets/images/brillos/JWC3.jpeg',
-                            height: 150,
-                            width: 300,
-                          ),
-                          // const SizedBox(height: 1,),
-                          Image.asset(
-                            'assets/images/brillos/JWC4.jpeg',
-                            height: 150,
-                            width: 300,
-                          ),
-                          // const SizedBox(height: 1,),
-                          const Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: SingleChildScrollView(
-                              child: Text( textColumn2,
-                                maxLines: 13,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                textAlign: TextAlign.justify,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox( height: 20,),
-  
-              Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    topRight: Radius.circular(5),
-                    bottomRight: Radius.circular(5),
-                    bottomLeft: Radius.circular(5),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 5,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(12),
-                  child: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('¿Que es Detailing?',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox( height: 10,),
-                      Text( detailingDescription,
-                        maxLines: 10,
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        textAlign: TextAlign.justify,
-                      ),
-                    ],
-                  )
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-  
-              SizedBox(
-                height: 350,
-                width: double.infinity,
-                child: _Map()
-              ),
-  
-              const SizedBox( height: 20,),
-  
-              const _ContactUsForm(),
-            ],
-          ),
-        ),
-      );
+      return  _HomeUserBody(size: size, textColumn1: textColumn1, textColumn2: textColumn2, detailingDescription: detailingDescription);
     }
-    else if ( authStateProvider.isAdmin == true ) {
+    else if ( authStatusProvider.authStatus == AuthStatus.authenticated && authStateProvider.isAdmin == true ) {
       return  SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Center(
@@ -371,12 +173,238 @@ class _HomeBodyPage extends ConsumerWidget {
       );
     }
     else {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
+      return  _HomeUserBody(size: size, textColumn1: textColumn1, textColumn2: textColumn2, detailingDescription: detailingDescription);
     }
 
 
+  }
+}
+
+class _HomeUserBody extends StatelessWidget {
+  const _HomeUserBody({
+    super.key,
+    required this.size,
+    required this.textColumn1,
+    required this.textColumn2,
+    required this.detailingDescription,
+  });
+
+  final Size size;
+  final String textColumn1;
+  final String textColumn2;
+  final String detailingDescription;
+
+  @override
+  Widget build(BuildContext context) {
+
+    final String textTest = loremIpsum(words: 150, paragraphs: 3);
+    final size = MediaQuery.of(context).size;
+    const String textColumn1 = '¡Transforma tu Renault Duster en una obra maestra sobre ruedas con nuestro servicio de Detailing exclusivo! En Nuestro taller especializado, ofrecemos una experiencia única de embellecimiento y protección de tu vehículo, centrandonos en cada detalle de tu amada Renault Duster.';
+    const String textColumn2 = '¡Experimenta  la potencia y el estilo sin igual de tu MINI john Cooper Works llevados al máximo nivel con nuestra transformación exclusiva! En nuestro talle especializado, nos enorgullese ofrecer un servicio personalizado  que resalta la esencia deportiva y elegancia intrinseca de tu MINI JCW.';
+    const String detailingDescription = 'El detailing, en el servicio automotriz, es el conjunto de tecnicas centeradas en la limpieza perfecta del vehiculo sin causar deterioro de los materiales que lo componen. Es más, se encarga de solucionar defectos estéticos y proteger el auto ante la mayoria de las agresiones externas.';
+
+
+
+    return SingleChildScrollView( 
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      // reverse: true,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+        
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+          
+            const SizedBox(height: 10,),
+      
+            const Text('Expertos en brillo',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      
+              children: [
+                SizedBox(
+                  width: size.width * 0.42,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(2),
+                        topRight: Radius.circular(2),
+                        bottomRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 5,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/images/brillos/RD1.jpeg',
+                          height: 150,
+                          width: 300,
+                        ),
+                        // const SizedBox(height: 3,),
+                        Image.asset(
+                          'assets/images/brillos/RD5.jpeg',
+                          height: 150,
+                          width: 300,
+                        ),
+                        // const SizedBox(height: 3,),
+                        Image.asset(
+                          'assets/images/brillos/RD4.jpeg',
+                          height: 150,
+                          width: 300,
+                        ),
+                        // const SizedBox(height: 3,),
+                        const Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: Text( textColumn1,
+                            maxLines: 15,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            textAlign: TextAlign.justify,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: size.width * 0.42,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(2),
+                        topRight: Radius.circular(2),
+                        bottomRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 5,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/images/brillos/JWC2.jpeg',
+                          height: 150,
+                          width: 300,
+                        ),
+                        // const SizedBox(height: 1,),
+                        Image.asset(
+                          'assets/images/brillos/JWC3.jpeg',
+                          height: 150,
+                          width: 300,
+                        ),
+                        // const SizedBox(height: 1,),
+                        Image.asset(
+                          'assets/images/brillos/JWC4.jpeg',
+                          height: 150,
+                          width: 300,
+                        ),
+                        // const SizedBox(height: 1,),
+                        const Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SingleChildScrollView(
+                            child: Text( textColumn2,
+                              maxLines: 13,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox( height: 20,),
+      
+            Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(5),
+                  topRight: Radius.circular(5),
+                  bottomRight: Radius.circular(5),
+                  bottomLeft: Radius.circular(5),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 5,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(12),
+                child: Column(
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('¿Que es Detailing?',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox( height: 10,),
+                    Text( detailingDescription,
+                      maxLines: 10,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      textAlign: TextAlign.justify,
+                    ),
+                  ],
+                )
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+      
+            SizedBox(
+              height: 350,
+              width: double.infinity,
+              child: _Map()
+            ),
+      
+            const SizedBox( height: 20,),
+      
+            const _ContactUsForm(),
+          ],
+        ),
+      ),
+    );
   }
 }
 

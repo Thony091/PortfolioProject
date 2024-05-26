@@ -31,6 +31,7 @@ dependencies:
   lorem_ipsum: ^0.0.3
   shared_preferences: ^2.2.3
   flutter_svg: ^2.0.9 # help us to use SVG in our app
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

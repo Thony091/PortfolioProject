@@ -33,6 +33,10 @@ class CustomFilledButton extends StatelessWidget {
   final double fontSize;
   /// El color del texto del botón.
   final Color textColor;
+  /// La alineación principal del botón.
+  final MainAxisAlignment mainAxisAlignment;
+  /// El ancho del separador del icono.
+  final double iconSeparatorWidth;
 
   /// Construye un [CustomFilledButton] con los parámetros proporcionados.
   const CustomFilledButton({
@@ -52,6 +56,8 @@ class CustomFilledButton extends StatelessWidget {
     this.padding = const EdgeInsets.all(0),
     this.fontSize = 16,
     this.textColor = Colors.white,
+    this.mainAxisAlignment = MainAxisAlignment.start,
+    this.iconSeparatorWidth = 0.0,
   });
 
   @override
@@ -95,9 +101,10 @@ class CustomFilledButton extends StatelessWidget {
           onPressed: onPressed, 
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: mainAxisAlignment,
             children: [
-              Icon( icon ),
+              Icon( icon, color: Colors.orangeAccent),
+              SizedBox(width: iconSeparatorWidth),
               Text(
                 text, 
                 style: TextStyle(
