@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../config/config.dart';
-import '../../presentation.dart';
+import '../../presentation_container.dart';
 import 'components/custom_profile_field.dart';
 
 class ProfileUserPage extends StatelessWidget {

@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../config/config.dart';
-import '../../domain/domain.dart';
-import '../presentation.dart';
-import '../shared/widgets/custom_product_field.dart';
+import '../../../config/config.dart';
+import '../../../domain/domain.dart';
+import '../../presentation_container.dart';
+import '../../shared/widgets/custom_product_field.dart';
 
-class ServiceDetailPage extends ConsumerWidget{
+class ServiceCreatePage extends ConsumerWidget{
 
   final String serviceId;
-  static const String name = 'ServiceDetailPage';
+  static const String name = 'ServiceCreatePage';
 
-  const ServiceDetailPage({super.key, required this.serviceId});
+  const ServiceCreatePage({super.key, required this.serviceId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

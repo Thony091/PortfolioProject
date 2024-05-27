@@ -27,20 +27,26 @@ class AuthNotifier extends StateNotifier<AuthState>{
     required this.authRepository,
     required this.keyValueStorageService,
   }): super(AuthState()){
-    
     checkAuthStatus();
   }
 
   /// Método para verificar el estado de autenticación.
   void checkAuthStatus() async {
+    
     final token = await keyValueStorageService.getValue<String>('token');
+    final email = await keyValueStorageService.getValue<String>('email');
+    final password = await keyValueStorageService.getValue<String>('password');
+    
     if( token == null ) return logOut();
+
     try {
-      final user = await authRepository.checkAuthStatus(token);
-      // _setLoggedUser(user);
+
+      await loginUserFireBase(email.toString(), password.toString());
+      
     } catch (e) {
       logOut();
     }
+
   }
 
   /// Método para iniciar sesión de un usuario.
@@ -57,6 +63,10 @@ class AuthNotifier extends StateNotifier<AuthState>{
 
       final userData = await authRepository.getUser('users', user.user!.uid);
 
+      // await keyValueStorageService.setKeyValue('uid',  user.user!.uid);
+      await keyValueStorageService.setKeyValue('email', userData.email);
+      await keyValueStorageService.setKeyValue('password', userData.password);
+
       _setLoggedUser(user, userData);
 
     } on CustomError {
@@ -69,13 +79,7 @@ class AuthNotifier extends StateNotifier<AuthState>{
 
   /// Método para registrar un nuevo usuario.
   Future<bool> registerUserFireBase( 
-    String email, 
-    String password, 
-    String name, 
-    String rut, 
-    String birthday, 
-    String phone 
-  ) async {
+    String email, String password, String name, String rut, String birthday, String phone ) async {
 
     try {
       
@@ -105,32 +109,13 @@ class AuthNotifier extends StateNotifier<AuthState>{
     return value;
   }
 
-  // /// Método para verificar el estado de autenticación.
-  // void checkAuthStatus() async {
-  //   final token = await keyValueStorageService.getValue<String>('token');
-  //   if( token == null ) return logOut();
-  //   try {
-  //     // final user = await authRepository.checkAuthStatus(token);
-  //     // _setLoggedUser(user);
-  //   } catch (e) {
-  //     logOut();
-  //   }
-  // }
-
   /// Método privado para establecer el usuario autenticado. 
   void _setLoggedUser (firebase_auth.UserCredential user, User userData) async {
 
     final tokenId = await user.user!.getIdToken();
-
-    // final uid = user.user!.uid;
-    // final data = await FirestoreService().getUserDataFromFirestore('users', uid);
-
-    // final userDataFirestore = UserFirestoreResponse.fromJson(data);
-
-    // final userData = UserMapper.userDbToEntity(userDataFirestore);
  
     // Verifica si tokenId es null antes de intentar almacenarlo.
-    if ( tokenId!= null ) {
+    if ( tokenId != null ) {
 
       await keyValueStorageService.setKeyValue('token', tokenId);
 
@@ -157,7 +142,10 @@ class AuthNotifier extends StateNotifier<AuthState>{
       await FirebaseAuthService.logOut();
       
       await keyValueStorageService.removeKey('token');
+      await keyValueStorageService.removeKey('email');
+      await keyValueStorageService.removeKey('password');
       print('Token eliminado correctamente');
+      
 
       state = state.copyWith(
         authStatus: AuthStatus.notAuthenticated,
@@ -214,5 +202,7 @@ class AuthState {
       userData: $userData
     ''';
   }
+
+  void addListener(Null Function(dynamic state) param0) {}
 
 }

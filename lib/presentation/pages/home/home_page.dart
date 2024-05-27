@@ -8,9 +8,9 @@ import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lorem_ipsum/lorem_ipsum.dart';
 
-import '../../config/theme/theme.dart';
-import '../presentation.dart';
-import '../shared/widgets/custom_product_field.dart';
+import '../../../config/theme/theme.dart';
+import '../../presentation_container.dart';
+import '../../shared/widgets/custom_product_field.dart';
 
 class HomePage extends ConsumerStatefulWidget {
 
@@ -113,7 +113,7 @@ class _HomeBodyPage extends ConsumerWidget {
                       textColor: Colors.black54,
                       buttonColor: const Color.fromARGB(255, 20, 140, 238).withOpacity(0.9),
                       shadowColor: Colors.black45,
-                      onPressed: () => context.push('/admin-config-services'),
+                      onPressed: () => context.push('/services'),
                       icon: Icons.car_repair_outlined,
                     ),
                     const SizedBox(height: 25,),
@@ -182,7 +182,6 @@ class _HomeBodyPage extends ConsumerWidget {
 
 class _HomeUserBody extends StatelessWidget {
   const _HomeUserBody({
-    super.key,
     required this.size,
     required this.textColumn1,
     required this.textColumn2,
@@ -270,13 +269,15 @@ class _HomeUserBody extends StatelessWidget {
                         // const SizedBox(height: 3,),
                         const Padding(
                           padding: EdgeInsets.all(5.0),
-                          child: Text( textColumn1,
+                          child: Text( 
+                            
+                            textColumn1,
                             maxLines: 15,
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
                             ),
-                            textAlign: TextAlign.justify,
+                            textAlign: TextAlign.start,
                           ),
                         ),
                       ],
@@ -325,13 +326,14 @@ class _HomeUserBody extends StatelessWidget {
                         const Padding(
                           padding: EdgeInsets.all(5.0),
                           child: SingleChildScrollView(
-                            child: Text( textColumn2,
+                            child: Text( 
+                              textColumn2,
                               maxLines: 13,
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,
                               ),
-                              textAlign: TextAlign.justify,
+                              textAlign: TextAlign.start,
                             ),
                           ),
                         ),

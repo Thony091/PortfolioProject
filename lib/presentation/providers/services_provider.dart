@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/domain.dart';
-import '../presentation.dart';
+import '../presentation_container.dart';
 
 final servicesProvider = StateNotifierProvider<ServicesNotifier, ServicesState>((ref) {
 
@@ -22,6 +22,34 @@ class ServicesNotifier extends StateNotifier<ServicesState>{
     getServices();
   }
   
+  Future<bool> createOrUpdateService( Map<String, dynamic> serviceSimilar) async {
+
+    try {
+      
+      final service = await servicesRepository.createUpdateService(serviceSimilar);
+      final isServiceInList = state.services.any((element) => element.id == service.id);
+
+      if ( !isServiceInList){
+        state = state.copyWith(
+          services: [...state.services, service]
+        );
+        return true;
+      } 
+
+      state = state.copyWith(
+        services: state.services.map(
+          (element) => ( element.id == service.id ) ? service : element
+        ).toList()
+      );
+      return true;
+      
+    } catch (e) {
+      return false;
+    }
+
+  }
+
+
   Future<void> getServices() async {
     
     state = state.copyWith(isLoading: true);

@@ -8,3 +8,4 @@ export 'products/products.dart';
 export 'message.dart';
 export 'reservation_date.dart';
 export 'reservation_time.dart';
+export 'products/description.dart';

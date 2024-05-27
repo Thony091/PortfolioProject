@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/domain.dart';
-import '../presentation.dart';
+import '../presentation_container.dart';
 
 final serviceProvider = StateNotifierProvider.autoDispose.family<ServiceNotifier, ServiceState, String>(
   (ref, serviceId) {
@@ -25,23 +25,40 @@ class ServiceNotifier extends StateNotifier<ServiceState>{
     getService();
   }
 
+  Services newEmptyService(){
+    return Services(
+      id: 'new',
+      name: '',
+      description: '',
+      minPrice: 0,
+      maxPrice: 0,
+      isActive: false,
+      images: []
+    );
+  }
+
   Future<void> getService() async {
 
     try {
-        
-        final service = await servicesRepository.getServiceById(state.id);
-        
+
+      if( state.id == 'new' ){
         state = state.copyWith(
-          service: service,
+          service: newEmptyService(),
           isLoading: false
-        );  
+        );
+        return;
+      }
+        
+      final service = await servicesRepository.getServiceById(state.id);
+      
+      state = state.copyWith(
+        service: service,
+        isLoading: false
+      );  
 
     } catch (e) {
       print('Error al obtener el servicio: $e');
     }
-    state = state.copyWith(isLoading: true);
-    final service = await servicesRepository.getServiceById(state.id);
-    state = state.copyWith( service: service, isLoading: false );
   }
 
 }

@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:portafolio_project/presentation/shared/widgets/custom_product_field.dart';
 
 
-import '../../config/config.dart';
-import '../presentation.dart';
+import '../../../config/config.dart';
+import '../../presentation_container.dart';
 
 
 //*TODO Revisar la implementación de la página de reservas*****

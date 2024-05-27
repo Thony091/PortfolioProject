@@ -32,6 +32,7 @@ dependencies:
   shared_preferences: ^2.2.3
   flutter_svg: ^2.0.9 # help us to use SVG in our app
   intl: ^0.18.1
+  image_picker: ^1.0.8
 
 dev_dependencies:
   flutter_test:

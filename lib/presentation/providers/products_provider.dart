@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/domain.dart';
-import '../presentation.dart';
+import '../presentation_container.dart';
 
 //* state notifier provider
 final productsProvider = StateNotifierProvider<ProductsNotifier, ProductsState>((ref) {

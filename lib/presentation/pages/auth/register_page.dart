@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../config/config.dart';
-import '../presentation.dart';
+import '../../../config/config.dart';
+import '../../presentation_container.dart';
 
 class RegisterPage extends StatelessWidget {
 

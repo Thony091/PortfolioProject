@@ -3,19 +3,24 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../presentation/presentation.dart';
+import '../../presentation/presentation_container.dart';
 import 'router.dart';
 
 
 final goRouterProvider = Provider( (ref) {
 
-  final goRouterNotifier = ref.read( goRouterNotifierProvider);
+  final goRouterNotifier = ref.read( goRouterNotifierProvider );
 
   return GoRouter(
-    initialLocation: '/',
+    initialLocation: '/splash',
     refreshListenable: goRouterNotifier,
     routes: 
       [
+        GoRoute(
+          path: '/splash', 
+          name: CheckAuthStatusScreen.name, 
+          builder: (context, state) => const CheckAuthStatusScreen()
+        ),
         //* Home
         GoRoute(
           path: '/',
@@ -83,6 +88,14 @@ final goRouterProvider = Provider( (ref) {
             serviceId: state.params['id'] ?? 'no-id'
           ),
         ),
+        //* Service Edit
+        GoRoute(
+          path: '/service-edit/:id',
+          name: ServiceEditPage.name,
+          builder: (context, state) => ServiceEditPage(
+            serviceId: state.params['id'] ?? 'no-id'
+          ),
+        ),
 
         //* Profile
         GoRoute(
@@ -147,18 +160,26 @@ final goRouterProvider = Provider( (ref) {
       final isGoingTo = state.subloc;
       final authStatus = goRouterNotifier.authStatus;
 
-      if ( authStatus == AuthStatus.authenticated ) {
-
-        if ( isGoingTo == '/login' || isGoingTo == '/register' || isGoingTo == '/splash' ){
-           return '/';
-        }
-      }
+      if ( isGoingTo == '/splash' && authStatus == AuthStatus.checking ) return null;
 
       if ( authStatus == AuthStatus.notAuthenticated ) {
-        if ( isGoingTo == '/pago' || isGoingTo == '/profile-user' ){
-           return '/login';
+
+        if ( isGoingTo == '/pago' || isGoingTo == '/profile-user' || isGoingTo == '/edit-user-profile' || 
+        isGoingTo == '/shoping-cart' || isGoingTo == '/admin-config-products' || isGoingTo == '/admin-config-services' || isGoingTo == '/admin-config-works' || isGoingTo == '/admin-contact-tickets'
+        || isGoingTo == '/login' || isGoingTo == '/register' ) {
+
+          return null;
+        } 
+
+        return '/';
+      }
+
+      if ( authStatus == AuthStatus.authenticated ) {
+        if ( isGoingTo == '/login' || isGoingTo == '/register' || isGoingTo == '/splash' ){
+          return '/';
         }
       }
+
       return null;
     }
   );

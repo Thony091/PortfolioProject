@@ -9,3 +9,5 @@ export 'service_card.dart';
 export 'custom_image_gallery.dart';
 export 'pop_up_message_final_widget.dart';
 export 'image_gallery.dart';
+export 'custom_icon_button.dart';
+export 'pop_up_pregunta_widget.dart';

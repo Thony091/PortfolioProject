@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portafolio_project/domain/domain.dart';
 
-import '../presentation.dart';
+import '../presentation_container.dart';
 
 final productProvider = StateNotifierProvider.autoDispose.family<ProductNotifier, ProductState, String>(
   (ref, prductId) {

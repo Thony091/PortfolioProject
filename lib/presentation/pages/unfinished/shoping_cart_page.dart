@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:portafolio_project/presentation/presentation.dart';
+import 'package:portafolio_project/presentation/presentation_container.dart';
 
-import '../../config/config.dart';
+import '../../../config/config.dart';
 
 class ShopingCartPage extends StatelessWidget {
 
