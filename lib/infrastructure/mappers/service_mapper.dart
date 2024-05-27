@@ -6,8 +6,8 @@ class ServiceMapper {
 
   static jsonToEntity( Map<String, dynamic> json) => Services(
     id: json['id'].toString(), 
-    name: json['name'], 
-    description: json['description'], 
+    name: json['name'] ?? '', 
+    description: json['description'] ?? '', 
     minPrice: double.parse( json['minPrice'].toString() ), 
     maxPrice: double.parse( json['maxPrice'].toString() ), 
     images: json['images'] != null 

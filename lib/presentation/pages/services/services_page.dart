@@ -21,17 +21,21 @@ class ServicesPage extends ConsumerWidget {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text( !authState.userData!.isAdmin 
+        title: Text( authState.authStatus != AuthStatus.authenticated
           ? "Nuestros Servicios" 
-          : "Servicios disponibles"
+          :( !authState.userData!.isAdmin )
+            ? "Nuestros Servicios" 
+            : "Servicios disponibles"
         ),
         backgroundColor: color.primary,
       ),
       body: BackgroundImageWidget(
         opacity: 0.1,
-        child: !authState.userData!.isAdmin
+        child: ( authState.authStatus != AuthStatus.authenticated )
           ? const _ServiceBodyPage()
-          : const _ServiceAdminBodyPage()
+          : ( !authState.userData!.isAdmin )
+            ? const _ServiceBodyPage()
+            : const _ServiceAdminBodyPage()
         ),
       floatingActionButton: ( authState.authStatus != AuthStatus.authenticated)
         ? null 

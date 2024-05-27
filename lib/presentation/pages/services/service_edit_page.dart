@@ -144,7 +144,7 @@ class _ServiceInformation extends ConsumerWidget {
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             initialValue: serviceForm.minPrice.value.toString(),
             onChanged: (value) => ref.read( serviceFormProvider( service ).notifier )
-              .onMinPriceChange( double.parse(value) ?? 0),
+              .onMinPriceChange( double.parse(value) ?? 0 ),
             errorMessage: serviceForm.minPrice.errorMessage,
           ),
           CustomProductField( 
