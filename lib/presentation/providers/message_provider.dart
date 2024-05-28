@@ -20,7 +20,9 @@ class MessageNotifier extends StateNotifier<MessageState>{
 
   MessageNotifier({
     required this.messageRepository
-  }): super(MessageState());
+  }): super(MessageState()){
+    getMessages();
+  }
 
   Future<void> postMessage(String name, String email, String message) async{
 
@@ -39,22 +41,53 @@ class MessageNotifier extends StateNotifier<MessageState>{
     }
   }
 
+    Future<void> getMessages() async {
+    
+    state = state.copyWith(isLoading: true);
+
+    try {
+      
+      final messages = await messageRepository.getMessagesByPage();
+      
+      state = state.copyWith(
+        messages: messages,
+        isLoading: false
+      );
+
+    } catch (e) {
+      
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: 'Error al obtener los servicios'
+      );
+
+    }
+  }
+
 }
 
 class MessageState{
 
+  final bool isLoading;
   final Message? message;
+  final List<Message> messages;
   final String errorMessage;
 
   MessageState({
+    this.messages = const [],
+    this.isLoading = false,
     this.message,
     this.errorMessage = ''
   });
 
   MessageState copyWith({
+    List<Message>? messages,
+    bool? isLoading,
     Message? message,
     String? errorMessage
   }) => MessageState(
+    messages: messages ?? this.messages,
+    isLoading: isLoading ?? this.isLoading,
     message: message ?? this.message,
     errorMessage: errorMessage ?? this.errorMessage
   );

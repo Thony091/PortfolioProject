@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../config/config.dart';
 import '../../presentation_container.dart';
@@ -18,7 +19,12 @@ class OurWorksPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Nuestros Trabajos'),
+        title: Text( authState.authStatus != AuthStatus.authenticated
+          ? "Nuestros Trabajos" 
+          :( !authState.userData!.isAdmin )
+            ? "Nuestros Trabajos" 
+            : "Trabajos disponibles"
+        ),
         backgroundColor: color.primary,
       ),
       body: const BackgroundImageWidget(
@@ -70,6 +76,59 @@ class _OurWorksBodyPage extends ConsumerWidget {
             )
           );
         },
+      ),
+    );
+  }
+}
+
+
+//* Vista de los servicios para el administrador
+class _OurWorksAdminBodyPage extends ConsumerStatefulWidget {
+  const _OurWorksAdminBodyPage();
+
+  @override
+  _OurWorksAdminBodyPageState createState() => _OurWorksAdminBodyPageState();
+}
+
+class _OurWorksAdminBodyPageState extends ConsumerState {
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    final worksState = ref.watch( worksProvider);
+    
+    return Padding(
+      padding: const EdgeInsets.only( left: 20, top: 10),
+      child:  ListView.builder(
+        itemCount: worksState.works.length,
+        itemBuilder: ( context, index) {
+          final work = worksState.works[index];
+          return Column(
+            children:
+              [
+                WorkCard( 
+                  work: work,
+                  onTapdEdit: () => context.push('/work-edit/${work.id}'),
+                  onTapDelete: () {
+                    showDialog(
+                      context: context, 
+                      builder: (context){
+                        return PopUpPreguntaWidget(
+                          pregunta: '¿Estas seguro de eliminar el servicio?', 
+                          // confirmar: () {},
+                          confirmar: () => ref.read(servicesProvider.notifier).deleteService(work.id).then((value) => context.pop()), 
+                          cancelar: () => context.pop()
+                        );
+                      }
+                    );
+                  } 
+                ),
+                const SizedBox(height: 10),
+              ] 
+          );
+        },
+        
       ),
     );
   }

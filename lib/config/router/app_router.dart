@@ -127,9 +127,9 @@ final goRouterProvider = Provider( (ref) {
         //* AdminZone
         //* ConfigProductsPage
         GoRoute(
-          path: '/admin-config-products',
-          name: ConfigProductsPage.name,
-          builder: (context, state) => const ConfigProductsPage(),
+          path: '/messages',
+          name:  MessagesPage.name,
+          builder: (context, state) => const MessagesPage(),
         ),
 
         //* ConfigServicesPage

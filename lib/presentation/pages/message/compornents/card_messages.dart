@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../../../../domain/domain.dart';
+import '../../../../domain/domain.dart' show Message;
 import '../../../shared/shared.dart';
 
-class WorkCard extends StatelessWidget {
+class MessageCard extends StatelessWidget {
 
-  final Works work;
-  final Function()? onTapdEdit;
+  final Message message;
+  final Function()? onTapdResponse;
   final Function()? onTapDelete;
 
-  const WorkCard({
+  const MessageCard({
     super.key,
-    required this.work,
-    this.onTapdEdit,
+    required this.message,
+    this.onTapdResponse,
     this.onTapDelete,
   });
 
@@ -21,10 +21,10 @@ class WorkCard extends StatelessWidget {
     return Row(
       children: [
         _ImageViewer( 
-          image: work.image,
-          title: work.name,
-          description: work.description,
-          onTapdEdit: onTapdEdit,
+          title: message.name,
+          recivedMessage: message.message,
+          email: message.email,
+          onTapdResponse: onTapdResponse,
           onTapDelete: onTapDelete,
         ),
       ],
@@ -32,29 +32,27 @@ class WorkCard extends StatelessWidget {
   }
 }
 
-
 class _ImageViewer extends StatelessWidget {
-
-  final String image;
+  
   final String title;
-  final String description;
-  final Function()? onTapdEdit;
+  final String email;
+  final String recivedMessage;
+  final Function()? onTapdResponse;
   final Function()? onTapDelete;
 
   const _ImageViewer({
-    required this.image,
     this.title = '', 
-    this.description = '',
-    this.onTapdEdit,
-    this.onTapDelete,
+    this.recivedMessage = '',
+    this.onTapdResponse,
+    this.onTapDelete, 
+    this.email = '',
   });
 
   @override
   Widget build(BuildContext context) {
 
     final size = MediaQuery.of(context).size;
-    
-    if ( image.isEmpty ) {
+  
       return ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Container(width: size.width * 0.93,
@@ -97,8 +95,8 @@ class _ImageViewer extends StatelessWidget {
                       ),
                       const SizedBox( height: 10 ),
                       Text(
-                        maxLines: 3,
-                        description,
+                        maxLines: 4,
+                        recivedMessage,
                         style: const TextStyle(
                           fontSize: 10,
                         ),
@@ -114,7 +112,7 @@ class _ImageViewer extends StatelessWidget {
 
                     const SizedBox( width: 10 ),
                     CustomIconButton(
-                      onTap: onTapdEdit ?? () {}, 
+                      onTap: onTapdResponse ?? () {}, 
                       icon: Icons.edit,
                       size: 22,
                       color: Colors.blueGrey,
@@ -139,18 +137,6 @@ class _ImageViewer extends StatelessWidget {
       );
     }
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(5),
-      child: FadeInImage(
-        fit: BoxFit.cover,
-        height: 250,
-        width: size.width * 0.93,
-        fadeOutDuration: const Duration(milliseconds: 100),
-        fadeInDuration: const Duration(milliseconds: 200),
-        image: NetworkImage( image ),
-        placeholder: const AssetImage('assets/loaders/loader2.gif'),
-      ),
-    );
+
 
   }
-}

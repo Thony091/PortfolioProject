@@ -42,21 +42,58 @@ class MessageDatasourceImpl extends MessageDatasource{
   }
 
   @override
-  Future<void> deleteMessage(String id) {
-    // TODO: implement deleteMessage
-    throw UnimplementedError();
+  Future<void> deleteMessage(String id) async {
+    
+    try {
+      await dio.delete('/eliminar-mensaje/$id');
+    } catch (e) {
+      throw Exception();
+    }
+
   }
 
   @override
-  Future<Message> getMessageById(String id) {
-    // TODO: implement getMessageById
-    throw UnimplementedError();
+  Future<Message> getMessageById(String id) async {
+
+    try {
+
+      final response = await dio.get('/obtener-mensaje/$id');
+
+      final mensaje = MessageMapper.jsonToEntity(response.data);
+      return mensaje;
+
+    } on DioException catch (e) {
+      
+      if ( e.response!.statusCode == 404) throw ServiceNotFound();
+      throw e;
+
+    } catch (e) {
+      throw e;
+    }
+
   }
 
   @override
-  Future<List<Message>> getMessagesByPage() {
-    // TODO: implement getMessagesByPage
-    throw UnimplementedError();
+  Future<List<Message>> getMessagesByPage() async {
+    
+    try {
+
+      final response = await dio.get('/listar-mensajes');
+      final List<Message> mensajes = [];
+
+      if ( response.statusCode == 200 ) {
+        for ( final message in response.data ?? [] ) {
+          mensajes.add( MessageMapper.jsonToEntity(message) );
+        }
+      }
+      return mensajes;
+
+    } catch (e) {
+
+      print('Error $e');
+      return [];
+    
+    }
   }
 
 

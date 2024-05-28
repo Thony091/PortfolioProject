@@ -58,11 +58,11 @@ class ServicesDatasourceImpl extends ServicesDatasource {
     try {
       
       final String? serviceId = serviceSimilar['id'];
-      final String method = (serviceId == null) ? 'POST' : 'PATCH';
+      final String method = (serviceId == null) ? 'POST' : 'PUT';
       final String url = (serviceId == null) ? '/crear-servicio' : '/actualizar-servicio';
       // final String url = (serviceId == null) ? '/crear-servicio' : '/actualizar-servicio/$serviceId';
 
-      serviceSimilar.remove('id');
+      // serviceSimilar.remove('id');
       serviceSimilar['images'] = await _uploadPhotos( serviceSimilar['images'] );
 
 
@@ -74,19 +74,26 @@ class ServicesDatasourceImpl extends ServicesDatasource {
         )
       );
 
-      final product = ProductMapper.jsonToEntity(response.data);
-      return product;
+      final service = ServiceMapper.jsonToEntity(response.data);
+      return service;
 
     } catch (e) {
-      throw Exception();
+      throw Exception(e);
     }
 
   }
 
   @override
-  Future<void> deleteService(String id) {
-    // TODO: implement deleteService
-    throw UnimplementedError();
+  Future<void> deleteService(String id) async {
+    
+    try {
+
+      await dio.delete('/eliminar-servicio/$id');
+
+    } catch (e) {
+      throw Exception(e);
+    }
+
   }
 
   @override

@@ -6,9 +6,6 @@ enum DescriptionError { empty, format, length }
 // Extend FormzInput and provide the input type and error type.
 class Description extends FormzInput<String, DescriptionError> {
 
-  static final RegExp messageRegExp = RegExp(
-    r'^[A-Za-z].{0,349}$',
-  );
 
   // Call super.pure to represent an unmodified form input.
   const Description.pure() : super.pure('');
@@ -22,7 +19,7 @@ class Description extends FormzInput<String, DescriptionError> {
     if ( isValid || isPure ) return null;
 
     if ( displayError == DescriptionError.empty ) return 'El campo es requerido';
-    if ( displayError == DescriptionError.format ) return 'El mensaje no cumple con el formato requerido';
+
     if ( displayError == DescriptionError.length ) return 'El mensaje no puede superar los 500 caracteres';
 
     return null;
@@ -33,7 +30,6 @@ class Description extends FormzInput<String, DescriptionError> {
   DescriptionError? validator(String value) {
     
     if ( value.isEmpty || value.trim().isEmpty ) return DescriptionError.empty;
-    if ( messageRegExp.hasMatch(value)) return DescriptionError.format;
     if ( value.length >= 500 ) return DescriptionError.length;
 
     return null;

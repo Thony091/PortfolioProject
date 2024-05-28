@@ -49,6 +49,20 @@ class ServicesNotifier extends StateNotifier<ServicesState>{
 
   }
 
+  Future<void> deleteService( String id ) async {
+
+    try {
+      
+      await servicesRepository.deleteService(id);
+      state = state.copyWith(
+        services: state.services.where((element) => element.id != id).toList()
+      );
+
+    } catch (e) {
+      print(e);
+    }
+
+  }
 
   Future<void> getServices() async {
     

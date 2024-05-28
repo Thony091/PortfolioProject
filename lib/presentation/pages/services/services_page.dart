@@ -42,13 +42,14 @@ class ServicesPage extends ConsumerWidget {
         : ( authState.userData!.isAdmin ) 
           ? 
             FloatingActionButton.extended(
-              label: const Text('Nuevo Servicio'),
+              label: const Text('Crear Servicio'),
               icon: const Icon( Icons.add ),
               onPressed: () {
-                context.push('/service/new');
+                context.pushReplacementNamed('/service/new');
               },
             )
           : null,
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       // drawer: SideMenu(scaffoldKey: scaffoldKey),
     );
   }
@@ -85,7 +86,7 @@ class _ServiceBodyPageState extends ConsumerState {
         itemBuilder: ( context, index) {
           final service = servicesState.services[index];
           return GestureDetector(
-            onTap: () => context.push('/service/${service.id}'),
+            onTap: () => context.pushReplacement('/service/${service.id}'),
             child: ServiceCard( services: service ),
           );
         },
@@ -131,8 +132,8 @@ class _ServiceAdminBodyPageState extends ConsumerState {
                       builder: (context){
                         return PopUpPreguntaWidget(
                           pregunta: '¿Estas seguro de eliminar el servicio?', 
-                          confirmar: () {}, 
-                          // confirmar: () => ref.read(servicesProvider.notifier).deleteService(service.id), 
+                          // confirmar: () {},
+                          confirmar: () => ref.read(servicesProvider.notifier).deleteService(service.id).then((value) => context.pop()), 
                           cancelar: () => context.pop()
                         );
                       }

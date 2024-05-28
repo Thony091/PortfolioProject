@@ -17,3 +17,4 @@ export 'admin_pages/contact_tickets_page.dart';
 export 'services/service_detail_page.dart';
 export 'check_auth_status_screen.dart';
 export 'services/services_container.dart';
+export 'message/message_container.dart';

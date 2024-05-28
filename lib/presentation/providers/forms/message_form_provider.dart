@@ -38,7 +38,7 @@ class MessafeFormNotifier extends StateNotifier<MessageFormState>{
   }
 
   onMessageChange( String value ) {
-    final newMessage = Message.dirty(value);
+    final newMessage = Messages.dirty(value);
     state = state.copyWith(
       message: newMessage,
       isValid: Formz.validate([ newMessage, state.message ])
@@ -75,7 +75,7 @@ class MessafeFormNotifier extends StateNotifier<MessageFormState>{
 
     final name     = Name.dirty(state.name.value);
     final email    = Email.dirty(state.email.value);
-    final message  = Message.dirty(state.message.value);
+    final message  = Messages.dirty(state.message.value);
 
     state = state.copyWith(
       isFormPosted: true,
@@ -99,7 +99,7 @@ class MessageFormState{
   final bool isValid;
   final Name name;
   final Email email;
-  final Message message;
+  final Messages message;
 
   MessageFormState({
     this.isPosting      = false,
@@ -107,7 +107,7 @@ class MessageFormState{
     this.isValid        = false,
     this.name           = const Name.pure(),
     this.email          = const Email.pure(),
-    this.message        = const Message.pure()
+    this.message        = const Messages.pure()
   });
 
   MessageFormState copyWith({
@@ -116,7 +116,7 @@ class MessageFormState{
     bool?       isValid,
     Name?       name,
     Email?      email,
-    Message?    message,
+    Messages?    message,
   }) => MessageFormState(
     isPosting: isPosting ?? this.isPosting,
     isFormPosted: isFormPosted ?? this.isFormPosted,

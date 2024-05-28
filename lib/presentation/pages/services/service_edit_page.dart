@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../config/config.dart';
 import '../../../domain/domain.dart';
@@ -58,7 +59,7 @@ class ServiceEditPage extends ConsumerWidget{
           ? const FullScreenLoader()
           : _ServiceDetailBodyPage( service: serviceState.service! ),
         floatingActionButton: FloatingActionButton.extended(
-          label: const Text( 'Guardar Cambios' ),
+          label: const Text( 'Guardar' ),
           icon: const Icon( Icons.save_outlined, ),
           onPressed: () {
             if ( serviceState.service == null) return;
@@ -68,6 +69,7 @@ class ServiceEditPage extends ConsumerWidget{
             .then((value) {
               if ( !value ) return;
               showSnackbar(context);
+              context.push('/services');
             });
           },
         )

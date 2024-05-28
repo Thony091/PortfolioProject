@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../config/config.dart';
 import '../../../domain/domain.dart';
@@ -67,7 +68,7 @@ class ServiceDetailPage extends ConsumerWidget{
           : (authState.userData!.isAdmin) 
             ? 
               FloatingActionButton.extended(
-                label: const Text('Guardar Servicio'),
+                label: const Text('Guardar'),
                 icon: const Icon( Icons.save_as_outlined ),
                 onPressed: () {
                   if ( serviceState.service == null) return;
@@ -77,10 +78,12 @@ class ServiceDetailPage extends ConsumerWidget{
                   .then((value) {
                     if ( !value ) return;
                     showSnackbar(context);
+                    context.push('/services');
                   });
                 },
               )
             : null,
+            floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
       )
     );
   }

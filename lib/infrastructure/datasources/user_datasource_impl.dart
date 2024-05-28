@@ -84,9 +84,22 @@ class UserDatasourceImpl extends UserDatasource {
   }
   
   @override
-  Future<User> updateUser(User user) {
-    // TODO: implement updateUser
-    throw UnimplementedError();
+  Future<User> updateUser( Map<String, dynamic> userSimilar, User user) async {
+    
+    try {
+
+      final updatesUser = await FirestoreService().updateDataToFirestore(userSimilar, 'users', user.uid);
+
+      final newUserDataFirestore = UserFirestoreResponse.fromJson(updatesUser);
+
+      final newUserData = UserMapper.userDbToEntity(newUserDataFirestore);
+
+      return newUserData;
+
+    } catch (e) {
+      throw Exception(e);
+    }
+
   }
   
   @override
