@@ -14,3 +14,4 @@ export 'forms/message_form_provider.dart';
 export 'forms/reservation_form_provider.dart';
 export 'reservation_provider.dart';
 export 'forms/service_form_provider.dart';
+export 'work_provider.dart';

@@ -43,6 +43,21 @@ class WorksNotifier extends StateNotifier<WorksState>{
     }
   }
 
+  Future<void> deleteWork( String id ) async {
+
+    try {
+      
+      await worksRepository.deleteWork(id);
+      state = state.copyWith(
+        works: state.works.where((element) => element.id != id).toList()
+      );
+
+    } catch (e) {
+      print(e);
+    }
+
+  }
+
 
 }
 

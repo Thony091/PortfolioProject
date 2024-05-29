@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../config/config.dart';
 import '../../presentation_container.dart';
 import 'components/work_card.dart';
+import 'components/work_user_card.dart';
 
 class OurWorksPage extends ConsumerWidget {
   static const String name = 'OurWorksPage';
@@ -27,9 +28,13 @@ class OurWorksPage extends ConsumerWidget {
         ),
         backgroundColor: color.primary,
       ),
-      body: const BackgroundImageWidget(
+      body:  BackgroundImageWidget(
         opacity: 0.1, 
-        child: _OurWorksBodyPage()
+        child: ( authState.authStatus != AuthStatus.authenticated)
+          ? const _OurWorksBodyPage()
+          : ( authState.userData!.isAdmin )
+            ? const _OurWorksAdminBodyPage()
+            : const _OurWorksBodyPage(),
       ),
       floatingActionButton: ( authState.authStatus != AuthStatus.authenticated)
         ? null 
@@ -70,7 +75,7 @@ class _OurWorksBodyPage extends ConsumerWidget {
           final work = worksState.works[index];
           return GestureDetector(
             onTap: (){},
-            child: WorkCard( 
+            child: WorkUserCard( 
               work: work 
               
             )
@@ -82,7 +87,7 @@ class _OurWorksBodyPage extends ConsumerWidget {
 }
 
 
-//* Vista de los servicios para el administrador
+//* Vista de los Trabajos para el administrador
 class _OurWorksAdminBodyPage extends ConsumerStatefulWidget {
   const _OurWorksAdminBodyPage();
 
@@ -115,9 +120,9 @@ class _OurWorksAdminBodyPageState extends ConsumerState {
                       context: context, 
                       builder: (context){
                         return PopUpPreguntaWidget(
-                          pregunta: '¿Estas seguro de eliminar el servicio?', 
+                          pregunta: '¿Estas seguro de eliminar el Trabajo?', 
                           // confirmar: () {},
-                          confirmar: () => ref.read(servicesProvider.notifier).deleteService(work.id).then((value) => context.pop()), 
+                          confirmar: () => ref.read( worksProvider.notifier ).deleteWork(work.id).then((value) => context.pop()), 
                           cancelar: () => context.pop()
                         );
                       }
