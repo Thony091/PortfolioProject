@@ -2,29 +2,24 @@ import 'package:flutter/material.dart';
 
 class CustomImageGallery extends StatelessWidget {
 
-  final List<String> images;
+  final String image;
   
-  const CustomImageGallery({super.key, required this.images});
+  const CustomImageGallery({super.key, required this.image});
 
   @override
   Widget build(BuildContext context) {
 
-    return PageView(
-      scrollDirection: Axis.horizontal,
-      controller: PageController(
-        viewportFraction: 0.7
-      ),
-      children: images.isEmpty
-        ? [ ClipRRect(
+    return SizedBox(
+      child: image.isEmpty
+        ? ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(20)),
-            child: Image.asset('assets/images/no-image.jpg', fit: BoxFit.cover )) 
-        ]
-        : images.map((e){
-          return ClipRRect(
+            child: Image.asset('assets/images/no-image.jpg', fit: BoxFit.cover )
+          ) 
+        : 
+          ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(20)),
-            child: Image.network(e, fit: BoxFit.cover,),
-          );
-      }).toList(),
+            child: Image.network(image, fit: BoxFit.cover, ),
+          )
     );
   }
 }

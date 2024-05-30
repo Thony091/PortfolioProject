@@ -3,13 +3,13 @@ import '../../domain/domain.dart';
 import '../presentation_container.dart';
 
 final workProvider = StateNotifierProvider.autoDispose.family<WorkNotifier, WorkState, String>(
-  (ref, serviceId) {
+  (ref, workId) {
 
-    final workepository = ref.watch( worksRepositoryProvider);
+    final workRepository = ref.watch( worksRepositoryProvider );
 
     return WorkNotifier(
-      workRepository: workepository,
-      workId: serviceId
+      workRepository: workRepository,
+      workId: workId
     );
   }
 );

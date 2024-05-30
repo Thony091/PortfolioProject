@@ -58,6 +58,33 @@ class WorksNotifier extends StateNotifier<WorksState>{
 
   }
 
+    Future<bool> createOrUpdateWork( Map<String, dynamic> workSimilar) async {
+
+    try {
+      
+      final work = await worksRepository.createUpdateWorks(workSimilar);
+      final isServiceInList = state.works.any((element) => element.id == work.id);
+
+      if ( !isServiceInList){
+        state = state.copyWith(
+          works: [...state.works, work]
+        );
+        return true;
+      } 
+
+      state = state.copyWith(
+        works: state.works.map(
+          (element) => ( element.id == work.id ) ? work : element
+        ).toList()
+      );
+      return true;
+      
+    } catch (e) {
+      return false;
+    }
+
+  }
+
 
 }
 

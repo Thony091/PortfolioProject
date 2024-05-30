@@ -163,12 +163,7 @@ final goRouterProvider = Provider( (ref) {
       if ( isGoingTo == '/splash' && authStatus == AuthStatus.checking ) return null;
 
       if ( authStatus == AuthStatus.notAuthenticated ) {
-
-        if ( isGoingTo == '/pago' || isGoingTo == '/profile-user' || isGoingTo == '/edit-user-profile' || 
-        isGoingTo == '/shoping-cart' || isGoingTo == '/admin-config-products' || isGoingTo == '/admin-config-services' || isGoingTo == '/admin-config-works' || isGoingTo == '/admin-contact-tickets' || isGoingTo == '/login' || isGoingTo == '/register' || isGoingTo == '/services' || isGoingTo == '/service/:id' || isGoingTo == '/our-works' || isGoingTo == '/reservations' || isGoingTo == '/service-edit/:id') {
-
-          return null;
-        } 
+        if ( isGoingTo == '/login' || isGoingTo == '/register' || isGoingTo == '/services' || isGoingTo == '/service/:id' || isGoingTo == '/our-works' || isGoingTo == '/reservations' ) return null;
 
         return '/';
       }

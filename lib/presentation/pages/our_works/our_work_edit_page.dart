@@ -19,7 +19,7 @@ class OurWorkEditPage extends ConsumerWidget{
   void showSnackbar( BuildContext context ) {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Producto Actualizado'))
+      const SnackBar(content: Text('Trabajo Actualizado'))
     );
   }
 
@@ -70,14 +70,13 @@ class OurWorkEditPage extends ConsumerWidget{
             .then((value) {
               if ( !value ) return;
               showSnackbar(context);
-              context.push('/works');
+              context.push('/services');
             });
           },
         )
       )
     );
   }
-
 }
 
 class _WorkDetailBodyPage extends ConsumerWidget {
@@ -151,6 +150,7 @@ class _WorkInformation extends ConsumerWidget {
             onChanged: ref.read( workFormProvider( work ).notifier ).onDescriptionChange,
             errorMessage: workForm.description.errorMessage,
           ),
+
 
           const SizedBox(height: 30 ),
         ],

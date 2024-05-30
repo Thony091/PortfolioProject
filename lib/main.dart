@@ -23,7 +23,7 @@ class MainApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final appRouter = ref.watch( goRouterProvider);
+    final appRouter = ref.watch( goRouterProvider );
 
     return  MaterialApp.router(
       debugShowCheckedModeBanner: false,

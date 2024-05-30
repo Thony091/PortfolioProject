@@ -66,7 +66,7 @@ class _ServiceDetailBodyPage extends ConsumerWidget {
         SizedBox(
           height: 250,
           width: 600,
-          child: CustomImageGallery(images: service.images),
+          child: CustomImagesGallery(images: service.images),
         ),
 
         const SizedBox( height: 20 ),

@@ -45,7 +45,7 @@ class ServicesPage extends ConsumerWidget {
               label: const Text('Crear Servicio'),
               icon: const Icon( Icons.add ),
               onPressed: () {
-                context.pushReplacementNamed('/service/new');
+                context.push('/service/new');
               },
             )
           : null,
@@ -86,7 +86,7 @@ class _ServiceBodyPageState extends ConsumerState {
         itemBuilder: ( context, index) {
           final service = servicesState.services[index];
           return GestureDetector(
-            onTap: () => context.pushReplacement('/service/${service.id}'),
+            onTap: () => context.push('/service/${service.id}'),
             child: ServiceCard( services: service ),
           );
         },
@@ -95,8 +95,6 @@ class _ServiceBodyPageState extends ConsumerState {
     );
   }
 }
-
-
 
 //* Vista de los servicios para el administrador
 class _ServiceAdminBodyPage extends ConsumerStatefulWidget {

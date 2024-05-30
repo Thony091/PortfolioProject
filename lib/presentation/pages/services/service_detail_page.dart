@@ -46,9 +46,9 @@ class ServiceDetailPage extends ConsumerWidget{
 
               ref.read( serviceFormProvider(serviceState.service!).notifier )
                 .updateServiceImage(photoPath);
-    
-            }, 
-            icon: const Icon( Icons.photo_library_outlined )),
+              }, 
+              icon: const Icon( Icons.photo_library_outlined )
+            ),
 
             IconButton(onPressed: () async{
               final photoPath = await CameraGalleryServiceImpl().takePhoto();
@@ -107,7 +107,7 @@ class _ServiceDetailBodyPage extends ConsumerWidget {
         SizedBox(
           height: 250,
           width: 600,
-          child: CustomImageGallery(images: service.images),
+          child: CustomImagesGallery(images: service.images),
         ),
 
         const SizedBox( height: 20 ),
@@ -161,7 +161,6 @@ class _ServiceInformation extends ConsumerWidget {
 
             const SizedBox(height: 15 ),
 
-
             CustomProductField( 
               readOnly: true,
               maxLines: 6,
@@ -169,7 +168,6 @@ class _ServiceInformation extends ConsumerWidget {
               keyboardType: TextInputType.multiline,
               initialValue: service.description,
             ),
-
 
             const SizedBox(height: 30 ),
           ],
@@ -205,10 +203,8 @@ class _ServiceInformation extends ConsumerWidget {
               .onMaxPriceChange( double.parse(value) ?? -1 ),
             errorMessage: serviceForm.minPrice.errorMessage,
           ),
-
           const SizedBox(height: 15 ),
-
-
+          
           CustomProductField(
             maxLines: 6,
             label: 'Descripción',
@@ -217,7 +213,6 @@ class _ServiceInformation extends ConsumerWidget {
             onChanged: ref.read( serviceFormProvider( service ).notifier ).onDescriptionChange,
             hint: 'Descripción del servicio',
           ),
-
 
           const SizedBox(height: 30 ),
         ],

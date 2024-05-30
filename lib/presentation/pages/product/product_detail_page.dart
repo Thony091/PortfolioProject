@@ -67,7 +67,7 @@ class _ProductDetailBodyPage extends ConsumerWidget {
         SizedBox(
           height: 250,
           width: 600,
-          child: CustomImageGallery(images: product.images ),
+          child: CustomImagesGallery(images: product.images ),
         ),
 
         const SizedBox( height: 10 ),

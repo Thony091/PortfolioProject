@@ -7,30 +7,30 @@ import '../../../domain/domain.dart';
 import '../../presentation_container.dart';
 import '../../shared/widgets/custom_product_field.dart';
 
-class ServiceCreatePage extends ConsumerWidget{
+class WorkCreatePage extends ConsumerWidget{
 
-  final String serviceId;
-  static const String name = 'ServiceCreatePage';
+  final String workId;
+  static const String name = 'WorkCreatePage';
 
-  const ServiceCreatePage({super.key, required this.serviceId});
+  const WorkCreatePage({super.key, required this.workId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
     final authState = ref.watch( authProvider );
-    final serviceState = ref.watch( serviceProvider( serviceId ) );
+    final workState = ref.watch( workProvider( workId ) );
     final color = AppTheme().getTheme().colorScheme;
     
     return GestureDetector(
       onTap: () => FocusScope.of( context ).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text( serviceState.service?.name ?? ' Cargando...'),
+          title: Text( workState.work?.name ?? ' Cargando...'),
           backgroundColor: color.primary,
         ),
-        body: serviceState.isLoading
+        body: workState.isLoading
           ? const FullScreenLoader()
-          : _ServiceDetailBodyPage( service: serviceState.service! ),
+          : _WorkDetailBodyPage( work: workState.work! ),
         floatingActionButton:  ( authState.authStatus != AuthStatus.authenticated)
           ? null 
           : (authState.userData!.isAdmin) 
@@ -49,11 +49,11 @@ class ServiceCreatePage extends ConsumerWidget{
 
 }
 
-class _ServiceDetailBodyPage extends ConsumerWidget {
+class _WorkDetailBodyPage extends ConsumerWidget {
 
-  final Services service;
+  final Works work;
 
-  const _ServiceDetailBodyPage({ required this.service });
+  const _WorkDetailBodyPage({ required this.work });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -66,16 +66,16 @@ class _ServiceDetailBodyPage extends ConsumerWidget {
         SizedBox(
           height: 250,
           width: 600,
-          child: CustomImageGallery(images: service.images),
+          child: CustomImageGallery(image: work.image),
         ),
 
         const SizedBox( height: 20 ),
 
-        Center( child: Text( service.name, style: textStyles.titleSmall )),
+        Center( child: Text( work.name, style: textStyles.titleSmall )),
 
         const SizedBox( height: 20 ),
 
-        _ServiceInformation(service: service),
+        _WorkInformation(work: work),
 
       ],
     );
@@ -83,11 +83,11 @@ class _ServiceDetailBodyPage extends ConsumerWidget {
 }
 
 
-class _ServiceInformation extends ConsumerWidget {
+class _WorkInformation extends ConsumerWidget {
 
-  final Services service;
+  final Works work;
   
-  const _ServiceInformation({required this.service});
+  const _WorkInformation({required this.work});
 
   @override
   Widget build(BuildContext context, WidgetRef ref ) {
@@ -105,26 +105,17 @@ class _ServiceInformation extends ConsumerWidget {
             readOnly: true,
             isTopField: true,
             label: 'Nombre',
-            initialValue: service.name,
-          ),
-
-          CustomProductField( 
-            readOnly: true,
-            isBottomField: true,
-            label: 'Precio',
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            initialValue: 'Entre ${service.minPrice.toString()} - ${service.maxPrice.toString()}',
+            initialValue: work.name,
           ),
 
           const SizedBox(height: 15 ),
-
 
           CustomProductField( 
             readOnly: true,
             maxLines: 6,
             label: 'Descripción',
             keyboardType: TextInputType.multiline,
-            initialValue: service.description,
+            initialValue: work.description,
           ),
 
 
