@@ -5,7 +5,6 @@ export 'custom_bottom_navigation.dart';
 export 'background_image_widget.dart';
 export 'product_card.dart';
 export 'full_screen_loader.dart';
-export 'service_card.dart';
 export 'custom_images_gallery.dart';
 export 'pop_up_message_final_widget.dart';
 export 'image_gallery.dart';
