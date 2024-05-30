@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marquee/marquee.dart';
 
 import '../../../../domain/domain.dart';
 
@@ -79,10 +80,19 @@ class _ImageViewer extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      description,
-                      style: const TextStyle(
-                        fontSize: 14,
+                    const SizedBox( height: 5,),
+                    SizedBox(
+                      height: 70,
+                      child: Marquee(
+                        scrollAxis: Axis.vertical,
+                        velocity: 5,
+                        blankSpace: 20
+                        ,
+                        text: description,
+                        style: const TextStyle(
+                          fontSize: 14,
+                        ),
+                        
                       ),
                     ),
                   ],
