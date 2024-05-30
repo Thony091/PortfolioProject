@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../config/config.dart';
 import '../../presentation_container.dart';
+import 'component/service_card.dart';
 
 class ServicesPage extends ConsumerWidget {
 
@@ -55,6 +56,7 @@ class ServicesPage extends ConsumerWidget {
   }
 }
 
+//* Vista de los servicios para el usuario
 class _ServiceBodyPage extends ConsumerStatefulWidget {
   const _ServiceBodyPage();
 
@@ -81,22 +83,19 @@ class _ServiceBodyPageState extends ConsumerState {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child:  MasonryGridView.count(
         crossAxisCount: 2,
-        mainAxisSpacing: 20,
+        crossAxisSpacing: 5,
         itemCount: servicesState.services.length,
         itemBuilder: ( context, index) {
           final service = servicesState.services[index];
           return GestureDetector(
             onTap: () => context.pushReplacement('/service/${service.id}'),
-            child: ServiceCard( services: service ),
+            child: ServiceCard( service: service ),
           );
         },
-        
       ),
     );
   }
 }
-
-
 
 //* Vista de los servicios para el administrador
 class _ServiceAdminBodyPage extends ConsumerStatefulWidget {
@@ -107,7 +106,6 @@ class _ServiceAdminBodyPage extends ConsumerStatefulWidget {
 }
 
 class _ServiceAdminBodyPageState extends ConsumerState {
-
 
   @override
   Widget build(BuildContext context) {
@@ -143,8 +141,7 @@ class _ServiceAdminBodyPageState extends ConsumerState {
                 const SizedBox(height: 10),
               ] 
           );
-        },
-        
+        },        
       ),
     );
   }
