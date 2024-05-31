@@ -63,7 +63,7 @@ class AuthNotifier extends StateNotifier<AuthState>{
 
       final userData = await authRepository.getUser('users', user.user!.uid);
 
-      // await keyValueStorageService.setKeyValue('uid',  user.user!.uid);
+      await keyValueStorageService.setKeyValue('user',  userData);
       await keyValueStorageService.setKeyValue('email', userData.email);
       await keyValueStorageService.setKeyValue('password', userData.password);
 
@@ -107,6 +107,31 @@ class AuthNotifier extends StateNotifier<AuthState>{
       value = false;
     }
     return value;
+  }
+
+  Future<bool> updateDataToFirestore ( Map<String, dynamic> userSimilar ) async {
+    
+    final userData = await keyValueStorageService.getValue('user');
+    
+    final userSimilar = {
+
+      'name': '',
+      'birthday': '',
+      'phone': '',
+      'bio': '',
+      'ProfileImage': '',
+    };
+
+    try {
+      final user = await authRepository.updateUser(userSimilar, userData );
+
+      return true;
+    } catch (e) {
+      Exception("Error en actualizacion: ${e.toString()}");
+      print(e);
+      return false;
+    }
+
   }
 
   /// Método privado para establecer el usuario autenticado. 

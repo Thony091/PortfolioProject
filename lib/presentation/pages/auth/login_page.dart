@@ -15,7 +15,8 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final color   = AppTheme().getTheme().colorScheme;
+    final color         = AppTheme().getTheme().colorScheme;
+    // final scaffoldKey   = GlobalKey<ScaffoldState>();
     // final size    = MediaQuery.of(context).size;
     
     return  Scaffold(
@@ -28,6 +29,7 @@ class LoginPage extends StatelessWidget {
         opacity: 0.1,
         child: _LoginForm()
       ),
+      // drawer: SideMenu(scaffoldKey: scaffoldKey),
     );
   }
 }
