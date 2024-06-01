@@ -112,16 +112,6 @@ class AuthNotifier extends StateNotifier<AuthState>{
   Future<bool> updateDataToFirestore ( Map<String, dynamic> userSimilar ) async {
     
     final userData = await keyValueStorageService.getValue('user');
-    
-    final userSimilar = {
-
-      'name': '',
-      'birthday': '',
-      'phone': '',
-      'bio': '',
-      'ProfileImage': '',
-    };
-
     try {
       final user = await authRepository.updateUser(userSimilar, userData );
 

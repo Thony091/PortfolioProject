@@ -7,23 +7,18 @@ import '../../presentation_container.dart';
 
 final updateFormProvider = StateNotifierProvider.autoDispose<UpdateFormNotifier,UpdateFormState>((ref) {
 
-  final keyValueStorageService = KeyValueStorageServiceImpl();
   final updateUserCallback = ref.watch( authProvider.notifier ).updateDataToFirestore;
 
   return UpdateFormNotifier(
     updateUserCallback: updateUserCallback,
-    keyValueStorageService: keyValueStorageService
   );
 });
 
 class UpdateFormNotifier extends StateNotifier<UpdateFormState> {
 
-  final KeyValueStorageService keyValueStorageService;
   final Function( Map<String, String> userSimilar ) updateUserCallback;
 
-
   UpdateFormNotifier({
-    required this.keyValueStorageService,
     required this.updateUserCallback,
   }): super( UpdateFormState() );
   
@@ -62,6 +57,8 @@ class UpdateFormNotifier extends StateNotifier<UpdateFormState> {
 
   void onUpdateFormSubmit ( ) async {
     
+    _touchEveryField();
+
     final userSimilar = {
       'name': state.name.value,
       'birthday': state.birthday.value,
@@ -72,7 +69,6 @@ class UpdateFormNotifier extends StateNotifier<UpdateFormState> {
 
     try {
       
-      _touchEveryField();
       if ( !state.isValid ) return;
 
       state = state.copyWith(isPosting: true);

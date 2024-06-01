@@ -35,8 +35,6 @@ class _EditProfileBodyPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    //TODO: Implementar provider de edición de datos del usuario
-    // Aqui
     final textStyles = Theme.of(context).textTheme;
     final authState = ref.watch( authProvider ).userData!;
     final upForm = ref.watch( updateFormProvider );
@@ -68,17 +66,6 @@ class _EditProfileBodyPage extends ConsumerWidget {
               isBottomField: true,
               label: 'Nombre',
               onChanged: ref.read( updateFormProvider.notifier ).onNameChange,
-              // keyboardType: const TextInputType.numberWithOptions(decimal: true),
-              // initialValue: authState.nombre,
-            ),
-            const SizedBox( height: 20 ),
-            
-            CustomProfileField( 
-              readOnly: true,
-              hint: authState.email,
-              isTopField: true,
-              isBottomField: true,
-              label: 'Correo',
               // keyboardType: const TextInputType.numberWithOptions(decimal: true),
               // initialValue: authState.nombre,
             ),
